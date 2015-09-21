@@ -1,0 +1,324 @@
+\documentclass{article}
+\usepackage[margin=3pt,landscape]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[nopar]{lipsum}%just to generate text for the example
+
+% redefinition of \normalsize to use \footnotesize and decrease the values for
+% \abovedisplyskip, \belowdisplayskip, and the "short" variants
+\makeatletter
+\renewcommand\normalsize{%
+  \@setfontsize\footnotesize\@viiipt{9.5}%
+   \abovedisplayskip 1\p@ \@plus\p@ \@minus\p@
+   \belowdisplayskip 1\p@ \@plus\p@ \@minus\p@
+   \abovedisplayshortskip \z@ \@plus\p@
+   \belowdisplayshortskip \z@ \@plus\p@ \@minus\p@
+   \let\@listi\@listI}
+\makeatother
+
+\pagestyle{empty}
+
+% multicol parameters
+\setlength\premulticols{1pt}
+\setlength\postmulticols{1pt}
+\setlength\multicolsep{1pt}
+\setlength\columnsep{2pt}
+\raggedright
+
+% For the source codes
+\usepackage{stackengine}
+\usepackage{listings}
+\lstdefinestyle{customc}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+%  frame=L,
+%  xleftmargin=\parindent,
+  xleftmargin=0pt,
+  language=C,
+  showstringspaces=false,
+  basicstyle=\tiny\ttfamily,
+  tabsize=1,
+%  numbersep=8pt,
+%  numbers=left,
+%  xleftmargin=0.5cm,
+  frame=tlbr,
+%  framesep=2pt,
+  framerule=0pt
+}
+
+\lstset{escapechar=@,style=customc}
+
+% For Math Alphabet
+\DeclareMathAlphabet{\pazocal}{OMS}{zplm}{m}{n}
+\newcommand{\Kb}{\pazocal{K}}
+\newcommand{\Ib}{\pazocal{I}}
+\newcommand{\Sb}{\pazocal{S}}
+\newcommand{\Rb}{\pazocal{R}}
+\newcommand{\Ub}{\pazocal{U}}
+\newcommand{\Lb}{\pazocal{L}}
+\newcommand{\Hb}{\pazocal{H}}
+\newcommand{\Bb}{\pazocal{B}}
+
+\begin{document}
+\begin{multicols}{4}
+\textbf{Propositional Logic - Syntactic Sugar} 
+\begin{gather*} 
+{\varphi \Leftrightarrow \psi := (\neg \varphi \vee \psi) \wedge (\neg \psi \vee \varphi)} \qquad {\varphi \rightarrow \psi := \neg \varphi \vee \psi} \\
+{\varphi \oplus \psi := (\varphi \wedge \neg \psi) \vee (\psi \wedge \neg \varphi) }\qquad {\varphi \barwedge \psi := \neg (\varphi \wedge \psi)} \\
+{(\alpha \Rightarrow \beta | \gamma) := ( \neg \alpha \vee \beta) \wedge (\alpha \vee \gamma)} \quad {\varphi \bar{\vee}\psi := \neg (\varphi \vee \psi)}
+\end{gather*}
+\textbf{Satisfiability, Validity and Equivalence}
+\begin{gather*}
+\text{SAT}(\varphi) := \neg \text{VALID}(\neg \varphi) \quad \varphi \Leftrightarrow \psi := \text{VALID}(\varphi \leftrightarrow \psi) \\
+\text{VALID}(\varphi) := (\varphi \Leftrightarrow 1) \qquad \text{SAT}(\varphi) := \neg(\varphi \Leftrightarrow 0).
+\end{gather*}
+\textbf{Conjunctive Normal Form:} from truth table, take minterms that are 0. 
+Each minterm is built as an OR of the negated variables. E.g., ${(0, 0, 1) \rightarrow (x \vee y \vee \neg z)}$.
+
+\textbf{Distributivity:} ${a \wedge ( b \vee c ) = (a \wedge b) \vee (a \wedge c)}$
+${a \vee ( b \wedge c ) = (a \vee b) \wedge (a \vee c)}$
+
+\textbf{Sequent Calculus:}
+\begin{enumerate}
+\item Prove validity of $\phi$: start with $\{\} \vdash {\phi}$;  $\phi$ is valid iff $\Gamma \cap \Delta \neq \{\}$ for all leaves; else, counterexample: var is true, if $x \in \Gamma$; false otherwise; "don't care", if variable doesn't appear.
+\item Prove satisfiability of $\phi$: start with $\{\phi\} \vdash \{\}$; $\phi$ is satisfiable iff $\Gamma \cap \Delta = \{\}$ for at least one leaf. Satisfying interpretation: same as counterexample.
+\end{enumerate}
+\begin{tabular}{|c|c|c|}
+\hline
+OPER. & LEFT & RIGHT \\ \hline
+NOT & $\frac{\neg \phi,\Gamma \vdash \Delta}{\Gamma \vdash \phi, \Delta}$ & $\frac{\Gamma \vdash \neg \phi, \Delta}{\phi, \Gamma \vdash \Delta}$ \\ \hline
+AND & $\frac{\phi \wedge \psi,\Gamma \vdash \Delta}{\phi, \psi,\Gamma \vdash \Delta}$ & $\frac{\Gamma \vdash \phi \wedge \psi, \Delta}{\Gamma \vdash \phi,\Delta \qquad \Gamma \vdash \psi,\Delta}$\\ \hline
+OR & $\frac{\phi \vee \psi,\Gamma \vdash \Delta}{\phi,\Gamma \vdash \Delta \qquad \psi,\Gamma \vdash \Delta}$ & $\frac{\Gamma \vdash \phi \vee \psi, \Delta}{\Gamma \vdash \phi, \psi, \Delta}$ \\ \hline
+\end{tabular}
+\textbf{Resolution Calculus} $\frac{\{\neg x \} \cup C_1 \qquad \{x \} \cup C_2 }{C_1 \cup C_2}$
+
+To prove unsatisfiability of given clauses in CNF: If we reach \{\}, the formula is unsatisfiable. 
+E.g., $\{\{a\}, \{\neg a,b\}, \{\neg b\}\}$, we get: $\{a\} + \{ \neg a,b\} \rightarrow \{b\}; \{b\} + \{\neg b\}\rightarrow\{\} $ (unsatisfiable).
+To prove validity, prove UNSAT of negated formula.
+
+\textbf{Linear Clause Forms (Computes CNF)} - Bottom up in the syntax tree: convert “operators and variables” into new variable.
+E.g., $\neg a \vee b$ becomes $x_1 \leftrightarrow \neg a; x_2 \leftrightarrow x_1 \vee b$. Use rules below to find CNF.
+\begin{align*}
+x \leftrightarrow \neg y  \Leftrightarrow &(\neg x \vee \neg y) \wedge (x \vee y) \\
+x \leftrightarrow y_1 \wedge y_2 \Leftrightarrow &(\neg x \vee y_1) \wedge (\neg x \vee y_2) \wedge\\
+&(x \vee \neg y_1 \vee \neg y_2) \\
+x \leftrightarrow y_1 \vee y_2 \Leftrightarrow & (\neg x \vee y_1 \vee y_2) \wedge \\
+&( x \vee \neg y_1) \wedge (x \vee \neg y_2) \\
+x \leftrightarrow y_1 \rightarrow y_2 \Leftrightarrow & (x \vee y_1) \wedge ( x \vee \neg y_1 \vee \neg y_2) \wedge \\
+&(\neg x \vee \neg y_1 \vee y_2) \\
+x \leftrightarrow (y_1 \leftrightarrow y_2) \Leftrightarrow & (x \vee y_1 \vee y_2) \wedge (x \vee \neg y_1 \vee \neg y_2) \wedge \\
+&(\neg x \vee y_1 \vee \neg y_2) \wedge (\neg x \vee \neg y_1 \vee y_2)\\
+x \leftrightarrow y_1 \oplus y_2 \Leftrightarrow & (x \vee \neg y_1 \vee y_2) \wedge (x \vee y_1 \vee \neg y_2) \wedge \\ &(\neg x \vee y_1 \vee y_2) \wedge (\neg x \vee \neg y_1 \vee y_2)
+\end{align*}
+
+\textbf{Davis Putnam Procedure} - proves SAT; To prove validity: prove unsatisfiability of negated formula.
+\textbf{(1)} Compute Linear Clause Form \underline{\textit{(Don't forget to create the last clause $\{x_n\}$)}}
+\textbf{(2)}Last variable has to be \underline{1} (true) $\rightarrow$ find implied variables.
+\textbf{(3)}For remaining variables: assume values and compute newly implied variables.
+\textbf{(4)}If contradiction reached: backtrack.
+\setbox0=\hbox{%
+\begin{minipage}{0.425\columnwidth}
+% Apply
+\begin{lstlisting}[mathescape,style=customc] 
+Apply($\odot$, Bddnode a, b)
+	int m; BddNode h, l;
+	if isLeaf(a)&isLeaf(b) then
+		return Eval($\odot$,label(a),label(b));
+	else
+		m=max{label(a),label(b)}
+		(a0,a1):=Ops(a,m);
+		(b0,b1):=Ops(b,m);
+		h:=Apply($\odot$,a1,b1);
+		l:=Apply($\odot$,a0,b0);
+		return CreateNode(m,h,l)
+	end;
+end
+\end{lstlisting}
+\end{minipage}
+}
+\savestack{\listingA}{\box0}
+\setbox0=\hbox{%
+%Compose
+\begin{minipage}{0.425\columnwidth}
+\begin{lstlisting}[mathescape,style={customc}]
+Compose$(\text{int x, BddNode }\psi,\alpha)$
+	int m; BddNode h, l;
+	if x>label($\psi$) then 
+		return $\psi$;
+	elseif x=label($\psi$) then
+		return ITE($\alpha$,high($\psi$),low($\psi$));
+	else
+		m=max{label$(\psi),\text{label(}\alpha)$}
+		($\alpha_0$,$\alpha_1$):=Ops($\alpha$, m);
+		($\psi_0$,$\psi_1$):=Ops($\psi$, m);
+		h:=Compose(x,$\psi_1$,$\alpha_1$);
+		l:=Compose(x,$\psi_0$,$\alpha_0$);
+		return CreateNode(m,h,l)
+	endif;end
+\end{lstlisting}
+\end{minipage}
+}
+\savestack{\listingB}{\box0}
+\setbox0=\hbox{%
+%ITE
+\begin{minipage}{0.425\columnwidth}
+\begin{lstlisting}[mathescape,style={customc}]
+ITE(BddNode i, j, k)
+	int m; BddNode h, l;
+	if i = 0 then return k
+	elseif i=1 then
+		return j
+	elseif j=k then
+		return k
+	else
+		m = max{label(i),
+						label(j),label(k)}
+		($i_0,i_1$):=Ops(i,m);
+		($j_0,j_1$):=Ops(j,m);
+		($k_0,k_1$):=Ops(k,m);
+		l:=ITE($i_0,j_0,k_0$);
+		h:=ITE(i1, j1, k1);
+		return CreateNode(m,h,l)
+	end;end
+\end{lstlisting}
+\end{minipage}
+}
+\savestack{\listingC}{\box0}
+\setbox0=\hbox{%
+%Constrain
+\begin{minipage}{0.425\columnwidth}
+\begin{lstlisting}[mathescape,style={customc}]
+Constrain($\Phi$, $\beta$)
+	if $\beta$=0 then
+		ret 0
+	elseif $\Phi \in \{0,1\} (\beta=1)$
+	    ret $\Phi$
+	else
+		m=max{label$(\beta)\text{,label}(\Phi)$}
+    ($\Phi_0,\Phi_1$):=Ops($\Phi$,m);
+    ($\beta_0,\beta_1$):=Ops($\beta$,m);
+    if $\beta_0$=0
+		ret Constrain($\Phi_1,\beta_1$)
+	elseif $\beta_1$=0 then
+		ret Constrain($\Phi_0,\beta_0$)
+	else 
+		l:=Constrain($\Phi_0,\beta_0$);
+		h:=Constrain($\Phi_1,\beta_1$);
+		ret CreateNode(m,h,l)
+endif;endif;end
+\end{lstlisting}
+\end{minipage}
+}
+\savestack{\listingD}{\box0}
+
+\setbox0=\hbox{%
+%Restrict
+\begin{minipage}{0.425\columnwidth}
+\begin{lstlisting}[mathescape,style={customc}]
+Restrict($\Phi,\beta$)
+	if $\beta$=0
+		return 0
+	elseif $\Phi\in \{0,1\}\vee(\beta=1)$
+		return $\Phi$
+	else
+		m=max{label$(\beta)\text{,label}(\Phi)$}
+		($\Phi_0,\Phi_1$):=Ops($\Phi$,m);
+		($\beta_0,\beta_1$):=Ops($\beta$,m)
+	if $\beta_0$=0
+		return Restrict($\Phi_1,\beta_1$)
+	elseif $\beta_1$=0
+		return Restrict($\Phi_0,\beta_0$)
+	elseif m=label($\Phi$)
+		return CreateNode(m,
+			Restrict ($\Phi_1,\beta_1$),
+			Restrict ($\Phi_0,\beta_0$))
+	else
+		return Restrict($\Phi$,
+		Apply($\vee,\beta_0,\beta_1$))
+	endif;endif;end
+\end{lstlisting}
+\end{minipage}
+}
+\savestack{\listingE}{\box0}
+
+\setbox0=\hbox{%
+%Constrain
+\begin{minipage}{0.425\columnwidth}
+\begin{lstlisting}[mathescape,style={customc}]
+Ops(v,m)
+	x:=label(v);
+	if m=degree(x)
+		return (low(v),high(v))
+	else return(v, v)
+end;end
+_____________________
+Other Diagrams:
+TODO ZDD FDD
+\end{lstlisting}
+\end{minipage}
+}
+\savestack{\listingF}{\box0}
+\begin{tabular}{|l|l|}
+\hline
+{\listingA} &
+{\listingB} \\ \hline
+{\listingC} &
+{\listingD}\\ \hline
+{\listingE} &
+{\listingF} \\ \hline
+\end{tabular}
+
+\textbf{Simulation}: given ${\Kb_{1}=(\Ib_1,\Sb_1,\Rb_1,\Lb_1)}$ and ${\Kb_{2}=(\Ib_2,\Sb_2,\Rb_2,\Lb_2)}$; ${\sigma \subseteq \Sb_1 \times \Sb_2}$ is a sim. relation between $\Kb_1 \text{ and } \Kb_2$ (${\Kb_1 \preccurlyeq \Kb_2}$) if: \textbf{SIM1-} ${(s_1,s_2) \in \sigma}$ implies ${\Lb_1(s_1)=\Lb_2(s_2)}$; \textbf{SIM2-} for $s_1,s'_{1} \in \Sb_1, s_2 \in \Sb_2$ with ${(s_1,s_2) \in \sigma}$ and ${(s_1,s'_{1}) \in \Rb_1}$, there must be ${s'_2 \in \Rb_2}$ with ${(s'_1,s'_2) \in \sigma}$ ${(s_2,s'_{2}) \in \Rb_2}$; \textbf{SIM3-} for all ${s_1 \in \Ib_1}$, there is a ${s_2 \in \Ib_2}$ with ${(s_1,s_2) \in \sigma}$.
+\textbf{Greatest Simulation Relation}
+${(s_1,s_2) \in \Hb_{0}\Leftrightarrow \Lb_1(s_1)=\Lb_2(s_2)}$
+
+${(s_1,s_2) \in \Hb_{i+1}\Leftrightarrow}$
+\begin{align*}
+  \begin{pmatrix}
+    (s_1,s_2) \in \Hb_{i} \wedge&\\
+    \forall s'_1 \in \Sb_1.\exists s'_2 \in \Sb_2.&\\
+    (s_1,s'_1) \in \Rb_1 \rightarrow &(s_2,s'_2) \in \Rb_2 \wedge (s'_1,s'_2) \in \Hb_{i}
+  \end{pmatrix}
+\end{align*}
+$\Hb_*$is the greatest simulation relation if \textbf{SIM3}: ${\Ib_1 \subseteq \{s_1 \in \Sb_1 | \exists s_2 \in \Ib_2 . (s_1, s_2) \in \Hb_* \}}$
+
+\textbf{Bisimulation}:${\sigma \subseteq \Sb_1 \times \Sb_2}$ is a bisim. relation between $\Kb_1 \text{ and } \Kb_2$ (${\Kb_1 \approx \Kb_2}$) if: \textbf{BISIM1-} ${(s_1,s_2) \in \sigma}$ implies ${\Lb_1(s_1)=\Lb_2(s_2)}$; \textbf{BISIM2a-} $s_1,s'_{1} \in \Sb_1, s_2 \in \Sb_2$, ${(s_1,s_2) \in \sigma}$, ${(s_1,s'_{1}) \in \Rb_1}$, imply that there is ${s'_2 \in \Sb_2}$ with ${(s'_1,s'_2) \in \sigma}$ and ${(s_2,s'_{2}) \in \Rb_2}$;\textbf{BISIM2b-} $s_2,s'_{2} \in \Sb_2, s_1 \in \Sb_1$, ${(s_1,s_2) \in \sigma}$, ${(s_2,s'_{2}) \in \Rb_2}$, imply that there is ${s'_1 \in \Sb_1}$ with ${(s'_1,s'_2) \in \sigma}$ and ${(s_1,s'_{1}) \in \Rb_1}$;\textbf{BISIM3a-} for all ${s_1 \in \Ib_1}$, there is a ${s_2 \in \Ib_2}$ with ${(s_1,s_2) \in \sigma}$;\textbf{BISIM3b-} for all ${s_1 \in \Ib_2}$, there is a ${s_2 \in \Ib_2}$ with ${(s_1,s_2) \in \sigma}$.
+
+\textbf{Greatest Bisimulation Relation (Equivalence)}
+${(s_1,s_2) \in \Bb_{0}\Leftrightarrow \Lb_1(s_1)=\Lb_2(s_2)}$
+
+${(s_1,s_2) \in \Bb_{i+1}\Leftrightarrow}$
+\begin{align*}
+  \begin{pmatrix}
+    (s_1,s_2) \in \Bb_{i} \wedge\\
+    \begin{bmatrix}
+    		\forall s'_1 \in \Sb_1.\exists s'_2 \in \Sb_2.\\
+   		(s_1,s'_1) \in \Rb_1 \rightarrow (s_2,s'_2) \in \Rb_2 \wedge (s'_1,s'_2) \in \Bb_{i}
+    \end{bmatrix}\\
+    \begin{bmatrix}
+    		\forall s'_2 \in \Sb_2.\exists s'_1 \in \Sb_1.\\
+   		(s_2,s'_2) \in \Rb_2 \rightarrow (s_1,s'_1) \in \Rb_1 \wedge (s'_1,s'_2) \in \Bb_{i}
+    \end{bmatrix}
+  \end{pmatrix}
+\end{align*}
+$\Bb_*$is the greatest simulation relation if ${\Ib_1 \subseteq \{s_1 \in \Sb_1 | \exists s_2 \in \Ib_2 . (s_1, s_2) \in \Bb_* \}}$ ${\Ib_2 \subseteq \{s_2 \in \Sb_2 | \exists s_1 \in \Ib_1 . (s_1, s_2) \in \Bb_* \}}$
+
+\textbf{Quotient}: given ${\Kb=(\Ib,\Sb,\Rb,\Lb)}$ and the equivalence relation $\sigma \subseteq \Sb \times \Sb$; Quotient structure $\Kb_{/\sigma}=(\widetilde{\Ib},\widetilde{\Sb},\widetilde{\Rb},\widetilde{\Lb})$:
+$\widetilde{\Ib}:=\{\{s' \in \Sb | (s,s') \in \sigma \} | s \in \Ib \}$
+$\widetilde{\Sb}:=\{\{s' \in \Sb | (s,s') \in \sigma \} | s \in \Sb \}$
+$(\widetilde{s}_1,\widetilde{s}_2) \in \Rb :\Leftrightarrow \exists s'_1 \in \widetilde{s}_1. \exists s'_2 \in \widetilde{s}_2.(s'_1,s'_2) \in \Rb$
+$\widetilde{\Lb}( \widetilde{s} ):= \Lb(s)$
+
+\textbf{Quantification}
+${\exists x.\varphi:=[\varphi]^{1}_{x} \vee [\varphi]^{0}_{x}}$
+${\forall x.\varphi:=[\varphi]^{1}_{x} \wedge [\varphi]^{0}_{x}}$
+
+\textbf{Automata types:} G$\rightarrow$Safety; F$\rightarrow$Liveness; FG$\rightarrow$Persistence/Co-Buchi; GF$\rightarrow$Fairness/Buchi.
+
+\lipsum
+
+\end{multicols}
+\end{document}
