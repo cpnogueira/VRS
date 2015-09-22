@@ -5,6 +5,7 @@
 \usepackage{multicol}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{ stmaryrd }
 \usepackage[nopar]{lipsum}%just to generate text for the example
 
 % redefinition of \normalsize to use \footnotesize and decrease the values for
@@ -61,6 +62,9 @@
 \newcommand{\Lb}{\pazocal{L}}
 \newcommand{\Hb}{\pazocal{H}}
 \newcommand{\Bb}{\pazocal{B}}
+\newcommand{\Vb}{\pazocal{V}}
+\newcommand{\Qb}{\pazocal{Q}}
+\newcommand{\Db}{\mathfrak{D}}
 
 \begin{document}
 \begin{multicols}{4}
@@ -272,6 +276,7 @@ TODO ZDD FDD
 \end{tabular}
 
 \textbf{Simulation}: given ${\Kb_{1}=(\Ib_1,\Sb_1,\Rb_1,\Lb_1)}$ and ${\Kb_{2}=(\Ib_2,\Sb_2,\Rb_2,\Lb_2)}$; ${\sigma \subseteq \Sb_1 \times \Sb_2}$ is a sim. relation between $\Kb_1 \text{ and } \Kb_2$ (${\Kb_1 \preccurlyeq \Kb_2}$) if: \textbf{SIM1-} ${(s_1,s_2) \in \sigma}$ implies ${\Lb_1(s_1)=\Lb_2(s_2)}$; \textbf{SIM2-} for $s_1,s'_{1} \in \Sb_1, s_2 \in \Sb_2$ with ${(s_1,s_2) \in \sigma}$ and ${(s_1,s'_{1}) \in \Rb_1}$, there must be ${s'_2 \in \Rb_2}$ with ${(s'_1,s'_2) \in \sigma}$ ${(s_2,s'_{2}) \in \Rb_2}$; \textbf{SIM3-} for all ${s_1 \in \Ib_1}$, there is a ${s_2 \in \Ib_2}$ with ${(s_1,s_2) \in \sigma}$.
+
 \textbf{Greatest Simulation Relation}
 ${(s_1,s_2) \in \Hb_{0}\Leftrightarrow \Lb_1(s_1)=\Lb_2(s_2)}$
 
@@ -312,13 +317,76 @@ $\widetilde{\Sb}:=\{\{s' \in \Sb | (s,s') \in \sigma \} | s \in \Sb \}$
 $(\widetilde{s}_1,\widetilde{s}_2) \in \Rb :\Leftrightarrow \exists s'_1 \in \widetilde{s}_1. \exists s'_2 \in \widetilde{s}_2.(s'_1,s'_2) \in \Rb$
 $\widetilde{\Lb}( \widetilde{s} ):= \Lb(s)$
 
-\textbf{Quantification}
-${\exists x.\varphi:=[\varphi]^{1}_{x} \vee [\varphi]^{0}_{x}}$
-${\forall x.\varphi:=[\varphi]^{1}_{x} \wedge [\varphi]^{0}_{x}}$
+\textbf{Symbolic Product Computation} - given ${\Kb_1=(\Vb_1,\varphi_{\Ib},\varphi_{\Rb})}$ and ${\Kb_2=(\Vb_2,\psi_{\Ib},\psi_{\Rb})}$, the product is: $\Kb_1 \times \Kb_2 = (\Vb_1 \cup \Vb_2, \varphi_{\Ib} \wedge \psi_{\Ib},\varphi_{\Rb} \wedge \psi_{\Rb} )$
+\textbf{Quantif.} ${\exists x.\varphi:=[\varphi]^{1}_{x} \vee [\varphi]^{0}_{x}}\; \clubsuit\; {\forall x.\varphi:=[\varphi]^{1}_{x} \wedge [\varphi]^{0}_{x}}$
 
+\textbf{Predecessor and Successor}
+$\diamond := pre^{\Rb}_{\exists}(Q) := \exists x'_1,...,x'_n.\varphi_{\Rb} \wedge [\varphi_{Q}]^{x'_1,...,x'_n}_{x_1,...,x_n}$
+$\overleftarrow{\diamond} := suc^{\Rb}_{\exists}(Q) := [\exists x'_1,...,x'_n.\varphi_{\Rb} \wedge \varphi_{Q}]_{x'_1,...,x'_n}^{x_1,...,x_n}$
+$\square = pre^{\Rb}_{\forall}(Q) := \forall x'_1,...,x'_n.\varphi_{\Rb} \rightarrow [\varphi_{Q}]^{x'_1,...,x'_n}_{x_1,...,x_n}$
+$\overleftarrow{\square} := suc^{\Rb}_{\forall}(Q) := [\forall x'_1,...,x'_n.\varphi_{\Rb} \rightarrow \varphi_{Q}]_{x'_1,...,x'_n}^{x_1,...,x_n}$
+
+\setbox0=\hbox{%
+\begin{minipage}{0.425\columnwidth}
+% universal predecessor
+\begin{lstlisting}[mathescape,style=customc] 
+$pre_{\forall}^{\Rb}(Q=\{S_1,...,S_n\})$
+for each node n in $\Kb$:
+	if(n points to a node that is not in Q)
+		n $\notin pre_{\forall}^{\Rb}(Q)$
+	else
+		n $\in pre_{\forall}^{\Rb}(Q)$
+\end{lstlisting}
+\end{minipage}
+}
+\savestack{\listingG}{\box0}
+\setbox0=\hbox{%
+% universal successor
+\begin{minipage}{0.425\columnwidth}
+\begin{lstlisting}[mathescape,style={customc}]
+$suc_{\forall}^{\Rb}(Q=\{S_1,...,S_n\})$
+for each node n in $\Kb$:
+	if(n is pointed by a node that is not in Q)
+		n $\not\in suc_{\forall}^{\Rb}(Q)$
+	else
+		n $\in suc_{\forall}^{\Rb}(Q)$
+\end{lstlisting}
+\end{minipage}
+}
+\savestack{\listingH}{\box0}
+
+\begin{tabular}{|l|l|}
+\hline
+{\listingG} &
+{\listingH} \\ \hline
+\end{tabular}
+
+\textbf{Tarski-Knaster Theorem}: $\mu := \text{starts} \; \bot \rightarrowtriangle \text{least fixpoint} \;\spadesuit \; \nu :=\text{starts} \;\top \rightarrowtriangle \text{greatest fixpoint}$
+
+\textbf{Local Model Checking}
+
+\begin{tabular}{|l|l|l|l|}
+\hline
+\multicolumn{2}{|l|}{$\frac{s \vdash_{\Phi} \varphi \wedge \psi}{\{s \vdash_{\Phi} \varphi \} \quad \{s \vdash_{\Phi} \psi\}} \wedge$} & \multicolumn{2}{|l|}{$\frac{s \vdash_{\Phi} \varphi \vee \psi}{\{s \vdash_{\Phi} \varphi \} \quad \{s \vdash_{\Phi} \psi\}} \vee $}\\ \hline
+\multicolumn{2}{|l|}{$\frac{s \vdash_{\Phi} \square \varphi}{\{s_1 \vdash_{\Phi} \varphi\} \dots \{s_n \vdash_{\Phi} \varphi\}} \wedge$}&\multicolumn{2}{|l|}{$\frac{s \vdash_{\Phi} \diamond \varphi}{\{s_1 \vdash_{\Phi} \varphi\} \dots \{s_n \vdash_{\Phi} \varphi\}} \vee$} \\
+ \hline
+\multicolumn{2}{|l|}{$\frac{s \vdash_{\Phi} \overleftarrow{\square} \varphi}{\{s'_1 \vdash_{\Phi} \varphi \}\dots \{ s'_n \vdash_{\Phi} \varphi\}} \wedge$} &\multicolumn{2}{|l|}{$\frac{s \vdash_{\Phi} \overleftarrow{\diamond} \varphi}{\{s'_1 \vdash_{\Phi} \varphi \}\dots \{ s'_n \vdash_{\Phi} \varphi\}} \vee$} \\
+ \hline
+$\frac{s \vdash_{\Phi} \mu x.\varphi}{s \vdash_{\Phi} \varphi}$ &$\frac{s \vdash_{\Phi} \nu x.\varphi}{s \vdash_{\Phi} \varphi}$&$\frac{s \vdash_{\Phi} x}{s \vdash_{\Phi} \Db_{\Phi}(x)}$&$\frac{\Db_{\Phi}\text{\tiny (replace w.}}{\text{\tiny initial form.)}}$\\
+ \hline
+\multicolumn{4}{|l|}{$\{s_1 \dots s_n \}=suc^{\Rb}_{\exists}({s})$ and $\{s'_1 \dots s'_n \}=pre^{\Rb}_{\exists}({s})$}\\ \hline 
+\end{tabular}
+\textbf{Approximations and Ranks}
+\begin{tabular}{|l|l|}
+\hline
+If (s,$\mu x.\varphi$) repeats$\rightarrow$return 1&$apx_0(\mu x.\varphi):=0$\\ \hline
+If (s,$\nu x.\varphi$) repeats$\rightarrow$return 0& $apx_0(\nu x.\varphi):=1$\\ \hline
+\multicolumn{2}{|l|}{$apx_{n+1}(\mu x.\varphi):=[\varphi]_{x}^{apx{n}(\mu x.\varphi)}$}\\ \hline
+\multicolumn{2}{|l|}{$apx_{n+1}(\nu x.\varphi):=[\varphi]_{x}^{apx{n}(\nu x.\varphi)}$}\\ \hline
+\end{tabular}
 \textbf{Automata types:} G$\rightarrow$Safety; F$\rightarrow$Liveness; FG$\rightarrow$Persistence/Co-Buchi; GF$\rightarrow$Fairness/Buchi.
 
-\lipsum
+\lipsum  %generate random text so we better see the cheat sheet
 
 \end{multicols}
 \end{document}
