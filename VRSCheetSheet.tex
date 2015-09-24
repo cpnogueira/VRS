@@ -6,7 +6,9 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{ stmaryrd }
-%\usepackage[nopar]{lipsum}%just to generate text for the example
+\usepackage[nopar]{lipsum}%just to generate text for the example
+\usepackage{fixltx2e}
+\usepackage{textcomp}
 
 % redefinition of \normalsize to use \footnotesize and decrease the values for
 % \abovedisplyskip, \belowdisplayskip, and the "short" variants
@@ -64,7 +66,10 @@
 \newcommand{\Bb}{\pazocal{B}}
 \newcommand{\Vb}{\pazocal{V}}
 \newcommand{\Qb}{\pazocal{Q}}
+\newcommand{\Ab}{\pazocal{A}}
+\newcommand{\Fb}{\pazocal{F}}
 \newcommand{\Db}{\mathfrak{D}}
+
 
 \begin{document}
 \begin{multicols}{4}
@@ -386,66 +391,73 @@ If (s,$\nu x.\varphi$) repeats$\rightarrow$return 0& $apx_0(\nu x.\varphi):=1$\\
 \end{tabular}
 \textbf{Automata types:} G$\rightarrow$Safety; F$\rightarrow$Liveness; FG$\rightarrow$Persistence/Co-Buchi; GF$\rightarrow$Fairness/Buchi.
 
+\textbf{\underline{Automaton Determinization}}\\
+\textbf{NDet\textsubscript{G}\textrightarrow Det\textsubscript{G}:} 
+1.Remove all states/edges that do not satisfy acceptance condition;
+2.Use Subset construction (Rabin-Scott);
+3.Acceptance condition will be the states where \{\} is never reached. \\
+\textbf{\{NDet\textsubscript{F}(partial) or NDet\textsubscript{prefix}\}\textrightarrow Det\textsubscript{FG}:} 
+Breakpoint Construction. \\
+\textbf{NDet\textsubscript{F} (total)\textrightarrow Det\textsubscript{F}:}
+Subset Construction. \\
+\textbf{NDet\textsubscript{FG}\textrightarrow Det\textsubscript{FG}:}
+Breakpoint Construction.\\
+\textbf{NDet\textsubscript{GF}\textrightarrow \{Det\textsubscript{Rabin} or Det\textsubscript{Streett}\}:}
+Safra Algorithm.
 %\lipsum  %generate random text so we better see the cheat sheet
+
+%% TODO: Organize latter from here on the order of the things. Follow the rest of the content of the first side of the sheet
+
+\textbf{Automata Formulas}
+
+\underline{Complement}
+\begin{align*}
+\neg \Ab_{\forall}(Q,\Ib,\Rb,\Fb)=\Ab_{\exists}(Q,\Ib,\Rb,\neg \Fb) \\
+\neg \Ab_{\exists}(Q,\Ib,\Rb,\Fb)=\Ab_{\forall}(Q,\Ib,\Rb,\neg \Fb)
+\end{align*}
+\underline{Conjunction}
+\begin{align*}
+(\Ab_{\exists}(Q_1,\Ib_1,\Rb_1,\Fb_1)\wedge \Ab_{\exists}(Q_2,\Ib_2,\Rb_2,\Fb_2)&)=\\
+\Ab_{\exists}(Q_1 \cup Q_2,\Ib_1 \wedge \Ib_2,\Rb_1 \wedge \Rb_2,\Fb_1 \wedge \Fb_2)&
+\end{align*}
+
+\underline{Disjunction}
+\begin{align*}
+(\Ab_{\exists}(Q_1,\Ib_1,\Rb_1,\Fb_1)\vee \Ab_{\exists}(Q_2,\Ib_2,\Rb_2,\Fb_2)&)=\\
+\Ab_{\exists} \begin{pmatrix}
+Q_1 \cup Q_2 \cup \{q\},\\
+(\neg q \wedge \Ib_1) \vee (q \wedge \Ib_2), \\
+(\neg q \wedge \Rb_1 \wedge \neg q') \vee ( q \wedge \Rb_2 \wedge q'), \\
+(\neg q \wedge \Fb_1) \vee (q \wedge \Fb_2)
+  \end{pmatrix}
+\end{align*}
+\textit{If both automata are totally defined,}
+\begin{align*}
+(\Ab_{\exists}(Q_1,\Ib_1,\Rb_1,\Fb_1)\vee \Ab_{\exists}(Q_2,\Ib_2,\Rb_2,\Fb_2)&)=\\
+\Ab_{\exists}(Q_1 \cup Q_2,\Ib_1 \wedge \Ib_2,\Rb_1 \wedge \Rb_2,\Fb_1 \vee \Fb_2)
+\end{align*}
+\underline{Eliminate Nesting} - Acceptance condition \textbf{must} be an automata of the same type
+\begin{align*}
+\Ab_{\exists}(Q^1,\Ib_1^1,\Rb_1^1,\Ab_{\exists}(Q^2,\Ib_1^2,\Rb_1^2,\Fb_1))\\
+= \Ab_{\exists}(Q^1 \cup Q^2,\Ib_1^1 \wedge \Ib_1^2,\Rb_1^1 \wedge \Rb_1^2,\Fb_1))
+\end{align*}
+\underline{Boolean Operations of G}
+\begin{align*}
+(1)\neg G \varphi = F \neg \varphi\qquad \qquad  (2)G \varphi &\wedge G \psi = G[\varphi \wedge \psi]\\
+(3) G \varphi \vee G \psi = \Ab_{\exists}(\{p,q\},p \wedge q,&\qquad\qquad\\
+[p' \leftrightarrow p \wedge \varphi] \wedge &[q' \leftrightarrow q \wedge \psi],G[p \vee q])
+\end{align*}
+\underline{Boolean Operations of F}
+\begin{align*}
+(1)\neg F \varphi = G \neg \varphi\qquad \qquad\quad\;(2)F \varphi &\vee F \psi = F[\varphi \vee \psi]\\
+(3) F \varphi \wedge F \psi = \Ab_{\exists}(\{p,q\}, \neg p \wedge \neg q,&\qquad\qquad\\
+[p' \leftrightarrow p \vee \varphi] \wedge [q' \leftrightarrow & q \vee \psi],F[p \wedge q])
+\end{align*}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%% Other side of the previous sheet! %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Defining first the boxes content
-\setbox0=\hbox{%
-\begin{minipage}{0.425\columnwidth}
-\textbf{NDetG}\\
--Remove all stages/edges that do not satisfy acceptance condition \\
--Use Subset construction (Rabin-Scott) \\
--Acceptance condition: states where \{\} is never reached \\
--Becomes DetG \\
-\end{minipage}
-}
-\savestack{\listingFA}{\box0}
-
-\setbox0=\hbox{%
-\begin{minipage}{0.425\columnwidth}
-%\begin{lstlisting}
-\textbf{NDetF (partial) or NDetPrefix} \\
--Use Breakpoint Construction \\
--Becomes DetFG \\
-\\
-\textbf{NDetF (total)} \\
--Use Subset Construction \\
--Acceptance condition same as before \\
--Become DetF \\
-%\end{lstlisting}
-\end{minipage}
-}
-\savestack{\listingFB}{\box0}
-
-\setbox0=\hbox{%
-\begin{minipage}{0.425\columnwidth}
-\textbf{NDetFG}
--Use Breakpoint Construction \\
--Become DetFG \\
-\end{minipage}
-}
-\savestack{\listingFC}{\box0}
-
-\setbox0=\hbox{%
-\begin{minipage}{0.425\columnwidth}
-\textbf{NDetGF} \\
--Use Safra algorithm \\
--Become DetRabin or DetStreett \\
-\end{minipage}
-}
-\savestack{\listingFD}{\box0}
-
-\setbox0=\hbox{%
-\begin{minipage}{0.425\columnwidth}
-\textbf{NDetGF} \\
--Use Safra algorithm \\
--Become DetRabin or DetStreett \\
-\end{minipage}
-}
-\savestack{\listingFD}{\box0}
-
 \setbox0=\hbox{%
 \begin{minipage}{0.425\columnwidth}
 $EX\varphi = \diamondsuit (\Phi_{inf} \wedge \varphi)$ \\
@@ -467,17 +479,6 @@ TODO
 \savestack{\listingFF}{\box0}
 
 %Organizing the boxes
-\textbf{Automaton Determinization}
-\begin{tabular}{|l|l|}
-\hline
-{\listingFA} &
-{\listingFB} \\
-\hline
-{\listingFC} &
-{\listingFD} \\
-\hline
-\end{tabular}
-
 \textbf{CTL to $\mu -Calculus (\Phi _{inf} = \nu y.\diamondsuit y$)}
 \begin{tabular}{|l|l|}
 \hline
