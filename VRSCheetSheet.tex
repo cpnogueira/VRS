@@ -453,8 +453,55 @@ Q_1 \cup Q_2 \cup \{q\},\\
 (3) F \varphi \wedge F \psi = \Ab_{\exists}(\{p,q\}, \neg p \wedge \neg q,&\qquad\qquad\\
 [p' \leftrightarrow p \vee \varphi] \wedge [q' \leftrightarrow & q \vee \psi],F[p \wedge q])
 \end{align*}
+\underline{Boolean Operations of FG}
+\begin{align*}
+(1)\neg FG \varphi = GF \neg \varphi\qquad(2)FG \varphi \wedge FG \psi = FG[\varphi \wedge \psi]\\
+(3) FG \varphi \vee FG \psi = \Ab_{\exists}(\{q\}, \neg q, q' \leftrightarrow (q \Rightarrow \psi | \neg \varphi),\\
+FG[\neg q \vee \psi])
+\end{align*}
+\underline{Boolean Operations of FG}
+\begin{align*}
+(1)\neg GF \varphi = FG \neg \varphi \qquad(2)GF \varphi \vee GF \psi = GF[\varphi \vee \psi]\\
+(3) GF \varphi \wedge GF \psi = \Ab_{\exists}&(\{q\}, \neg q, q' \leftrightarrow (q \Rightarrow \neg \psi | \varphi),\\
+GF[q \wedge \psi])
+\end{align*}
+\textbf{Transformation of Acceptance Conditions}
+\underline{Reduction of G}
+\begin{align*}
+G\varphi &= \Ab_{\exists}(\{q\},q,\varphi \wedge q \wedge q',F q))\\
+G\varphi &= \Ab_{\exists}(\{q\},q, q' \leftrightarrow q \wedge \varphi,FG q) \\
+G\varphi &= \Ab_{\exists}(\{q\},q, q' \leftrightarrow q \wedge \varphi,GF q) 
+\end{align*}
+\underline{Reduction of F}
+\begin{align*}
+F\varphi &\text{ can \textbf{\underline{not}} be expressed by } NDet_G\\
+F\varphi &= \Ab_{\exists}(\{q\},\neg q, q' \leftrightarrow q \vee \varphi,FG q) \\
+F\varphi &= \Ab_{\exists}(\{q\},\neg q, q' \leftrightarrow q \vee \varphi,GF q) 
+\end{align*}
+\underline{Reduction of FG}
+\begin{align*}
+FG\varphi &\text{ can \textbf{\underline{not}} be expressed by } NDet_G\\
+FG\varphi &= \Ab_{\exists}(\{q\},\neg q, q \rightarrow \varphi \wedge q',F q) \\
+FG\varphi &= \Ab_{\exists} \begin{pmatrix}
+\{p,q\},\qquad \neg p \wedge \neg q,\\
+	\begin{bmatrix}
+(p \rightarrow p') \wedge (p' \rightarrow p \vee \neg q) \wedge \\
+(q' \leftrightarrow (p \wedge \neg q \vee \neg \varphi) \vee (p \wedge q))
+    \end{bmatrix},\\
+    G \neg q \wedge F p
+\end{pmatrix}\\
+FG\varphi &= \Ab_{\exists} \begin{pmatrix}
+\{p,q\},\qquad \neg p \wedge \neg q,\\
+	\begin{bmatrix}
+(p \rightarrow p') \wedge (p' \rightarrow p \vee \neg q) \wedge \\
+(q' \leftrightarrow (p \wedge \neg q \vee \neg \varphi) \vee (p \wedge q))
+    \end{bmatrix},\\
+    GF[p \wedge \neg q]
+\end{pmatrix}
+\end{align*}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%% Other side of the previous sheet! %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Defining first the boxes content
