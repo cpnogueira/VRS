@@ -391,7 +391,7 @@ If (s,$\nu x.\varphi$) repeats$\rightarrow$return 0& $apx_0(\nu x.\varphi):=1$\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%% Other side of the previous sheet! %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\textbf{Automaton Determinization}
+%Defining first the boxes content
 \setbox0=\hbox{%
 \begin{minipage}{0.425\columnwidth}
 \textbf{NDetG}\\
@@ -402,6 +402,7 @@ If (s,$\nu x.\varphi$) repeats$\rightarrow$return 0& $apx_0(\nu x.\varphi):=1$\\
 \end{minipage}
 }
 \savestack{\listingFA}{\box0}
+
 \setbox0=\hbox{%
 \begin{minipage}{0.425\columnwidth}
 %\begin{lstlisting}
@@ -418,11 +419,71 @@ If (s,$\nu x.\varphi$) repeats$\rightarrow$return 0& $apx_0(\nu x.\varphi):=1$\\
 }
 \savestack{\listingFB}{\box0}
 
+\setbox0=\hbox{%
+\begin{minipage}{0.425\columnwidth}
+\textbf{NDetFG}
+-Use Breakpoint Construction \\
+-Become DetFG \\
+\end{minipage}
+}
+\savestack{\listingFC}{\box0}
 
+\setbox0=\hbox{%
+\begin{minipage}{0.425\columnwidth}
+\textbf{NDetGF} \\
+-Use Safra algorithm \\
+-Become DetRabin or DetStreett \\
+\end{minipage}
+}
+\savestack{\listingFD}{\box0}
+
+\setbox0=\hbox{%
+\begin{minipage}{0.425\columnwidth}
+\textbf{NDetGF} \\
+-Use Safra algorithm \\
+-Become DetRabin or DetStreett \\
+\end{minipage}
+}
+\savestack{\listingFD}{\box0}
+
+\setbox0=\hbox{%
+\begin{minipage}{0.425\columnwidth}
+$EX\varphi = \diamondsuit (\Phi_{inf} \wedge \varphi)$ \\
+$EG\varphi = \nu x.\varphi \wedge \diamondsuit x $ \\
+$EF\varphi = \mu x.\Phi_{inf} \wedge \varphi \vee \diamondsuit x  $ \\
+$E[ \varphi \underline{U} \psi] = \mu x.(\Phi_{inf} \wedge \psi) \vee \varphi \wedge \diamondsuit x $ \\
+$E[ \varphi U \psi] = \nu x.(\Phi_{inf} \wedge \psi) \vee \varphi \wedge \diamondsuit x $ \\
+$E[ \varphi \underline{B} \psi] = \mu x.\neg\psi \wedge (\Phi_{inf} \wedge \varphi \vee \diamondsuit x) $ \\
+$E[ \varphi B \psi] = \nu x.\neg\psi \wedge (\Phi_{inf} \wedge \varphi \vee \diamondsuit x) $ \\
+\end{minipage}
+}
+\savestack{\listingFE}{\box0}
+
+\setbox0=\hbox{%
+\begin{minipage}{0.425\columnwidth}
+TODO
+\end{minipage}
+}
+\savestack{\listingFF}{\box0}
+
+%Organizing the boxes
+\textbf{Automaton Determinization}
 \begin{tabular}{|l|l|}
 \hline
 {\listingFA} &
-{\listingFB} \\ \hline
+{\listingFB} \\
+\hline
+{\listingFC} &
+{\listingFD} \\
+\hline
+\end{tabular}
+
+\textbf{CTL to $\mu -Calculus (\Phi _{inf} = \nu y.\diamondsuit y$)}
+\begin{tabular}{|l|l|}
+\hline
+{\listingFE} &
+{\listingFF} \\
+\hline
 \end{tabular}
 
 \end{multicols}
