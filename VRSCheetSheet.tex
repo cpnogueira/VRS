@@ -6,7 +6,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{ stmaryrd }
-\usepackage[nopar]{lipsum}%just to generate text for the example
+%\usepackage[nopar]{lipsum}%just to generate text for the example
 
 % redefinition of \normalsize to use \footnotesize and decrease the values for
 % \abovedisplyskip, \belowdisplayskip, and the "short" variants
@@ -386,7 +386,44 @@ If (s,$\nu x.\varphi$) repeats$\rightarrow$return 0& $apx_0(\nu x.\varphi):=1$\\
 \end{tabular}
 \textbf{Automata types:} G$\rightarrow$Safety; F$\rightarrow$Liveness; FG$\rightarrow$Persistence/Co-Buchi; GF$\rightarrow$Fairness/Buchi.
 
-\lipsum  %generate random text so we better see the cheat sheet
+%\lipsum  %generate random text so we better see the cheat sheet
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%% Other side of the previous sheet! %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{Automaton Determinization}
+\setbox0=\hbox{%
+\begin{minipage}{0.425\columnwidth}
+\textbf{NDetG}\\
+-Remove all stages/edges that do not satisfy acceptance condition \\
+-Use Subset construction (Rabin-Scott) \\
+-Acceptance condition: states where \{\} is never reached \\
+-Becomes DetG \\
+\end{minipage}
+}
+\savestack{\listingFA}{\box0}
+\setbox0=\hbox{%
+\begin{minipage}{0.425\columnwidth}
+%\begin{lstlisting}
+\textbf{NDetF (partial) or NDetPrefix} \\
+-Use Breakpoint Construction \\
+-Becomes DetFG \\
+\\
+\textbf{NDetF (total)} \\
+-Use Subset Construction \\
+-Acceptance condition same as before \\
+-Become DetF \\
+%\end{lstlisting}
+\end{minipage}
+}
+\savestack{\listingFB}{\box0}
+
+
+\begin{tabular}{|l|l|}
+\hline
+{\listingFA} &
+{\listingFB} \\ \hline
+\end{tabular}
 
 \end{multicols}
 \end{document}
