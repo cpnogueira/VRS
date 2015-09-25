@@ -5,10 +5,14 @@
 \usepackage{multicol}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{ stmaryrd }
-\usepackage[nopar]{lipsum}%just to generate text for the example
+\usepackage{stmaryrd}
 \usepackage{fixltx2e}
 \usepackage{textcomp}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{picinpar}
+
+\usepackage[nopar]{lipsum}%just to generate text for the example
 
 % redefinition of \normalsize to use \footnotesize and decrease the values for
 % \abovedisplyskip, \belowdisplayskip, and the "short" variants
@@ -69,7 +73,7 @@
 \newcommand{\Ab}{\pazocal{A}}
 \newcommand{\Fb}{\pazocal{F}}
 \newcommand{\Db}{\mathfrak{D}}
-
+\graphicspath{{./Pictures/}}
 
 \begin{document}
 \begin{multicols}{4}
@@ -266,6 +270,9 @@ end;end
 _____________________
 Other Diagrams:
 TODO ZDD FDD
+
+_____
+
 \end{lstlisting}
 \end{minipage}
 }
@@ -280,8 +287,9 @@ TODO ZDD FDD
 {\listingF} \\ \hline
 \end{tabular}
 
+\begin{window}[1, l, \includegraphics[width=0.3\columnwidth]{Simulation}, {}]
 \textbf{Simulation}: given ${\Kb_{1}=(\Ib_1,\Sb_1,\Rb_1,\Lb_1)}$ and ${\Kb_{2}=(\Ib_2,\Sb_2,\Rb_2,\Lb_2)}$; ${\sigma \subseteq \Sb_1 \times \Sb_2}$ is a sim. relation between $\Kb_1 \text{ and } \Kb_2$ (${\Kb_1 \preccurlyeq \Kb_2}$) if: \textbf{SIM1-} ${(s_1,s_2) \in \sigma}$ implies ${\Lb_1(s_1)=\Lb_2(s_2)}$; \textbf{SIM2-} for $s_1,s'_{1} \in \Sb_1, s_2 \in \Sb_2$ with ${(s_1,s_2) \in \sigma}$ and ${(s_1,s'_{1}) \in \Rb_1}$, there must be ${s'_2 \in \Rb_2}$ with ${(s'_1,s'_2) \in \sigma}$ ${(s_2,s'_{2}) \in \Rb_2}$; \textbf{SIM3-} for all ${s_1 \in \Ib_1}$, there is a ${s_2 \in \Ib_2}$ with ${(s_1,s_2) \in \sigma}$.
-
+\end{window}
 \textbf{Greatest Simulation Relation}
 ${(s_1,s_2) \in \Hb_{0}\Leftrightarrow \Lb_1(s_1)=\Lb_2(s_2)}$
 
@@ -322,6 +330,10 @@ $\widetilde{\Sb}:=\{\{s' \in \Sb | (s,s') \in \sigma \} | s \in \Sb \}$
 $(\widetilde{s}_1,\widetilde{s}_2) \in \Rb :\Leftrightarrow \exists s'_1 \in \widetilde{s}_1. \exists s'_2 \in \widetilde{s}_2.(s'_1,s'_2) \in \Rb$
 $\widetilde{\Lb}( \widetilde{s} ):= \Lb(s)$
 
+
+\includegraphics[width=0.7\columnwidth]{Quotient}
+
+
 \textbf{Symbolic Product Computation} - given ${\Kb_1=(\Vb_1,\varphi_{\Ib},\varphi_{\Rb})}$ and ${\Kb_2=(\Vb_2,\psi_{\Ib},\psi_{\Rb})}$, the product is: $\Kb_1 \times \Kb_2 = (\Vb_1 \cup \Vb_2, \varphi_{\Ib} \wedge \psi_{\Ib},\varphi_{\Rb} \wedge \psi_{\Rb} )$
 \textbf{Quantif.} ${\exists x.\varphi:=[\varphi]^{1}_{x} \vee [\varphi]^{0}_{x}}\; \clubsuit\; {\forall x.\varphi:=[\varphi]^{1}_{x} \wedge [\varphi]^{0}_{x}}$
 
@@ -330,6 +342,17 @@ $\diamond := pre^{\Rb}_{\exists}(Q) := \exists x'_1,...,x'_n.\varphi_{\Rb} \wedg
 $\overleftarrow{\diamond} := suc^{\Rb}_{\exists}(Q) := [\exists x'_1,...,x'_n.\varphi_{\Rb} \wedge \varphi_{Q}]_{x'_1,...,x'_n}^{x_1,...,x_n}$
 $\square = pre^{\Rb}_{\forall}(Q) := \forall x'_1,...,x'_n.\varphi_{\Rb} \rightarrow [\varphi_{Q}]^{x'_1,...,x'_n}_{x_1,...,x_n}$
 $\overleftarrow{\square} := suc^{\Rb}_{\forall}(Q) := [\forall x'_1,...,x'_n.\varphi_{\Rb} \rightarrow \varphi_{Q}]_{x'_1,...,x'_n}^{x_1,...,x_n}$
+\begin{tabular}{l l}
+\raisebox{-0.2\height+\baselineskip}{\includegraphics[width=0.33\columnwidth]{universalPre}}
+&
+{$\!\begin{aligned}
+\text{\textbf{Example: }} \square / \overleftarrow{\square} \\
+pre_{\forall}^{\Rb}(\{S3,S4\})=\{S0,S5\} \\
+suc_{\forall}^{\Rb}(\{S3,S4\})=\{S2,S5\} \\
+%pre_{\exists}^{\Rb}(\{S3,S4\})=\{S0,S1,S3\} \\
+%suc_{\exists}^{\Rb}(\{S3,S4\})=\{S1,S4,S5\}
+\end{aligned}$}
+\end{tabular}
 
 \setbox0=\hbox{%
 \begin{minipage}{0.425\columnwidth}
@@ -405,6 +428,11 @@ Breakpoint Construction.\\
 \textbf{NDet\textsubscript{GF}\textrightarrow \{Det\textsubscript{Rabin} or Det\textsubscript{Streett}\}:}
 Safra Algorithm.
 %\lipsum  %generate random text so we better see the cheat sheet
+
+\textbf{\textit{* Rabin-Scott Subset Construction}}
+\textbf{1.} Initial state is a set of states containing all the initial states.
+\textbf{2.} For every possible transition of a set of states, compute the successors and create a set of states containing all the possible reachable states when performing that transition.
+\textbf{3.} Acceptance condition are set of states containing acceptance states.
 
 %% TODO: Organize latter from here on the order of the things. Follow the rest of the content of the first side of the sheet
 
