@@ -570,61 +570,47 @@ $\diamond$1 holds on states with successor states.\\
 {\neg[\varphi \;\overleftarrow{B} \;\psi] = [ (\neg \varphi) \;\overleftarrow{\underline{U}}\; \psi ]}\qquad &{\neg[\varphi\; \overleftarrow{\underline{B}}\; \psi] = [ (\neg \varphi)\; \overleftarrow{U} \; \psi ]}\\
 \end{align*}
 \textbf{LTL Syntactic Sugar:} analog for past operators
-\begin{align*}
-G \varphi =& \neg [ 1 \; \underline{U} \; (\neg \varphi)] &F \varphi = [1\; \underline{U}\; \varphi]\\
-[\varphi \; W \;\psi] =& \neg [(\neg \varphi \vee \neg \psi)\; \underline{U}\; (\neg \varphi \wedge \psi)]\\
-[\varphi \; \underline{W} \;\psi] =& [(\neg \psi)\; \underline{U}\; (\varphi \wedge \psi)]\\
-[\varphi \; B \;\psi] =& \neg [(\neg \varphi)\; \underline{U}\; \psi)]\\
-[\varphi \; \underline{B} \;\psi] =& [(\neg \psi)\; \underline{U}\; (\varphi \wedge \neg \psi)]\\
-[\varphi \; U \;\psi] =& \neg [(\neg \psi)\; \underline{U}\; (\neg\varphi \wedge \neg \psi)]\\
-[\varphi \; \underline{U} \;\psi] =& \neg [(\neg \psi)\; U\; (\neg \varphi \wedge \neg \psi)]\\
-[\varphi \; \underline{U} \;\psi] =& \neg [(\neg \psi)\; W\; (\varphi \rightarrow \psi)]\\
-[\varphi \; \underline{U} \;\psi] =& [\psi\; \underline{W}\; (\varphi \rightarrow \psi)]\\
-[\varphi \; \underline{U} \;\psi] =& \neg [(\neg \varphi)\; B\; \psi]\\
-[\varphi \; \underline{U} \;\psi] =& [\psi\; \underline{B}\; (\neg \varphi \wedge \neg \psi]\\
-\end{align*}
+$G \varphi = \neg [ 1 \; \underline{U} \; (\neg \varphi)] \qquad \qquad F \varphi = [1\; \underline{U}\; \varphi]$ \\
+$[\varphi \; W \;\psi] = \neg [(\neg \varphi \vee \neg \psi)\; \underline{U}\; (\neg \varphi \wedge \psi)]$ \\
+$[\varphi \; \underline{W} \;\psi] = [(\neg \psi)\; \underline{U}\; (\varphi \wedge \psi)]$ \\
+$[\varphi \; B \;\psi] = \neg [(\neg \varphi)\; \underline{U}\; \psi)]$ \\
+$[\varphi \; \underline{B} \;\psi] = [(\neg \psi)\; \underline{U}\; (\varphi \wedge \neg \psi)]$ \\
+$[\varphi \; U \;\psi] = \neg [(\neg \psi)\; \underline{U}\; (\neg\varphi \wedge \neg \psi)]$ \\
+$[\varphi \; \underline{U} \;\psi] = \neg [(\neg \psi)\; U\; (\neg \varphi \wedge \neg \psi)]$ \\
+$[\varphi \; \underline{U} \;\psi] = \neg [(\neg \psi)\; W\; (\varphi \rightarrow \psi)]$ \\
+$[\varphi \; \underline{U} \;\psi] = [\psi\; \underline{W}\; (\varphi \rightarrow \psi)]$ \\
+$[\varphi \; \underline{U} \;\psi] = \neg [(\neg \varphi)\; B\; \psi]$ \\
+$[\varphi \; \underline{U} \;\psi] = [\psi\; \underline{B}\; (\neg \varphi \wedge \neg \psi]$ \\
+
 \textbf{CTL Syntactic Sugar:} analog for past operators
-\underline{Existential Operators}
-\begin{align*}
-EF\varphi =& E[1 \; \underline{U} \; \varphi] \\
-EG\varphi =& E[\varphi \; U \; 0] \\
-E[ \varphi \; U \; \psi] =& E[\varphi \; \underline{U}\; \psi] \vee EG\varphi \\
-E[ \varphi \; B \; \psi] =& E[(\neg \psi) \; \underline{U}\; (\varphi \wedge \neg \psi)] \vee EG\neg \psi \\
-E[ \varphi \; B \; \psi] =& E[(\neg \psi) \; U\; (\varphi \wedge \neg \psi)]\\
-E[ \varphi \; \underline{B} \; \psi] =& E[(\neg \psi) \; \underline{U}\; (\varphi \wedge \neg \psi)]\\
-E[ \varphi \; \underline{B} \; \psi] =& E[(\neg \psi \; \underline{U}\; (\varphi \wedge \neg \psi)]\\
-E[ \varphi \; W \; \psi] =& E[(\neg \psi) \; \underline{U}\; (\varphi \wedge \psi)] \vee EG\neg \psi \\
-E[ \varphi \; W \; \psi] =& E[(\neg \psi) \; U\; (\varphi \wedge \psi)]\\
-E[ \varphi \; \underline{W} \; \psi] =& E[(\neg \psi) \; \underline{U}\; (\varphi \wedge \psi)]\\
-\end{align*}
-\underline{Universal Operators}
-\begin{align*}
-AX\varphi =& \neg EX \neg \varphi \qquad\\
-AG\varphi=& \neg E[1 \; \underline{U} \; \neg \varphi]\\
-AF\varphi =& \neg EG \neg \varphi \\
-AF\varphi =& \neg E[(\neg \varphi)\; U\; 0] \\
-A[\varphi \; U\; \psi]=& \neg E[(\neg \psi)\; \underline{U} \; (\neg \varphi \wedge \neg \psi)] \\
-A[\varphi \; \underline{U} \; \psi] =& \neg E[(\neg \psi) \; \underline{U}\; (\neg \varphi \wedge \neg \psi)]\wedge \neg EG \neg \psi\\
-A[\varphi \; \underline{U} \; \psi] =& \neg E[(\neg \psi) \; U\; (\neg \varphi \wedge \neg \psi)]\\
-A[\varphi \; B\; \psi]=& \neg E[(\neg \varphi)\; \underline{U} \; \psi] \\
-A[\varphi \; \underline{B}\; \psi]=& \neg E[(\neg \varphi)\; U \; \psi] \\
-A[\varphi \; \underline{B} \; \psi] =& \neg E[(\neg \varphi \vee \psi) \; \underline{U}\; \psi] \wedge \neg EG(\neg \varphi \vee \psi)\\
-A[\varphi \; W\; \psi]=& \neg E[(\neg \psi) \; \underline{U}\; (\neg \varphi \wedge \psi)]\\
-A[\varphi \; \underline{W} \; \psi] =& \neg E[(\neg \psi) \; \underline{U}\; (\neg \varphi \wedge \psi)] \wedge \neg EG\neg \psi \\
-A[\varphi \; \underline{W} \; \psi] =& \neg E[(\neg \psi) \; U\; (\neg \varphi \wedge \psi)]
-\end{align*}
+\underline{Existential Operators}\\
+$EF\varphi =  E[1 \; \underline{U} \; \varphi]  $ \\
+$EG\varphi =  E[\varphi \; U \; 0]  $ \\
+$E[ \varphi \; U \; \psi] =  E[\varphi \; \underline{U}\; \psi] \vee EG\varphi  $ \\
+$E[ \varphi \; B \; \psi] =  E[(\neg \psi) \; \underline{U}\; (\varphi \wedge \neg \psi)] \vee EG\neg \psi  $ \\
+$E[ \varphi \; B \; \psi] =  E[(\neg \psi) \; U\; (\varphi \wedge \neg \psi)] $ \\
+$E[ \varphi \; \underline{B} \; \psi] =  E[(\neg \psi) \; \underline{U}\; (\varphi \wedge \neg \psi)] $ \\
+$E[ \varphi \; \underline{B} \; \psi] =  E[(\neg \psi \; \underline{U}\; (\varphi \wedge \neg \psi)] $ \\
+$E[ \varphi \; W \; \psi] =  E[(\neg \psi) \; \underline{U}\; (\varphi \wedge \psi)] \vee EG\neg \psi  $ \\
+$E[ \varphi \; W \; \psi] =  E[(\neg \psi) \; U\; (\varphi \wedge \psi)] $ \\
+$E[ \varphi \; \underline{W} \; \psi] =  E[(\neg \psi) \; \underline{U}\; (\varphi \wedge \psi)] $ \\
 
+\underline{Universal Operators} \\
+$AX\varphi =  \neg EX \neg \varphi \qquad$ \\
+$AG\varphi=  \neg E[1 \; \underline{U} \; \neg \varphi] $ \\
+$AF\varphi =  \neg EG \neg \varphi $ \\
+$AF\varphi =  \neg E[(\neg \varphi)\; U\; 0] $ \\
+$A[\varphi \; U\; \psi]=  \neg E[(\neg \psi)\; \underline{U} \; (\neg \varphi \wedge \neg \psi)] $ \\
+$A[\varphi \; \underline{U} \; \psi] =  \neg E[(\neg \psi) \; \underline{U}\; (\neg \varphi \wedge \neg \psi)]\wedge \neg EG \neg \psi$ \\
+$A[\varphi \; \underline{U} \; \psi] =  \neg E[(\neg \psi) \; U\; (\neg \varphi \wedge \neg \psi)]$ \\
+$A[\varphi \; B\; \psi]=  \neg E[(\neg \varphi)\; \underline{U} \; \psi] $ \\
+$A[\varphi \; \underline{B}\; \psi]=  \neg E[(\neg \varphi)\; U \; \psi] $ \\
+$A[\varphi \; \underline{B} \; \psi] =  \neg E[(\neg \varphi \vee \psi) \; \underline{U}\; \psi] \wedge \neg EG(\neg \varphi \vee \psi)$ \\
+$A[\varphi \; W\; \psi]=  \neg E[(\neg \psi) \; \underline{U}\; (\neg \varphi \wedge \psi)]$ \\
+$A[\varphi \; \underline{W} \; \psi] =  \neg E[(\neg \psi) \; \underline{U}\; (\neg \varphi \wedge \psi)] \wedge \neg EG\neg \psi $ \\
+$A[\varphi \; \underline{W} \; \psi] =  \neg E[(\neg \psi) \; U\; (\neg \varphi \wedge \psi)]$
 
-
-\lipsum
-\lipsum
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%% Other side of the previous sheet! %%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Defining first the boxes content
-\setbox0=\hbox{%
-\begin{minipage}{0.425\columnwidth}
+\textbf{CTL to $\mu -Calculus (\Phi _{inf} = \nu y.\diamondsuit y$)}
 $EX\varphi = \diamondsuit (\Phi_{inf} \wedge \varphi)$ \\
 $EG\varphi = \nu x.\varphi \wedge \diamondsuit x $ \\
 $EF\varphi = \mu x.\Phi_{inf} \wedge \varphi \vee \diamondsuit x  $ \\
@@ -632,25 +618,12 @@ $E[ \varphi \underline{U} \psi] = \mu x.(\Phi_{inf} \wedge \psi) \vee \varphi \w
 $E[ \varphi U \psi] = \nu x.(\Phi_{inf} \wedge \psi) \vee \varphi \wedge \diamondsuit x $ \\
 $E[ \varphi \underline{B} \psi] = \mu x.\neg\psi \wedge (\Phi_{inf} \wedge \varphi \vee \diamondsuit x) $ \\
 $E[ \varphi B \psi] = \nu x.\neg\psi \wedge (\Phi_{inf} \wedge \varphi \vee \diamondsuit x) $ \\
-\end{minipage}
-}
-\savestack{\listingFE}{\box0}
 
-\setbox0=\hbox{%
-\begin{minipage}{0.425\columnwidth}
-TODO
-\end{minipage}
-}
-\savestack{\listingFF}{\box0}
-
-%Organizing the boxes
-\textbf{CTL to $\mu -Calculus (\Phi _{inf} = \nu y.\diamondsuit y$)}
-\begin{tabular}{|l|l|}
-\hline
-{\listingFE} &
-{\listingFF} \\
-\hline
-\end{tabular}
+\lipsum
+\lipsum
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%% Other side of the previous sheet! %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{multicols}
 \end{document}
