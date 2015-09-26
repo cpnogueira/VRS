@@ -583,7 +583,36 @@ G \varphi =& \neg [ 1 \; \underline{U} \; (\neg \varphi)] &F \varphi = [1\; \und
 [\varphi \; \underline{U} \;\psi] =& \neg [(\neg \varphi)\; B\; \psi]\\
 [\varphi \; \underline{U} \;\psi] =& [\psi\; \underline{B}\; (\neg \varphi \wedge \neg \psi]\\
 \end{align*}
-
+\textbf{CTL Syntactic Sugar:} analog for past operators
+\underline{Existential Operators}
+\begin{align*}
+EF\varphi =& E[1 \; \underline{U} \; \varphi] \\
+EG\varphi =& E[\varphi \; U \; 0] \\
+E[ \varphi \; U \; \psi] =& E[\varphi \; \underline{U}\; \psi] \vee EG\varphi \\
+E[ \varphi \; B \; \psi] =& E[(\neg \psi) \; \underline{U}\; (\varphi \wedge \neg \psi)] \vee EG\neg \psi \\
+E[ \varphi \; B \; \psi] =& E[(\neg \psi) \; U\; (\varphi \wedge \neg \psi)]\\
+E[ \varphi \; \underline{B} \; \psi] =& E[(\neg \psi) \; \underline{U}\; (\varphi \wedge \neg \psi)]\\
+E[ \varphi \; \underline{B} \; \psi] =& E[(\neg \psi \; \underline{U}\; (\varphi \wedge \neg \psi)]\\
+E[ \varphi \; W \; \psi] =& E[(\neg \psi) \; \underline{U}\; (\varphi \wedge \psi)] \vee EG\neg \psi \\
+E[ \varphi \; W \; \psi] =& E[(\neg \psi) \; U\; (\varphi \wedge \psi)]\\
+E[ \varphi \; \underline{W} \; \psi] =& E[(\neg \psi) \; \underline{U}\; (\varphi \wedge \psi)]\\
+\end{align*}
+\underline{Universal Operators}
+\begin{align*}
+AX\varphi =& \neg EX \neg \varphi \qquad\\
+AG\varphi=& \neg E[1 \; \underline{U} \; \neg \varphi]\\
+AF\varphi =& \neg EG \neg \varphi \\
+AF\varphi =& \neg E[(\neg \varphi)\; U\; 0] \\
+A[\varphi \; U\; \psi]=& \neg E[(\neg \psi)\; \underline{U} \; (\neg \varphi \wedge \neg \psi)] \\
+A[\varphi \; \underline{U} \; \psi] =& \neg E[(\neg \psi) \; \underline{U}\; (\neg \varphi \wedge \neg \psi)]\wedge \neg EG \neg \psi\\
+A[\varphi \; \underline{U} \; \psi] =& \neg E[(\neg \psi) \; U\; (\neg \varphi \wedge \neg \psi)]\\
+A[\varphi \; B\; \psi]=& \neg E[(\neg \varphi)\; \underline{U} \; \psi] \\
+A[\varphi \; \underline{B}\; \psi]=& \neg E[(\neg \varphi)\; U \; \psi] \\
+A[\varphi \; \underline{B} \; \psi] =& \neg E[(\neg \varphi \vee \psi) \; \underline{U}\; \psi] \wedge \neg EG(\neg \varphi \vee \psi)\\
+A[\varphi \; W\; \psi]=& \neg E[(\neg \psi) \; \underline{U}\; (\neg \varphi \wedge \psi)]\\
+A[\varphi \; \underline{W} \; \psi] =& \neg E[(\neg \psi) \; \underline{U}\; (\neg \varphi \wedge \psi)] \wedge \neg EG\neg \psi \\
+A[\varphi \; \underline{W} \; \psi] =& \neg E[(\neg \psi) \; U\; (\neg \varphi \wedge \psi)]
+\end{align*}
 
 
 
