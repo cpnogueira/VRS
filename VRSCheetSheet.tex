@@ -671,6 +671,16 @@ $\qquad\qquad\qquad\qquad\begin{bmatrix}
   		\psi_2 \wedge [\varphi_1 \; U \psi_1]\;\;\\
 	\end{pmatrix}
   \end{bmatrix}$
+\textbf{CTL* Modelchecking to LTL model checking}
+Let's $\varphi_i$ be a pure path formula (without path quantifiers), $\Psi$ be a propositional formula, abbreviate subformulas $E\varphi$ and $A\psi$ working bottom-up the syntax tree to obtain the following normal form:
+$\Phi = \text{let} \begin{bmatrix}
+x_1 = A\varphi_1\\
+\vdots \\
+x_n = A\varphi_n
+\end{bmatrix}
+\text{ in } \Psi \text{ end}$\\
+Use LTL model checking to compute $Q_i:=\llbracket A\varphi_i\rrbracket _{\Kb_{i-1}}$, where $\Kb_0 := \Kb$ and $\Kb_{i+1}$ is obtained from $\Kb_i$ by labelling the states $Q_i$ with $x_i$.
+Finally compute $\llbracket \Psi \rrbracket_{\Kb_n}$
 %\lipsum
 %\lipsum
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
