@@ -11,6 +11,7 @@
 \usepackage{graphicx}
 \usepackage{wrapfig}
 \usepackage{picinpar}
+\usepackage{ upgreek }
 
 %\usepackage[nopar]{lipsum}%just to generate text for the example
 
@@ -673,7 +674,7 @@ $\qquad\qquad\qquad\qquad\begin{bmatrix}
   \end{bmatrix}$
 \textbf{CTL* Modelchecking to LTL model checking}
 Let's $\varphi_i$ be a pure path formula (without path quantifiers), $\Psi$ be a propositional formula, abbreviate subformulas $E\varphi$ and $A\psi$ working bottom-up the syntax tree to obtain the following normal form:
-$\Phi = \text{let} \begin{bmatrix}
+$\upphi = \text{let} \begin{bmatrix}
 x_1 = A\varphi_1\\
 \vdots \\
 x_n = A\varphi_n
@@ -681,6 +682,26 @@ x_n = A\varphi_n
 \text{ in } \Psi \text{ end}$\\
 Use LTL model checking to compute $Q_i:=\llbracket A\varphi_i\rrbracket _{\Kb_{i-1}}$, where $\Kb_0 := \Kb$ and $\Kb_{i+1}$ is obtained from $\Kb_i$ by labelling the states $Q_i$ with $x_i$.
 Finally compute $\llbracket \Psi \rrbracket_{\Kb_n}$
+
+\textbf{LTL to $\omega$-automata}
+% Normal operator
+$\upphi \langle X \varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q\},1,q \leftrightarrow X \varphi, \upphi \langle q \rangle_x)$\\
+$\upphi \langle X \varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q_0,q_1\},1,$\\ $\qquad\qquad\qquad\qquad(q_0 \leftrightarrow \varphi) \wedge (q_1 \leftrightarrow X q_0), \upphi \langle q_1 \rangle_x)$
+$\upphi \langle G \varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q\},1,q \leftrightarrow \varphi \wedge X q,$\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle q \rangle_x \wedge GF[\varphi \rightarrow q])$
+$\upphi \langle F \varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q\},1,q \leftrightarrow \varphi \wedge X q,$\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle q \rangle_x \wedge GF[q \rightarrow \varphi])$
+$\upphi \langle [\varphi\; U \; \psi] \rangle_x \Leftrightarrow \Ab_\exists (\{q\},1,q \leftrightarrow \psi \vee \varphi \wedge X q,$\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle q \rangle_x \wedge GF[\varphi \rightarrow q])$
+$\upphi \langle [\varphi\; \underline{U} \; \psi] \rangle_x \Leftrightarrow \Ab_\exists (\{q\},1,q \leftrightarrow \psi \vee \varphi \wedge X q,$\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle q \rangle_x \wedge GF[q \rightarrow \psi])$
+$\upphi \langle [\varphi\; B \; \psi] \rangle_x \Leftrightarrow \Ab_\exists (\{q\},1,q \leftrightarrow \neg\psi \wedge (\varphi \vee X q),$\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle q \rangle_x \wedge GF[q \vee \psi])$
+$\upphi \langle [\varphi\; \underline{B} \; \psi] \rangle_x \Leftrightarrow \Ab_\exists (\{q\},1,q \leftrightarrow \neg\psi \wedge (\varphi \vee X q),$\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle q \rangle_x \wedge GF[q \rightarrow \varphi])$
+% Past operators
+$\upphi \langle \overleftarrow{X} \varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q\},q, Xq \leftrightarrow \varphi, \upphi \langle q \rangle_x)$\\
+$\upphi \langle \overleftarrow{X} \varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q\},\neg q, Xq \leftrightarrow \varphi, \upphi \langle q \rangle_x)$\\
+$\upphi \langle \overleftarrow{G}\varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q\},q, X q \leftrightarrow \varphi \wedge q,\upphi \langle \varphi \wedge q \rangle_x)$
+$\upphi \langle \overleftarrow{F}\varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q\},\neg q, X q \leftrightarrow \varphi \vee q,\upphi \langle \varphi \vee q \rangle_x)$
+$\upphi \langle [\varphi \; \overleftarrow{U} \; \psi] \rangle_x \Leftrightarrow \Ab_\exists (\{q\},q, X q \leftrightarrow \psi \vee \varphi \wedge q, $\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle \psi \vee \varphi \wedge q \rangle_x)$
+$\upphi \langle [\varphi \; \overleftarrow{\underline{U}} \; \psi] \rangle_x \Leftrightarrow \Ab_\exists (\{q\},\neg q, X q \leftrightarrow \psi \vee \varphi \wedge q, $\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle \psi \vee \varphi \wedge q \rangle_x)$
+$\upphi \langle [\varphi\;\overleftarrow{B} \; \psi] \rangle_x \Leftrightarrow \Ab_\exists (\{q\},q, X q \leftrightarrow \neg\psi \wedge (\varphi \vee q),$\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle \neg \psi \wedge (\varphi \vee q) \rangle_x)$
+$\upphi \langle [\varphi\;\underline{\overleftarrow{B}} \; \psi] \rangle_x \Leftrightarrow \Ab_\exists (\{q\},\neg q, X q \leftrightarrow \neg\psi \wedge (\varphi \vee q),$\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle \neg \psi \wedge (\varphi \vee q) \rangle_x)$
 %\lipsum
 %\lipsum
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
