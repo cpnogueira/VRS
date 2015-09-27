@@ -13,7 +13,7 @@
 \usepackage{picinpar}
 \usepackage{ upgreek }
 
-%\usepackage[nopar]{lipsum}%just to generate text for the example
+\usepackage[nopar]{lipsum}%just to generate text for the example
 
 % redefinition of \normalsize to use \footnotesize and decrease the values for
 % \abovedisplyskip, \belowdisplayskip, and the "short" variants
@@ -489,63 +489,51 @@ Q_1 \cup Q_2 \cup \{q\},\\
 = \Ab_{\exists}(Q^1 \cup Q^2,\Ib_1^1 \wedge \Ib_1^2,\Rb_1^1 \wedge \Rb_1^2,\Fb_1))
 \end{align*}
 \underline{Boolean Operations of G}
-\begin{align*}
-(1)\neg G \varphi = F \neg \varphi\qquad \qquad  (2)G \varphi &\wedge G \psi = G[\varphi \wedge \psi]\\
-(3) G \varphi \vee G \psi = \Ab_{\exists}(\{p,q\},p \wedge q,&\qquad\qquad\\
-[p' \leftrightarrow p \wedge \varphi] \wedge &[q' \leftrightarrow q \wedge \psi],G[p \vee q])
-\end{align*}
+$(1)\neg G \varphi = F \neg \varphi\qquad \qquad  (2)G \varphi \wedge G \psi = G[\varphi \wedge \psi]$\\
+$(3) G \varphi \vee G \psi = \Ab_{\exists}(\{p,q\},p \wedge q,\qquad\qquad$\\
+$\qquad\qquad\qquad\qquad[p' \leftrightarrow p \wedge \varphi] \wedge [q' \leftrightarrow q \wedge \psi],G[p \vee q])$\\
+\vfill
+\columnbreak
 \underline{Boolean Operations of F}
-\begin{align*}
-(1)\neg F \varphi = G \neg \varphi\qquad \qquad\quad\;(2)F \varphi &\vee F \psi = F[\varphi \vee \psi]\\
-(3) F \varphi \wedge F \psi = \Ab_{\exists}(\{p,q\}, \neg p \wedge \neg q,&\qquad\qquad\\
-[p' \leftrightarrow p \vee \varphi] \wedge [q' \leftrightarrow & q \vee \psi],F[p \wedge q])
-\end{align*}
+$(1)\neg F \varphi = G \neg \varphi\qquad \qquad\quad\;(2)F \varphi \vee F \psi = F[\varphi \vee \psi]$\\
+$(3) F \varphi \wedge F \psi = \Ab_{\exists}(\{p,q\}, \neg p \wedge \neg q,\qquad\qquad$\\
+$\qquad\qquad\qquad\qquad[p' \leftrightarrow p \vee \varphi] \wedge [q' \leftrightarrow q \vee \psi],F[p \wedge q])$
 \underline{Boolean Operations of FG}
-\begin{align*}
-(1)\neg FG \varphi = GF \neg \varphi\qquad(2)FG \varphi \wedge FG \psi = FG[\varphi \wedge \psi]\\
-(3) FG \varphi \vee FG \psi = \Ab_{\exists}(\{q\}, \neg q, q' \leftrightarrow (q \Rightarrow \psi | \neg \varphi),\\
-FG[\neg q \vee \psi])
-\end{align*}
+$(1)\neg FG \varphi = GF \neg \varphi\qquad(2)FG \varphi \wedge FG \psi = FG[\varphi \wedge \psi]$ \\
+$(3) FG \varphi \vee FG \psi = \Ab_{\exists}(\{q\}, \neg q, q' \leftrightarrow (q \Rightarrow \psi | \neg \varphi),$\\
+$\qquad\qquad\qquad\qquad\qquad FG[\neg q \vee \psi])$\\
 \underline{Boolean Operations of GF}
-\begin{align*}
-(1)\neg GF \varphi = FG \neg \varphi \qquad(2)GF \varphi \vee GF \psi = GF[\varphi \vee \psi]\\
-(3) GF \varphi \wedge GF \psi = \Ab_{\exists}(\{q\}, \neg q, q' \leftrightarrow (q \Rightarrow \neg \psi | \varphi),\\
-GF[q \wedge \psi])
-\end{align*}
+$(1)\neg GF \varphi = FG \neg \varphi \qquad(2)GF \varphi \vee GF \psi = GF[\varphi \vee \psi]$\\
+$(3) GF \varphi \wedge GF \psi = \Ab_{\exists}(\{q\}, \neg q, q' \leftrightarrow (q \Rightarrow \neg \psi | \varphi),$\\
+$\qquad\qquad\qquad\qquad\qquad GF[q \wedge \psi])$\\
 \textbf{Transformation of Acceptance Conditions}
-\underline{Reduction of G}
-\begin{align*}
-G\varphi &= \Ab_{\exists}(\{q\},q,\varphi \wedge q \wedge q',F q))\\
-G\varphi &= \Ab_{\exists}(\{q\},q, q' \leftrightarrow q \wedge \varphi,FG q) \\
-G\varphi &= \Ab_{\exists}(\{q\},q, q' \leftrightarrow q \wedge \varphi,GF q) 
-\end{align*}
-\underline{Reduction of F}
-\begin{align*}
-F\varphi &\text{ can \textbf{\underline{not}} be expressed by } NDet_G\\
-F\varphi &= \Ab_{\exists}(\{q\},\neg q, q' \leftrightarrow q \vee \varphi,FG q) \\
-F\varphi &= \Ab_{\exists}(\{q\},\neg q, q' \leftrightarrow q \vee \varphi,GF q) 
-\end{align*}
+\underline{Reduction of G}\\
+$G\varphi = \Ab_{\exists}(\{q\},q,\varphi \wedge q \wedge q',F q))$\\
+$G\varphi = \Ab_{\exists}(\{q\},q, q' \leftrightarrow q \wedge \varphi,FG q)$\\
+$G\varphi = \Ab_{\exists}(\{q\},q, q' \leftrightarrow q \wedge \varphi,GF q)$\\ 
+\underline{Reduction of F}\\
+$F\varphi \text{ can \textbf{\underline{not}} be expressed by } NDet_G$\\
+$F\varphi = \Ab_{\exists}(\{q\},\neg q, q' \leftrightarrow q \vee \varphi,FG q)$ \\
+$F\varphi = \Ab_{\exists}(\{q\},\neg q, q' \leftrightarrow q \vee \varphi,GF q)$\\
 \underline{Reduction of FG}
-\begin{align*}
-FG\varphi &\text{ can \textbf{\underline{not}} be expressed by } NDet_G\\
-FG\varphi &= \Ab_{\exists}(\{q\},\neg q, q \rightarrow \varphi \wedge q',F q) \\
-FG\varphi &= \Ab_{\exists} \begin{pmatrix}
+$FG\varphi \text{ can \textbf{\underline{not}} be expressed by } NDet_G$\\
+$FG\varphi = \Ab_{\exists}(\{q\},\neg q, q \rightarrow \varphi \wedge q',F q)$\\
+$FG\varphi = \Ab_{\exists} \begin{pmatrix}
 \{p,q\},\qquad \neg p \wedge \neg q,\\
 	\begin{bmatrix}
 (p \rightarrow p') \wedge (p' \rightarrow p \vee \neg q) \wedge \\
 (q' \leftrightarrow (p \wedge \neg q \vee \neg \varphi) \vee (p \wedge q))
     \end{bmatrix},\\
     G \neg q \wedge F p
-\end{pmatrix}\\
-FG\varphi &= \Ab_{\exists} \begin{pmatrix}
+\end{pmatrix}$\\
+$FG\varphi = \Ab_{\exists} \begin{pmatrix}
 \{p,q\},\qquad \neg p \wedge \neg q,\\
 	\begin{bmatrix}
 (p \rightarrow p') \wedge (p' \rightarrow p \vee \neg q) \wedge \\
 (q' \leftrightarrow (p \wedge \neg q \vee \neg \varphi) \vee (p \wedge q))
     \end{bmatrix},\\
     GF[p \wedge \neg q]
-\end{pmatrix}
-\end{align*}
+\end{pmatrix}$
 
 \textbf{\underline{Temporal Logics}}
 \textit{Beware of Finite Paths}\\
@@ -558,29 +546,29 @@ $\square$0 holds on states with no successor states;\\
 $\diamondsuit$1 holds on states with successor states.\\
 
 \textbf{Negation Normal Form}
-\begin{align*}
-{\neg( \varphi \wedge \psi ) = \neg \varphi \vee \neg \psi} \qquad& {\neg( \varphi \vee \psi ) = \neg \varphi \wedge \neg \psi } \\
-{\neg \neg \varphi = \varphi} \qquad & {\neg X \varphi = X \neg \varphi} \\
-{\neg G \varphi = F \neg \varphi}\qquad  &{\neg F \varphi = G \neg \varphi}\\
-{\neg[\varphi \; U \;\psi] = [ (\neg \varphi) \;\underline{B}\; \psi ]}\qquad  &{\neg[\varphi\; \underline{U}\; \psi] = [ (\neg \varphi)\; B \;\psi ]}\\
-{\neg[\varphi \; B \;\psi] = [ (\neg \varphi) \;\underline{U}\; \psi ]}\qquad  &{\neg[\varphi\; \underline{B}\; \psi] = [ (\neg \varphi)\; U\; \psi ]}\\
-{\neg A \varphi = E \neg \varphi} \qquad & {\neg E \varphi = A \neg \varphi} \\
-{\neg \overleftarrow{X} \varphi = \underline{\overleftarrow{X}} \neg \varphi } \qquad & {\neg \underline{\overleftarrow{X}} \varphi = \overleftarrow{X} \neg \varphi }\\
-{\neg \overleftarrow{G} \varphi = \overleftarrow{F} \neg \varphi } \qquad & {\neg \overleftarrow{F} \varphi = \overleftarrow{G} \neg \varphi }\\
-{\neg[\varphi \;\overleftarrow{U} \;\psi] = [ (\neg \varphi) \;\overleftarrow{\underline{B}}\; \psi ]}\qquad &{\neg[\varphi\; \overleftarrow{\underline{U}}\; \psi] = [ (\neg \varphi)\; \overleftarrow{B} \; \psi ]}\\
-{\neg[\varphi \;\overleftarrow{B} \;\psi] = [ (\neg \varphi) \;\overleftarrow{\underline{U}}\; \psi ]}\qquad &{\neg[\varphi\; \overleftarrow{\underline{B}}\; \psi] = [ (\neg \varphi)\; \overleftarrow{U} \; \psi ]}\\
-\end{align*}
+${\neg( \varphi \wedge \psi ) = \neg \varphi \vee \neg \psi} \qquad\quad {\neg( \varphi \vee \psi ) = \neg \varphi \wedge \neg \psi }$ \\
+${\neg \neg \varphi = \varphi} \qquad\qquad\qquad\qquad  {\neg X \varphi = X \neg \varphi}$ \\
+${\neg G \varphi = F \neg \varphi}\qquad\qquad\qquad\;\;{\neg F \varphi = G \neg \varphi}$\\
+${\neg[\varphi \; U \;\psi] = [ (\neg \varphi) \;\underline{B}\; \psi ]}\qquad  {\neg[\varphi\; \underline{U}\; \psi] = [ (\neg \varphi)\; B \;\psi ]}$\\
+${\neg[\varphi \; B \;\psi] = [ (\neg \varphi) \;\underline{U}\; \psi ]}\qquad  {\neg[\varphi\; \underline{B}\; \psi] = [ (\neg \varphi)\; U\; \psi ]}$\\
+${\neg A \varphi = E \neg \varphi} \qquad\qquad\qquad\;\;  {\neg E \varphi = A \neg \varphi}$ \\
+${\neg \overleftarrow{X} \varphi = \underline{\overleftarrow{X}} \neg \varphi } \qquad\qquad\qquad  {\neg \underline{\overleftarrow{X}} \varphi = \overleftarrow{X} \neg \varphi }$\\
+${\neg \overleftarrow{G} \varphi = \overleftarrow{F} \neg \varphi } \qquad\qquad\qquad {\neg \overleftarrow{F} \varphi = \overleftarrow{G} \neg \varphi }$\\
+${\neg[\varphi \;\overleftarrow{U} \;\psi] = [ (\neg \varphi) \;\overleftarrow{\underline{B}}\; \psi ]}\quad\;\; {\neg[\varphi\; \overleftarrow{\underline{U}}\; \psi] = [ (\neg \varphi)\; \overleftarrow{B} \; \psi ]}$\\
+${\neg[\varphi \;\overleftarrow{B} \;\psi] = [ (\neg \varphi) \;\overleftarrow{\underline{U}}\; \psi ]}\quad\;\; {\neg[\varphi\; \overleftarrow{\underline{B}}\; \psi] = [ (\neg \varphi)\; \overleftarrow{U} \; \psi ]}$\\
+
 \textbf{LTL Syntactic Sugar:} analog for past operators
 $G \varphi = \neg [ 1 \; \underline{U} \; (\neg \varphi)] \qquad \qquad F \varphi = [1\; \underline{U}\; \varphi]$ \\
 $[\varphi \; W \;\psi] = \neg [(\neg \varphi \vee \neg \psi)\; \underline{U}\; (\neg \varphi \wedge \psi)]$ \\
-$[\varphi \; \underline{W} \;\psi] = [(\neg \psi)\; \underline{U}\; (\varphi \wedge \psi)]$ \\
+$[\varphi \; \underline{W} \;\psi] = [(\neg \psi)\; \underline{U}\; (\varphi \wedge \psi)]$ \tiny\textit{($\neg\psi$ holds until $\varphi \wedge \psi$)}\normalsize \\
 $[\varphi \; B \;\psi] = \neg [(\neg \varphi)\; \underline{U}\; \psi)]$ \\
-$[\varphi \; \underline{B} \;\psi] = [(\neg \psi)\; \underline{U}\; (\varphi \wedge \neg \psi)]$ \\
-$[\varphi \; U \;\psi] = \neg [(\neg \psi)\; \underline{U}\; (\neg\varphi \wedge \neg \psi)]$ \\
+$[\varphi \; \underline{B} \;\psi] = [(\neg \psi)\; \underline{U}\; (\varphi \wedge \neg \psi)]$\tiny\textit{($\psi$ can't hold when $\varphi$ holds)}\normalsize \\
+$[\varphi \; U \;\psi] = \neg [(\neg \psi)\; \underline{U}\; (\neg\varphi \wedge \neg \psi)]$\\
+$[\varphi \; U \;\psi] = [\varphi \; \underline{U} \;\psi] \vee G \varphi$
 $[\varphi \; \underline{U} \;\psi] = \neg [(\neg \psi)\; U\; (\neg \varphi \wedge \neg \psi)]$ \\
 $[\varphi \; \underline{U} \;\psi] = \neg [(\neg \psi)\; W\; (\varphi \rightarrow \psi)]$ \\
 $[\varphi \; \underline{U} \;\psi] = [\psi\; \underline{W}\; (\varphi \rightarrow \psi)]$ \\
-$[\varphi \; \underline{U} \;\psi] = \neg [(\neg \varphi)\; B\; \psi]$ \\
+$[\varphi \; \underline{U} \;\psi] = \neg [(\neg \varphi)\; B\; \psi]$\tiny\textit{($\varphi$ doesn't matter when $\psi$ holds)}\normalsize \\
 $[\varphi \; \underline{U} \;\psi] = [\psi\; \underline{B}\; (\neg \varphi \wedge \neg \psi]$ \\
 
 \textbf{CTL Syntactic Sugar:} analog for past operators
@@ -702,7 +690,7 @@ $\upphi \langle [\varphi \; \overleftarrow{U} \; \psi] \rangle_x \Leftrightarrow
 $\upphi \langle [\varphi \; \overleftarrow{\underline{U}} \; \psi] \rangle_x \Leftrightarrow \Ab_\exists (\{q\},\neg q, X q \leftrightarrow \psi \vee \varphi \wedge q, $\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle \psi \vee \varphi \wedge q \rangle_x)$
 $\upphi \langle [\varphi\;\overleftarrow{B} \; \psi] \rangle_x \Leftrightarrow \Ab_\exists (\{q\},q, X q \leftrightarrow \neg\psi \wedge (\varphi \vee q),$\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle \neg \psi \wedge (\varphi \vee q) \rangle_x)$
 $\upphi \langle [\varphi\;\underline{\overleftarrow{B}} \; \psi] \rangle_x \Leftrightarrow \Ab_\exists (\{q\},\neg q, X q \leftrightarrow \neg\psi \wedge (\varphi \vee q),$\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle \neg \psi \wedge (\varphi \vee q) \rangle_x)$
-%\lipsum
+\lipsum
 %\lipsum
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%% Other side of the previous sheet! %%%%%%%%%%%%%%%%%%
