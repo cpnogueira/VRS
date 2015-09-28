@@ -13,7 +13,7 @@
 \usepackage{picinpar}
 \usepackage{ upgreek }
 
-%\usepackage[nopar]{lipsum}%just to generate text for the example
+\usepackage[nopar]{lipsum}%just to generate text for the example
 
 % redefinition of \normalsize to use \footnotesize and decrease the values for
 % \abovedisplyskip, \belowdisplayskip, and the "short" variants
@@ -544,6 +544,10 @@ A0 holds on states with only finite paths;\\
 E1 is false on state with only finite paths;\\
 $\square$0 holds on states with no successor states;\\
 $\diamondsuit$1 holds on states with successor states.\\
+$F\varphi = \varphi \vee X F\varphi\qquad\qquad\qquad G\varphi = \varphi \wedge XG \varphi$\\
+$[ \varphi \; U\; \psi ] = \psi \vee (\varphi\wedge X[ \varphi \; U\; \psi])$\\
+$[ \varphi \; B\; \psi ] = \neg \psi \wedge (\varphi \vee X[ \varphi \; B\; \psi])$\\
+$[ \varphi \; W\; \psi] = (\psi \wedge \varphi) \vee (\neg \psi \wedge X[\varphi \; W \; \psi])$
 
 \textbf{Negation Normal Form}
 ${\neg( \varphi \wedge \psi ) = \neg \varphi \vee \neg \psi} \qquad\quad {\neg( \varphi \vee \psi ) = \neg \varphi \wedge \neg \psi }$ \\
@@ -597,8 +601,7 @@ $A[\varphi \; \underline{B}\; \psi]=  \neg E[(\neg \varphi)\; U \; \psi] $ \\
 $A[\varphi \; \underline{B} \; \psi] =  \neg E[(\neg \varphi \vee \psi) \; \underline{U}\; \psi] \wedge \neg EG(\neg \varphi \vee \psi)$ \\
 $A[\varphi \; W\; \psi]=  \neg E[(\neg \psi) \; \underline{U}\; (\neg \varphi \wedge \psi)]$ \\
 $A[\varphi \; \underline{W} \; \psi] =  \neg E[(\neg \psi) \; \underline{U}\; (\neg \varphi \wedge \psi)] \wedge \neg EG\neg \psi $ \\
-$A[\varphi \; \underline{W} \; \psi] =  \neg E[(\neg \psi) \; U\; (\neg \varphi \wedge \psi)]$
-
+$A[\varphi \; \underline{W} \; \psi] =  \neg E[(\neg \psi) \; U\; (\neg \varphi \wedge \psi)]$\\
 \textbf{CTL to $\mu -Calculus (\Phi _{inf} = \nu y.\diamondsuit y$)}
 $EX\varphi = \diamondsuit (\Phi_{inf} \wedge \varphi)$ \\
 $EG\varphi = \nu x.\varphi \wedge \diamondsuit x $ \\
@@ -690,8 +693,10 @@ $\upphi \langle [\varphi \; \overleftarrow{U} \; \psi] \rangle_x \Leftrightarrow
 $\upphi \langle [\varphi \; \overleftarrow{\underline{U}} \; \psi] \rangle_x \Leftrightarrow \Ab_\exists (\{q\},\neg q, X q \leftrightarrow \psi \vee \varphi \wedge q, $\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle \psi \vee \varphi \wedge q \rangle_x)$
 $\upphi \langle [\varphi\;\overleftarrow{B} \; \psi] \rangle_x \Leftrightarrow \Ab_\exists (\{q\},q, X q \leftrightarrow \neg\psi \wedge (\varphi \vee q),$\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle \neg \psi \wedge (\varphi \vee q) \rangle_x)$
 $\upphi \langle [\varphi\;\underline{\overleftarrow{B}} \; \psi] \rangle_x \Leftrightarrow \Ab_\exists (\{q\},\neg q, X q \leftrightarrow \neg\psi \wedge (\varphi \vee q),$\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle \neg \psi \wedge (\varphi \vee q) \rangle_x)$
-%\lipsum
-%\lipsum
+
+
+\lipsum
+\lipsum
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%% Other side of the previous sheet! %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
