@@ -9,11 +9,13 @@
 \usepackage{fixltx2e}
 \usepackage{textcomp}
 \usepackage{graphicx}
+\usepackage{epstopdf}
 \usepackage{wrapfig}
 \usepackage{picinpar}
+\usepackage{amsfonts}
 \usepackage{ upgreek }
 
-\usepackage[nopar]{lipsum}%just to generate text for the example
+%\usepackage[nopar]{lipsum}%just to generate text for the example
 
 % redefinition of \normalsize to use \footnotesize and decrease the values for
 % \abovedisplyskip, \belowdisplayskip, and the "short" variants
@@ -695,11 +697,65 @@ $\upphi \langle [\varphi\;\overleftarrow{B} \; \psi] \rangle_x \Leftrightarrow \
 $\upphi \langle [\varphi\;\underline{\overleftarrow{B}} \; \psi] \rangle_x \Leftrightarrow \Ab_\exists (\{q\},\neg q, X q \leftrightarrow \neg\psi \wedge (\varphi \vee q),$\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle \neg \psi \wedge (\varphi \vee q) \rangle_x)$
 
 
-\lipsum
-\lipsum
+%\lipsum
+%\lipsum
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%% Other side of the previous sheet! %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{S1S} \\
+First order terms are defined as follows: \\
+$-0 \in Term _{\sum}^{S1S} $\\
+$-{\textit{t} \in V_{\sum} | typ_{sum}(\textit{t}) = \mathbb{N}} \subseteq Term _{\sum}^{S1S} $ \\
+$-SUC(\tau) \in Term _{\sum}^{S1S} if \tau \in Term _{\sum}^{S1S}$ \\
+Formulas $\zeta_{S1S}$ are defined as: \\
+$-p^{(t)} \in L_{S1S}$ (predicate p at time t)\\
+$-\neg\varphi, \varphi \wedge \psi \in L_{S1S}$ \\
+$-\exists t. \varphi \in L_{S1S} $ \\
+$-\exists p. \varphi \in L_{S1S} $ \\
+where: \\
+$-\tau \in Term _{\sum}^{S1S} $ \\
+$-\varphi, \psi \in \zeta_{S1S} $ \\
+$-t \in V_{\sum} \ with \ typ_{\sum}(t) = \mathbb{N}$ \\
+$-p \in V_{\sum} \ with \ typ_{\sum}(p) = \mathbb{N} \rightarrow \mathbb{B}$ \\
+
+\textbf{LO2} \\
+first order terms are defined as: \\
+$-{\textit{t} \in V_{\sum} | typ_{sum}(\textit{t}) = \aleph} \subseteq Term _{\sum}^{LO2} $ \\
+formulas LO2 are defined as:
+$-t1 < t2 \in L_{LO2} $ \\
+$-p^{(t)} \in L_{LO2}$ \\
+$-\neg\varphi, \varphi \wedge \psi \in L_{LO2}$ \\
+$-\exists t. \varphi \in L_{LO2} $ \\
+$-\exists p. \varphi \in L_{LO2} $ \\
+where: \\
+$-t, t_{1}, t_{2}\tau \in V_{\sum} \ with \ typ_{\sum}(_{t}) = typ_{\sum}(_{t1}) = typ_{\sum}(t_{t2}) = \mathbb{N} $ \\
+$-\varphi, \psi \in \zeta_{LO2} $ \\
+$-t \in V_{\sum} \ with \ typ_{\sum}(t) = \mathbb{N}$ \\
+$-p \in V_{\sum} \ with \ typ_{\sum}(p) = \mathbb{N} \rightarrow \mathbb{B}$ \\
+
+
+\textbf{function LO2\_S1S($\Phi$)} \\
+\ \ \textbf{case $\Phi$ of} \\
+$\ \ \ \ t1 < t2 : \textbf{return}\ \exists p. [\forall t. p^{(t)} \rightarrow p^{(SUC(t))} ] \wedge \neg p^{(t1)} \wedge p^{(t2)}:$ \\
+$\ \ \ \ p^{(t)} : \textbf{return}\ p^{(t)}; $ \\
+$\ \ \ \ \neg \varphi : \textbf{return}\ \neg LO2\_S1S(\varphi); $ \\
+$\ \ \ \ \varphi \wedge \psi : \textbf{return}\ LO2\_S1S(\varphi) \wedge LO2\_S1S(\psi); $ \\
+$\ \ \ \ \exists t.\varphi : \textbf{return}\ \exists t.LO2\_S1S(\varphi);$ \\
+$\ \ \ \ \exists p.\varphi : \textbf{return}\ \exists p.LO2\_S1S(\varphi); $ \\
+\ \ \textbf{end} \\
+\textbf{end} \\
+
+\textbf{function S1S\_LO2($\Phi$)} \\
+\ \ \textbf{case $\Phi$ of} \\
+$\ \ \ \ p^{(n)} : \textbf{return}\ \exists t0...tn. p^{(tn)} \wedge zero(t0) \wedge \bigwedge_{i=0}^{n-1} succ(ti, ti + 1); $ \\
+$\ \ \ \ p^{(t0 + n)} : \textbf{return}\ \exists t1...tn. p^{(tn)} \wedge \bigwedge_{i=0}^{n-1} succ(ti, ti + 1); $ \\
+$\ \ \ \ \neg \varphi : \textbf{return}\ \neg S1S\_LO2(\varphi); $ \\
+$\ \ \ \ \varphi \wedge \psi : \textbf{return}\ S1S\_LO2(\varphi) \wedge S1S\_LO2(\psi); $ \\
+$\ \ \ \ \exists t.\varphi : \textbf{return}\ \exists t.S1S\_LO2(\varphi);$ \\
+$\ \ \ \ \exists p.\varphi : \textbf{return}\ \exists p.S1S\_LO2(\varphi); $ \\
+\ \ \textbf{end} \\
+\textbf{end} \\
 
 \end{multicols}
 \end{document}
