@@ -757,5 +757,59 @@ $\ \ \ \ \exists p.\varphi : \textbf{return}\ \exists p.S1S\_LO2(\varphi); $ \\
 \ \ \textbf{end} \\
 \textbf{end} \\
 
+\textbf{LO2'}
+Consider the following set $\zeta_{LO2'}$ of formulas: \\
+$-Subset(p,q), Sing(p), and PSUC(p,q) belong to \zeta_{LO2'}$ \\
+$-\neg\varphi, \varphi \wedge \psi $ \\
+$-\exists p.\varphi$ \\
+where
+$-\varphi, \psi \in \zeta_{LO2'}$ \\
+$-p \in V_{\sum}\ with\ typ_{\sum}(p) = \mathbb{N} \rightarrow \mathbb{B}$ \\
+$\zeta_{LO2'}\ has no numeric variables$ \\
+numeric variable \textit{t} is replaced by a singleton set $p_{t}$ \\
+$\zeta_{LO2'}$ is as expressive as LO2 and S1S \\
+
+\textbf{function ElimFO($\Phi$)} (LO2 TO LO2')\\
+\ \ \textbf{case $\Phi$ of} \\
+$\ \ \ \ t1 = t2: \textbf{return}\ Subset(q_{t1}, q_{t2}) \wedge Subset(q_{t2}, q_{t1})$ \\
+$\ \ \ \ t1 < t2: \Psi :\equiv \forall q1. \forall q2.PSUC(q1, q2) \rightarrow [Subset(q1,p) \rightarrow Subset(q2,p)];$ \\
+$\ \ \ \ \ \ \ \ \textbf{return}\ \exists p.\Psi \wedge \neg Subset(qt1, p)\wedge Subset(qt2, p);$ \\
+$\ \ \ \ p^{(t)} : \textbf{return}\ Subset(qt, p)$ \\
+$\ \ \ \ \neg \varphi : \textbf{return}\ \neg ElimFO(\varphi); $ \\
+$\ \ \ \ \varphi \wedge \psi : \textbf{return}\ ElimFO(\varphi) \wedge ElimFO(\psi); $ \\
+$\ \ \ \ \varphi \vee \psi : \textbf{return}\ ElimFO(\varphi) \vee ElimFO(\psi); $ \\
+$\ \ \ \ \exists t.\varphi : \textbf{return}\ \exists qt.Sing(qt)\wedge ElimFO(\varphi);$ \\
+$\ \ \ \ \exists p.\varphi : \textbf{return}\ \exists p.ElimFO(\varphi); $ \\
+\ \ \textbf{end} \\
+\textbf{end} \\
+
+\textbf{function} Tp2Od(t0, $\Phi$) \/\/\textit{temporal to LO1} \\
+\ \ \textbf{case $\Phi$ of} \\
+\ \ \ \ $is\_var(\Phi): \Psi^{(t0)};$ \\
+$\ \ \ \ \neg \varphi : \textbf{return}\ \neg Tp2Od(\varphi); $ \\
+$\ \ \ \ \varphi \wedge \psi : \textbf{return}\ Tp2Od(\varphi) \wedge Tp2Od(\psi); $ \\
+$\ \ \ \ \varphi \vee \psi : \textbf{return}\ Tp2Od(\varphi) \vee Tp2Od(\psi); $ \\
+$\ \ \ \ X\varphi : \Psi := \exists t1.(t0 < t1)\wedge(\forall t2.t0 < t2 \rightarrow t1 \leq t2) \wedge Tp2Od(t1, \varphi);$ \\
+$\ \ \ \ [\varphi \underline{U} \psi] : \Psi := \exists t1.t0 \leq t1 \wedge Tp2Od(t1, \psi)\wedge interval((t0, 1, t1, 0), \varphi);$\\
+$\ \ \ \ [\varphi B \psi] : \Psi := \forall t1.t0 \leq t1 \wedge interval((t0, 1, t1, 0), \neg\varphi) \rightarrow Tp2Od(t1, \neg\psi);$\\
+$\ \ \ \ \overleftarrow{X}\varphi : \Psi := \forall t1.(t1 < t0)\wedge(\forall t2.t2 < t0 \rightarrow t2 \leq t1) \rightarrow Tp2Od(t1, \varphi);$ \\
+$\ \ \ \ \overleftarrow{\underline{X}}\varphi : \Psi := \exists t1.(t1 < t0)\wedge(\forall t2.t2 < t0 \rightarrow t2 \leq t1) \wedge Tp2Od(t1, \varphi);$ \\
+$\ \ \ \ [\varphi \overleftarrow{\underline{U}} \psi] : \Psi := \exists t1.t1 \leq t0 \wedge Tp2Od(t1, \psi)\wedge interval((t1, 0, t0, 1), \varphi);$\\
+$\ \ \ \ [\varphi \overleftarrow{B} \psi] : \Psi := \forall t1.t1 \leq t0 \wedge interval((t1, 0, t0, 1), \neg\varphi) \rightarrow Tp2Od(t1, \neg\psi);$\\
+\ \ \textbf{end} \\
+\ \ \textbf{return}\ $\Psi$ \\
+\textbf{end} \\
+
+\textbf{function} interval(l, $\varphi$)\\
+\ \ \textbf{case $\Phi$ of} \\
+$\ \ \ \ (t0, 0, t1, 0) : \textbf{return}\ \forall t2.t0 < t2 \wedge t2 < t1 \rightarrow$ \\
+$\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Tp2Od(t2, \varphi);$ \\
+$\ \ \ \ (t0, 0, t1, 1) : \textbf{return}\ \forall t2.t0 < t2 \wedge t2 \leq t1 \rightarrow$ \\
+$\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Tp2Od(t2, \varphi);$ \\
+$\ \ \ \ (t0, 1, t1, 0) : \textbf{return}\ \forall t2.t0 \leq t2 \wedge t2 < t1 \rightarrow$ \\
+$\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Tp2Od(t2, \varphi);$ \\
+$\ \ \ \ (t0, 1, t1, 1) : \textbf{return}\ \forall t2.t0 \leq t2 \wedge t2 \leq3 t1 \rightarrow$\\ $\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Tp2Od(t2, \varphi);$ \\
+\ \ \textbf{end} \\
+\textbf{end} \\
 \end{multicols}
 \end{document}
