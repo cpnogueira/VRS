@@ -679,22 +679,31 @@ Finally compute $\llbracket \Psi \rrbracket_{\Kb_n}$
 \textbf{LTL to $\omega$-automata}
 % Normal operator
 $\upphi \langle X \varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q\},1,q \leftrightarrow X \varphi, \upphi \langle q \rangle_x)$\\
-$\upphi \langle X \varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q_0,q_1\},1,$\\ $\qquad\qquad\qquad\qquad(q_0 \leftrightarrow \varphi) \wedge (q_1 \leftrightarrow X q_0), \upphi \langle q_1 \rangle_x)$
-$\upphi \langle G \varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q\},1,q \leftrightarrow \varphi \wedge X q,$\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle q \rangle_x \wedge GF[\varphi \rightarrow q])$
-$\upphi \langle F \varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q\},1,q \leftrightarrow \varphi \wedge X q,$\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle q \rangle_x \wedge GF[q \rightarrow \varphi])$
-$\upphi \langle [\varphi\; U \; \psi] \rangle_x \Leftrightarrow \Ab_\exists (\{q\},1,q \leftrightarrow \psi \vee \varphi \wedge X q,$\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle q \rangle_x \wedge GF[\varphi \rightarrow q])$
-$\upphi \langle [\varphi\; \underline{U} \; \psi] \rangle_x \Leftrightarrow \Ab_\exists (\{q\},1,q \leftrightarrow \psi \vee \varphi \wedge X q,$\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle q \rangle_x \wedge GF[q \rightarrow \psi])$
-$\upphi \langle [\varphi\; B \; \psi] \rangle_x \Leftrightarrow \Ab_\exists (\{q\},1,q \leftrightarrow \neg\psi \wedge (\varphi \vee X q),$\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle q \rangle_x \wedge GF[q \vee \psi])$
-$\upphi \langle [\varphi\; \underline{B} \; \psi] \rangle_x \Leftrightarrow \Ab_\exists (\{q\},1,q \leftrightarrow \neg\psi \wedge (\varphi \vee X q),$\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle q \rangle_x \wedge GF[q \rightarrow \varphi])$
+$\upphi \langle X \varphi\rangle_x \Leftrightarrow $ \\
+$\ \ \ \ \Ab_\exists (\{q_0,q_1\},1,(q_0 \leftrightarrow \varphi) \wedge (q_1 \leftrightarrow X q_0), \upphi \langle q_1 \rangle_x)$ \\
+$\upphi \langle G \varphi\rangle_x \Leftrightarrow $ \\
+$\ \ \ \ \Ab_\exists (\{q\},1,q \leftrightarrow \varphi \wedge X q,\upphi \langle q \rangle_x \wedge GF[\varphi \rightarrow q])$ \\
+$\upphi \langle F \varphi\rangle_x \Leftrightarrow$ \\
+$\ \ \ \ \Ab_\exists (\{q\},1,q \leftrightarrow \varphi \wedge X q, \upphi \langle q \rangle_x \wedge GF[q \rightarrow \varphi])$ \\
+$\upphi \langle [\varphi\; U \; \psi] \rangle_x \Leftrightarrow$ \\
+$\ \ \ \ \Ab_\exists (\{q\},1,q \leftrightarrow \psi \vee \varphi \wedge X q, \upphi \langle q \rangle_x \wedge GF[\varphi \rightarrow q])$ \\
+$\upphi \langle [\varphi\; \underline{U} \; \psi] \rangle_x \Leftrightarrow$ \\
+$\ \ \ \ \Ab_\exists (\{q\},1,q \leftrightarrow \psi \vee \varphi \wedge X q, \upphi \langle q \rangle_x \wedge GF[q \rightarrow \psi])$ \\
+$\upphi \langle [\varphi\; B \; \psi] \rangle_x \Leftrightarrow$ \\
+$\ \ \ \ \Ab_\exists (\{q\},1,q \leftrightarrow \neg\psi \wedge (\varphi \vee X q), \upphi \langle q \rangle_x \wedge GF[q \vee \psi])$ \\
+$\upphi \langle [\varphi\; \underline{B} \; \psi] \rangle_x \Leftrightarrow$ \\
+$\ \ \ \ \Ab_\exists (\{q\},1,q \leftrightarrow \neg\psi \wedge (\varphi \vee X q), \upphi \langle q \rangle_x \wedge GF[q \rightarrow \varphi])$ \\
 % Past operators
 $\upphi \langle \overleftarrow{X} \varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q\},q, Xq \leftrightarrow \varphi, \upphi \langle q \rangle_x)$\\
 $\upphi \langle \overleftarrow{X} \varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q\},\neg q, Xq \leftrightarrow \varphi, \upphi \langle q \rangle_x)$\\
 $\upphi \langle \overleftarrow{G}\varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q\},q, X q \leftrightarrow \varphi \wedge q,\upphi \langle \varphi \wedge q \rangle_x)$
 $\upphi \langle \overleftarrow{F}\varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q\},\neg q, X q \leftrightarrow \varphi \vee q,\upphi \langle \varphi \vee q \rangle_x)$
-$\upphi \langle [\varphi \; \overleftarrow{U} \; \psi] \rangle_x \Leftrightarrow \Ab_\exists (\{q\},q, X q \leftrightarrow \psi \vee \varphi \wedge q, $\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle \psi \vee \varphi \wedge q \rangle_x)$
-$\upphi \langle [\varphi \; \overleftarrow{\underline{U}} \; \psi] \rangle_x \Leftrightarrow \Ab_\exists (\{q\},\neg q, X q \leftrightarrow \psi \vee \varphi \wedge q, $\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle \psi \vee \varphi \wedge q \rangle_x)$
-$\upphi \langle [\varphi\;\overleftarrow{B} \; \psi] \rangle_x \Leftrightarrow \Ab_\exists (\{q\},q, X q \leftrightarrow \neg\psi \wedge (\varphi \vee q),$\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle \neg \psi \wedge (\varphi \vee q) \rangle_x)$
-$\upphi \langle [\varphi\;\underline{\overleftarrow{B}} \; \psi] \rangle_x \Leftrightarrow \Ab_\exists (\{q\},\neg q, X q \leftrightarrow \neg\psi \wedge (\varphi \vee q),$\\ $\quad\qquad\qquad\qquad\qquad \upphi \langle \neg \psi \wedge (\varphi \vee q) \rangle_x)$
+$\upphi \langle [\varphi \; \overleftarrow{U} \; \psi] \rangle_x \Leftrightarrow$ \\
+$\ \ \ \ \Ab_\exists (\{q\},q, X q \leftrightarrow \psi \vee \varphi \wedge q, \upphi \langle \psi \vee \varphi \wedge q \rangle_x)$ \\
+$\upphi \langle [\varphi \; \overleftarrow{\underline{U}} \; \psi] \rangle_x \Leftrightarrow$ \\ $\ \ \ \ \Ab_\exists (\{q\},\neg q, X q \leftrightarrow \psi \vee \varphi \wedge q, \upphi \langle \psi \vee \varphi \wedge q \rangle_x)$ \\
+$\upphi \langle [\varphi\;\overleftarrow{B} \; \psi] \rangle_x \Leftrightarrow$ \\
+$\ \ \ \ \Ab_\exists (\{q\},q, X q \leftrightarrow \neg\psi \wedge (\varphi \vee q), \upphi \langle \neg \psi \wedge (\varphi \vee q) \rangle_x)$ \\
+$\upphi \langle [\varphi\;\underline{\overleftarrow{B}} \; \psi] \rangle_x \Leftrightarrow$ \\ $\ \ \ \ \Ab_\exists (\{q\},\neg q, X q \leftrightarrow \neg\psi \wedge (\varphi \vee q), \upphi \langle \neg \psi \wedge (\varphi \vee q) \rangle_x)$ \\
 
 
 %\lipsum
@@ -706,7 +715,7 @@ $\upphi \langle [\varphi\;\underline{\overleftarrow{B}} \; \psi] \rangle_x \Left
 \textbf{S1S} \\
 First order terms are defined as follows: \\
 $-0 \in Term _{\sum}^{S1S} $\\
-$-{\textit{t} \in V_{\sum} | typ_{sum}(\textit{t}) = \mathbb{N}} \subseteq Term _{\sum}^{S1S} $ \\
+$-{\textit{t} \in V_{\sum} | typ_{\sum}(\textit{t}) = \mathbb{N}} \subseteq Term _{\sum}^{S1S} $ \\
 $-SUC(\tau) \in Term _{\sum}^{S1S} if \tau \in Term _{\sum}^{S1S}$ \\
 Formulas $\zeta_{S1S}$ are defined as: \\
 $-p^{(t)} \in L_{S1S}$ (predicate p at time t)\\
@@ -721,8 +730,8 @@ $-p \in V_{\sum} \ with \ typ_{\sum}(p) = \mathbb{N} \rightarrow \mathbb{B}$ \\
 
 \textbf{LO2} \\
 first order terms are defined as: \\
-$-{\textit{t} \in V_{\sum} | typ_{sum}(\textit{t}) = \aleph} \subseteq Term _{\sum}^{LO2} $ \\
-formulas LO2 are defined as:
+$-{\textit{t} \in V_{\sum} | typ_{\sum}(\textit{t}) = \mathbb{N}} \subseteq Term _{\sum}^{LO2} $ \\
+formulas LO2 are defined as: \\
 $-t1 < t2 \in L_{LO2} $ \\
 $-p^{(t)} \in L_{LO2}$ \\
 $-\neg\varphi, \varphi \wedge \psi \in L_{LO2}$ \\
@@ -811,5 +820,21 @@ $\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Tp2Od(t2, \varphi);$ \\
 $\ \ \ \ (t0, 1, t1, 1) : \textbf{return}\ \forall t2.t0 \leq t2 \wedge t2 \leq3 t1 \rightarrow$\\ $\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Tp2Od(t2, \varphi);$ \\
 \ \ \textbf{end} \\
 \textbf{end} \\
+
+\textbf{Temporal Logic Equivalences} \\
+$[\varphi \underline{U} \psi] \equiv \varphi\ don't\ matter\ when\ \psi\ hold $ \\
+$[\varphi \underline{B} \psi] \equiv \psi\ can't\ hold\ when\ \varphi\ hold $ \\
+$[\varphi \underline{W} \psi] \equiv \neg\psi\ hold\ until\ \varphi\ \wedge\ \psi $ \\
+$[\varphi U \psi] \equiv [\varphi \underline{U} \psi] \vee G\varphi$ \\
+$[\varphi B \psi] \equiv [\varphi \underline{B} \psi] \vee G\neg\psi$ \\
+$[\varphi W \psi] \equiv \neg[\neg\varphi \underline{W} \psi]$ \\
+$F[a \underline{B} b] \equiv F[a \wedge \neg b] $ \\
+$F[a \underline{U} b] \equiv Fb \equiv [Fa \underline{U} Fb] $ \\
+$E(\varphi \wedge \psi) \equiv E\varphi \wedge E \psi (in\ general) $ \\
+$AEA \equiv A $ \\
+$[a \underline{U} Fb] \equiv Fb $ \\
+$GF(x \vee y) \equiv GFx \vee GFy $ \\
+
+
 \end{multicols}
 \end{document}
