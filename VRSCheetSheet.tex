@@ -811,17 +811,18 @@ $\ \ \ \ [\varphi \overleftarrow{B} \psi] : \Psi := \forall t1.t1 \leq t0 \wedge
 
 \textbf{function} interval(l, $\varphi$)\\
 \ \ \textbf{case $\Phi$ of} \\
-$\ \ \ \ (t0, 0, t1, 0) : \textbf{return}\ \forall t2.t0 < t2 \wedge t2 < t1 \rightarrow$ \\
-$\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Tp2Od(t2, \varphi);$ \\
-$\ \ \ \ (t0, 0, t1, 1) : \textbf{return}\ \forall t2.t0 < t2 \wedge t2 \leq t1 \rightarrow$ \\
-$\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Tp2Od(t2, \varphi);$ \\
-$\ \ \ \ (t0, 1, t1, 0) : \textbf{return}\ \forall t2.t0 \leq t2 \wedge t2 < t1 \rightarrow$ \\
-$\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Tp2Od(t2, \varphi);$ \\
-$\ \ \ \ (t0, 1, t1, 1) : \textbf{return}\ \forall t2.t0 \leq t2 \wedge t2 \leq3 t1 \rightarrow$\\ $\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Tp2Od(t2, \varphi);$ \\
+$\ \ \ (t0, 0, t1, 0) : $ \\
+$\ \ \ \ \ \ \textbf{return}\ \forall t2.t0 < t2 \wedge t2 < t1 \rightarrow Tp2Od(t2, \varphi);$ \\
+$\ \ \ (t0, 0, t1, 1) : $ \\
+$\ \ \ \ \ \ \textbf{return}\ \forall t2.t0 < t2 \wedge t2 \leq t1 \rightarrow Tp2Od(t2, \varphi);$ \\
+$\ \ \ (t0, 1, t1, 0) :$ \\
+$\ \ \ \ \ \ \textbf{return}\ \forall t2.t0 \leq t2 \wedge t2 < t1 \rightarrow Tp2Od(t2, \varphi);$ \\
+$\ \ \ (t0, 1, t1, 1) :$ \\
+$\ \ \ \ \ \ \textbf{return}\ \forall t2.t0 \leq t2 \wedge t2 \leq3 t1 \rightarrow Tp2Od(t2, \varphi);$ \\
 \ \ \textbf{end} \\
 \textbf{end} \\
 
-\textbf{Temporal Logic Equivalences} \\
+\textbf{Temporal Logic Equivalences and Tips} \\
 $[\varphi \underline{U} \psi] \equiv \varphi\ don't\ matter\ when\ \psi\ hold $ \\
 $[\varphi \underline{B} \psi] \equiv \psi\ can't\ hold\ when\ \varphi\ hold $ \\
 $[\varphi \underline{W} \psi] \equiv \neg\psi\ hold\ until\ \varphi\ \wedge\ \psi $ \\
@@ -835,6 +836,31 @@ $AEA \equiv A $ \\
 $[a \underline{U} Fb] \equiv Fb $ \\
 $GF(x \vee y) \equiv GFx \vee GFy $ \\
 
+\textbf{G and $\mu$-calculus (safety property)} \\
+-$[\nu x. \varphi \wedge \diamondsuit x]_{K} $ \\
+-Contains states s where an infinite path $\pi$ starts with $\forall t. \pi^{(t)} \in [\varphi]_{K}$ \\
+-$\varphi$ holds always on $\pi$ \\
+\textbf{F and $\mu$-calculus (liveness property)} \\
+-$[\mu x. \varphi \vee \diamondsuit x]_{K} $ \\
+-Contains states s where a (possibly finite) path $\pi$ starts with $\exists t. \pi^{(t)} \in [\varphi]_{K}$ \\
+-$\varphi$ holds at least once on $\pi$ \\
+\textbf{FG and $\mu$-calculus (persistence property)} \\
+-$[\mu y.[\nu x. \varphi \wedge \diamondsuit x] \vee \diamondsuit y]_{K} $ \\
+-Contains states s where an infinite path $\pi$ starts with $\exists t1.\forall t2. \pi^{(t1+t2)} \in [\varphi]_{K}$ \\
+-$\varphi$ holds after some point on $\pi$ \\
+\textbf{GF and $\mu$-calculus (fairness property)} \\
+-$[\nu y.[\mu x. (y \wedge \varphi) \vee \diamondsuit x]]_{K} $ \\
+-Contains states s where an infinite path $\pi$ starts with $\forall t1.\exists t2. \pi^{(t1+t2)} \in [\varphi]_{K} ?????t1+t2 or t1+t0?????$ \\
+-$\varphi$ holds infinitely often on $\pi$ \\
 
+\textbf{$\omega$-Automaton to LO2} \\
+$A_{\exists}({q1,...,qn}, \psi I, \psi R, \psi F) \textit{(input automaton)}$ \\
+$\exists q1..qn, \Theta LO2(0,\psi I) \wedge (\forall t.\Theta LO2(t,\psi R)) \wedge (\forall.t1\exists t2. t1 < t2 \wedge \Theta LO2(t2,\psi F))$ \\
+\textbf{Where $\Theta$LO2(t, $\Phi$) is:} \\
+-$\Theta LO2(t, p) := p(t)\ for\ variable\ p $ \\
+-$\Theta LO2(t, X\psi) := \Theta LO2(t+1, \psi)$ \\
+-$\Theta LO2(t, \neg\psi) := \neg\Theta LO2(t, \psi)$ \\
+-$\Theta LO2(t, \varphi\wedge\psi) := \Theta LO2(t, \varphi) \wedge \Theta LO2(t, \psi)$ \\
+-$\Theta LO2(t, \varphi\vee\psi) := \Theta LO2(t, \varphi) \vee \Theta LO2(t, \psi)$ \\
 \end{multicols}
 \end{document}
