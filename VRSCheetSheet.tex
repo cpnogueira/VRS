@@ -411,10 +411,10 @@ for each node n in $\Kb$:
 \textbf{Local Model Checking}
 \begin{tabular}{|l|l|l|l|}
 \hline
-\multicolumn{2}{|l|}{\tiny(1)\small$\frac{s \vdash_{\Phi} \varphi \wedge \psi}{\{s \vdash_{\Phi} \varphi \} \quad \{s \vdash_{\Phi} \psi\}} \wedge$} & \multicolumn{2}{|l|}{\tiny(2)\small$\frac{s \vdash_{\Phi} \varphi \vee \psi}{\{s \vdash_{\Phi} \varphi \} \quad \{s \vdash_{\Phi} \psi\}} \vee $}\\ \hline
-\multicolumn{2}{|l|}{\tiny(3)\small$\frac{s \vdash_{\Phi} \square \varphi}{\{s_1 \vdash_{\Phi} \varphi\} \dots \{s_n \vdash_{\Phi} \varphi\}} \wedge$}&\multicolumn{2}{|l|}{\tiny(4)\small$\frac{s \vdash_{\Phi} \diamondsuit \varphi}{\{s_1 \vdash_{\Phi} \varphi\} \dots \{s_n \vdash_{\Phi} \varphi\}} \vee$} \\
+\multicolumn{2}{|l|}{\small$\frac{s \vdash_{\Phi} \varphi \wedge \psi}{\{s \vdash_{\Phi} \varphi \} \quad \{s \vdash_{\Phi} \psi\}} \wedge$} & \multicolumn{2}{|l|}{\small$\frac{s \vdash_{\Phi} \varphi \vee \psi}{\{s \vdash_{\Phi} \varphi \} \quad \{s \vdash_{\Phi} \psi\}} \vee $}\\ \hline
+\multicolumn{2}{|l|}{\small$\frac{s \vdash_{\Phi} \square \varphi}{\{s_1 \vdash_{\Phi} \varphi\} \dots \{s_n \vdash_{\Phi} \varphi\}} \wedge$}&\multicolumn{2}{|l|}{\small$\frac{s \vdash_{\Phi} \diamondsuit \varphi}{\{s_1 \vdash_{\Phi} \varphi\} \dots \{s_n \vdash_{\Phi} \varphi\}} \vee$} \\
  \hline
-\multicolumn{2}{|l|}{\tiny(5)\small$\frac{s \vdash_{\Phi} \overleftarrow{\square} \varphi}{\{s'_1 \vdash_{\Phi} \varphi \}\dots \{ s'_n \vdash_{\Phi} \varphi\}} \wedge$} &\multicolumn{2}{|l|}{\tiny(6)\small$\frac{s \vdash_{\Phi} \overleftarrow{\diamondsuit} \varphi}{\{s'_1 \vdash_{\Phi} \varphi \}\dots \{ s'_n \vdash_{\Phi} \varphi\}} \vee$} \\
+\multicolumn{2}{|l|}{\small$\frac{s \vdash_{\Phi} \overleftarrow{\square} \varphi}{\{s'_1 \vdash_{\Phi} \varphi \}\dots \{ s'_n \vdash_{\Phi} \varphi\}} \wedge$} &\multicolumn{2}{|l|}{\small$\frac{s \vdash_{\Phi} \overleftarrow{\diamondsuit} \varphi}{\{s'_1 \vdash_{\Phi} \varphi \}\dots \{ s'_n \vdash_{\Phi} \varphi\}} \vee$} \\
  \hline
 $\frac{s \vdash_{\Phi} \mu x.\varphi}{s \vdash_{\Phi} \varphi}$ &$\frac{s \vdash_{\Phi} \nu x.\varphi}{s \vdash_{\Phi} \varphi}$&$\frac{s \vdash_{\Phi} x}{s \vdash_{\Phi} \Db_{\Phi}(x)}$&$\frac{\Db_{\Phi}\text{\tiny (replace w.}}{\text{\tiny initial form.)}}$\\
  \hline
