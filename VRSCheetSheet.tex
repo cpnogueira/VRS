@@ -80,28 +80,31 @@
 
 \begin{document}
 \begin{multicols}{4}
-\textbf{Propositional Logic - Syntactic Sugar} 
+\textbf{Propositional Logic Syntactic Sugar} 
 \begin{gather*} 
 {\varphi \Leftrightarrow \psi := (\neg \varphi \vee \psi) \wedge (\neg \psi \vee \varphi)} \qquad {\varphi \rightarrow \psi := \neg \varphi \vee \psi} \\
 {\varphi \oplus \psi := (\varphi \wedge \neg \psi) \vee (\psi \wedge \neg \varphi) }\qquad {\varphi \barwedge \psi := \neg (\varphi \wedge \psi)} \\
 {(\alpha \Rightarrow \beta | \gamma) := ( \neg \alpha \vee \beta) \wedge (\alpha \vee \gamma)} \quad {\varphi \bar{\vee}\psi := \neg (\varphi \vee \psi)}
 \end{gather*}
+\textbf{Distributivity:} ${a \wedge ( b \vee c ) = (a \wedge b) \vee (a \wedge c)}$
+${a \vee ( b \wedge c ) = (a \vee b) \wedge (a \vee c)}$ \\
+\textbf{De Morgan:} $\neg(a \vee b) \equiv (\neg a \wedge \neg b)$ \\
+$\neg(a \wedge b) \equiv (\neg a \vee \neg b) $ \\
+\textbf{CNF:} from truth table, take minterms that are 0. 
+Each minterm is built as an OR of the negated variables. E.g., ${(0, 0, 1) \rightarrow (x \vee y \vee \neg z)}$. \\
+
+\textbf{\#\#\#SAT SOLVERS} \\
+
 \textbf{Satisfiability, Validity and Equivalence}
 \begin{gather*}
 \text{SAT}(\varphi) := \neg \text{VALID}(\neg \varphi) \quad \varphi \Leftrightarrow \psi := \text{VALID}(\varphi \leftrightarrow \psi) \\
 \text{VALID}(\varphi) := (\varphi \Leftrightarrow 1) \qquad \text{SAT}(\varphi) := \neg(\varphi \Leftrightarrow 0).
-\end{gather*}
-\textbf{Conjunctive Normal Form:} from truth table, take minterms that are 0. 
-Each minterm is built as an OR of the negated variables. E.g., ${(0, 0, 1) \rightarrow (x \vee y \vee \neg z)}$.
+\end{gather*} \\
 
-\textbf{Distributivity:} ${a \wedge ( b \vee c ) = (a \wedge b) \vee (a \wedge c)}$
-${a \vee ( b \wedge c ) = (a \vee b) \wedge (a \vee c)}$
-
-\textbf{Sequent Calculus:}
-\begin{enumerate}
-\item Prove validity of $\phi$: start with $\{\} \vdash {\phi}$;  $\phi$ is valid iff $\Gamma \cap \Delta \neq \{\}$ for all leaves; else, counterexample: var is true, if $x \in \Gamma$; false otherwise; "don't care", if variable doesn't appear.
-\item Prove satisfiability of $\phi$: start with $\{\phi\} \vdash \{\}$; $\phi$ is satisfiable iff $\Gamma \cap \Delta = \{\}$ for at least one leaf. Satisfying interpretation: same as counterexample.
-\end{enumerate}
+\textbf{Sequent Calculus:}\\
+-\textit{Validity}: start with $\{\} \vdash {\phi}$;  valid iff $\Gamma \cap \Delta \neq \{\}$ FOR ALL leaves.\\
+-\textit{Satisfiability}: start with $\{\phi\} \vdash \{\}$; satisfiable iff $\Gamma \cap \Delta = \{\}$ for AT LEAST ONE leaf.\\
+-Counterexample/sat variable assignment: var is true, if $x \in \Gamma$; false otherwise; "don't care", if variable doesn't appear.\\
 \begin{tabular}{|c|c|c|}
 \hline
 OPER. & LEFT & RIGHT \\ \hline
@@ -115,26 +118,26 @@ To prove unsatisfiability of given clauses in CNF: If we reach \{\}, the formula
 E.g., $\{\{a\}, \{\neg a,b\}, \{\neg b\}\}$, we get: $\{a\} + \{ \neg a,b\} \rightarrow \{b\}; \{b\} + \{\neg b\}\rightarrow\{\} $ (unsatisfiable).
 To prove validity, prove UNSAT of negated formula.
 
-\textbf{Linear Clause Forms (Computes CNF)} - Bottom up in the syntax tree: convert “operators and variables” into new variable.
-E.g., $\neg a \vee b$ becomes $x_1 \leftrightarrow \neg a; x_2 \leftrightarrow x_1 \vee b$. Use rules below to find CNF.
-\begin{align*}
-x \leftrightarrow \neg y  \Leftrightarrow &(\neg x \vee \neg y) \wedge (x \vee y) \\
-x \leftrightarrow y_1 \wedge y_2 \Leftrightarrow &(\neg x \vee y_1) \wedge (\neg x \vee y_2) \wedge\\
-&(x \vee \neg y_1 \vee \neg y_2) \\
-x \leftrightarrow y_1 \vee y_2 \Leftrightarrow & (\neg x \vee y_1 \vee y_2) \wedge \\
-&( x \vee \neg y_1) \wedge (x \vee \neg y_2) \\
-x \leftrightarrow y_1 \rightarrow y_2 \Leftrightarrow & (x \vee y_1) \wedge ( x \vee \neg y_1 \vee \neg y_2) \wedge \\
-&(\neg x \vee \neg y_1 \vee y_2) \\
-x \leftrightarrow (y_1 \leftrightarrow y_2) \Leftrightarrow & (x \vee y_1 \vee y_2) \wedge (x \vee \neg y_1 \vee \neg y_2) \wedge \\
-&(\neg x \vee y_1 \vee \neg y_2) \wedge (\neg x \vee \neg y_1 \vee y_2)\\
-x \leftrightarrow y_1 \oplus y_2 \Leftrightarrow & (x \vee \neg y_1 \vee y_2) \wedge (x \vee y_1 \vee \neg y_2) \wedge \\ &(\neg x \vee y_1 \vee y_2) \wedge (\neg x \vee \neg y_1 \vee \neg y_2)
-\end{align*}
-
-\textbf{Davis Putnam Procedure} - proves SAT; To prove validity: prove unsatisfiability of negated formula.
-\textbf{(1)} Compute Linear Clause Form \underline{\textit{(Don't forget to create the last clause $\{x_n\}$)}}
-\textbf{(2)}Last variable has to be \underline{1} (true) $\rightarrow$ find implied variables.
-\textbf{(3)}For remaining variables: assume values and compute newly implied variables.
+\textbf{Davis Putnam Procedure} - proves SAT; To prove validity: prove unsatisfiability of negated formula. \\
+\textbf{(1)} Compute Linear Clause Form \underline{\textit{(Don't forget to create the last clause $\{x_n\}$)}} \\
+\textbf{(2)}Last variable has to be \underline{1} (true) $\rightarrow$ find implied variables. \\
+\textbf{(3)}For remaining variables: assume values and compute newly implied variables. \\
 \textbf{(4)}If contradiction reached: backtrack.
+
+\textbf{Linear Clause Forms (Computes CNF)} - Bottom up in the syntax tree: convert “operators and variables” into new variable.
+E.g., $\neg a \vee b$ becomes $x_1 \leftrightarrow \neg a; x_2 \leftrightarrow x_1 \vee b$. Use rules below to find CNF. \\
+$x \leftrightarrow \neg y  \Leftrightarrow (\neg x \vee \neg y) \wedge (x \vee y)$ \\
+$x \leftrightarrow y_1 \wedge y_2 \Leftrightarrow$ \\
+$\ \ \ \ (\neg x \vee y_1) \wedge (\neg x \vee y_2) \wedge (x \vee \neg y_1 \vee \neg y_2)$ \\
+$x \leftrightarrow y_1 \vee y_2 \Leftrightarrow$ \\
+$\ \ \ \ (\neg x \vee y_1 \vee y_2) \wedge ( x \vee \neg y_1) \wedge (x \vee \neg y_2)$ \\
+$x \leftrightarrow y_1 \rightarrow y_2 \Leftrightarrow$ \\
+$\ \ \ \ (x \vee y_1) \wedge ( x \vee \neg y_1 \vee \neg y_2) \wedge (\neg x \vee \neg y_1 \vee y_2)$ \\
+$x \leftrightarrow (y_1 \leftrightarrow y_2) \Leftrightarrow (x \vee y_1 \vee y_2) \wedge (x \vee \neg y_1 \vee \neg y_2) \wedge$ \\
+$\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\neg x \vee y_1 \vee \neg y_2) \wedge (\neg x \vee \neg y_1 \vee y_2)$\\
+$x \leftrightarrow y_1 \oplus y_2 \Leftrightarrow (x \vee \neg y_1 \vee y_2) \wedge (x \vee y_1 \vee \neg y_2) \wedge$ \\
+$\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\neg x \vee y_1 \vee y_2) \wedge (\neg x \vee \neg y_1 \vee \neg y_2)$
+
 \setbox0=\hbox{%
 \begin{minipage}{0.425\columnwidth}
 % Apply
@@ -283,59 +286,59 @@ _____
 \savestack{\listingF}{\box0}
 \begin{tabular}{|l|l|}
 \hline
-{\listingA} &
-{\listingB} \\ \hline
-{\listingC} &
-{\listingD}\\ \hline
-{\listingE} &
-{\listingF} \\ \hline
+%{\listingA} &
+{\listingB} &
+{\listingC} \\ \hline
+%{\listingD}\\ \hline
+%{\listingE} &
+%{\listingF} \\ \hline
 \end{tabular}
 
-\begin{window}[1, l, \includegraphics[width=0.3\columnwidth]{Simulation}, {}]
-\textbf{Simulation}: given ${\Kb_{1}=(\Ib_1,\Sb_1,\Rb_1,\Lb_1)}$ and ${\Kb_{2}=(\Ib_2,\Sb_2,\Rb_2,\Lb_2)}$; ${\sigma \subseteq \Sb_1 \times \Sb_2}$ is a sim. relation between $\Kb_1 \text{ and } \Kb_2$ (${\Kb_1 \preccurlyeq \Kb_2}$) if: \textbf{SIM1-} ${(s_1,s_2) \in \sigma}$ implies ${\Lb_1(s_1)=\Lb_2(s_2)}$; \textbf{SIM2-} for $s_1,s'_{1} \in \Sb_1, s_2 \in \Sb_2$ with ${(s_1,s_2) \in \sigma}$ and ${(s_1,s'_{1}) \in \Rb_1}$, there must be ${s'_2 \in \Rb_2}$ with ${(s'_1,s'_2) \in \sigma}$ ${(s_2,s'_{2}) \in \Rb_2}$; \textbf{SIM3-} for all ${s_1 \in \Ib_1}$, there is a ${s_2 \in \Ib_2}$ with ${(s_1,s_2) \in \sigma}$.
-\end{window}
-\textbf{Greatest Simulation Relation}
-${(s_1,s_2) \in \Hb_{0}\Leftrightarrow \Lb_1(s_1)=\Lb_2(s_2)}$
+%\begin{window}[1, l, \includegraphics[width=0.3\columnwidth]{Simulation}, {}]
+%\textbf{Simulation}: given ${\Kb_{1}=(\Ib_1,\Sb_1,\Rb_1,\Lb_1)}$ and ${\Kb_{2}=(\Ib_2,\Sb_2,\Rb_2,\Lb_2)}$; ${\sigma \subseteq \Sb_1 \times \Sb_2}$ is a sim. relation between $\Kb_1 \text{ and } \Kb_2$ (${\Kb_1 \preccurlyeq \Kb_2}$) if: \textbf{SIM1-} ${(s_1,s_2) \in \sigma}$ implies ${\Lb_1(s_1)=\Lb_2(s_2)}$; \textbf{SIM2-} for $s_1,s'_{1} \in \Sb_1, s_2 \in \Sb_2$ with ${(s_1,s_2) \in \sigma}$ and ${(s_1,s'_{1}) \in \Rb_1}$, there must be ${s'_2 \in \Rb_2}$ with ${(s'_1,s'_2) \in \sigma}$ ${(s_2,s'_{2}) \in \Rb_2}$; \textbf{SIM3-} for all ${s_1 \in \Ib_1}$, there is a ${s_2 \in \Ib_2}$ with ${(s_1,s_2) \in \sigma}$.
+%\end{window}
+%\textbf{Greatest Simulation Relation}
+%${(s_1,s_2) \in \Hb_{0}\Leftrightarrow \Lb_1(s_1)=\Lb_2(s_2)}$
 
-${(s_1,s_2) \in \Hb_{i+1}\Leftrightarrow}$
-\begin{align*}
-  \begin{pmatrix}
-    (s_1,s_2) \in \Hb_{i} \wedge&\\
-    \forall s'_1 \in \Sb_1.\exists s'_2 \in \Sb_2.&\\
-    (s_1,s'_1) \in \Rb_1 \rightarrow &(s_2,s'_2) \in \Rb_2 \wedge (s'_1,s'_2) \in \Hb_{i}
-  \end{pmatrix}
-\end{align*}
-$\Hb_*$is the greatest simulation relation if \textbf{SIM3}: ${\Ib_1 \subseteq \{s_1 \in \Sb_1 | \exists s_2 \in \Ib_2 . (s_1, s_2) \in \Hb_* \}}$
+%${(s_1,s_2) \in \Hb_{i+1}\Leftrightarrow}$
+%\begin{align*}
+%  \begin{pmatrix}
+%    (s_1,s_2) \in \Hb_{i} \wedge&\\
+%    \forall s'_1 \in \Sb_1.\exists s'_2 \in \Sb_2.&\\
+%    (s_1,s'_1) \in \Rb_1 \rightarrow &(s_2,s'_2) \in \Rb_2 \wedge (s'_1,s'_2) \in \Hb_{i}
+%  \end{pmatrix}
+%\end{align*}
+%$\Hb_*$is the greatest simulation relation if \textbf{SIM3}: ${\Ib_1 \subseteq \{s_1 \in \Sb_1 | %\exists s_2 \in \Ib_2 . (s_1, s_2) \in \Hb_* \}}$
 
-\textbf{Bisimulation}:${\sigma \subseteq \Sb_1 \times \Sb_2}$ is a bisim. relation between $\Kb_1 \text{ and } \Kb_2$ (${\Kb_1 \approx \Kb_2}$) if: \textbf{BISIM1-} ${(s_1,s_2) \in \sigma}$ implies ${\Lb_1(s_1)=\Lb_2(s_2)}$; \textbf{BISIM2a-} $s_1,s'_{1} \in \Sb_1, s_2 \in \Sb_2$, ${(s_1,s_2) \in \sigma}$, ${(s_1,s'_{1}) \in \Rb_1}$, imply that there is ${s'_2 \in \Sb_2}$ with ${(s'_1,s'_2) \in \sigma}$ and ${(s_2,s'_{2}) \in \Rb_2}$;\textbf{BISIM2b-} $s_2,s'_{2} \in \Sb_2, s_1 \in \Sb_1$, ${(s_1,s_2) \in \sigma}$, ${(s_2,s'_{2}) \in \Rb_2}$, imply that there is ${s'_1 \in \Sb_1}$ with ${(s'_1,s'_2) \in \sigma}$ and ${(s_1,s'_{1}) \in \Rb_1}$;\textbf{BISIM3a-} for all ${s_1 \in \Ib_1}$, there is a ${s_2 \in \Ib_2}$ with ${(s_1,s_2) \in \sigma}$;\textbf{BISIM3b-} for all ${s_1 \in \Ib_2}$, there is a ${s_2 \in \Ib_2}$ with ${(s_1,s_2) \in \sigma}$.
+%\textbf{Bisimulation}:${\sigma \subseteq \Sb_1 \times \Sb_2}$ is a bisim. relation between $\Kb_1 \text{ and } \Kb_2$ (${\Kb_1 \approx \Kb_2}$) if: \textbf{BISIM1-} ${(s_1,s_2) \in \sigma}$ implies ${\Lb_1(s_1)=\Lb_2(s_2)}$; \textbf{BISIM2a-} $s_1,s'_{1} \in \Sb_1, s_2 \in \Sb_2$, ${(s_1,s_2) \in \sigma}$, ${(s_1,s'_{1}) \in \Rb_1}$, imply that there is ${s'_2 \in \Sb_2}$ with ${(s'_1,s'_2) \in \sigma}$ and ${(s_2,s'_{2}) \in \Rb_2}$;\textbf{BISIM2b-} $s_2,s'_{2} \in \Sb_2, s_1 \in \Sb_1$, ${(s_1,s_2) \in \sigma}$, ${(s_2,s'_{2}) \in \Rb_2}$, imply that there is ${s'_1 \in \Sb_1}$ with ${(s'_1,s'_2) \in \sigma}$ and ${(s_1,s'_{1}) \in \Rb_1}$;\textbf{BISIM3a-} for all ${s_1 \in \Ib_1}$, there is a ${s_2 \in \Ib_2}$ with ${(s_1,s_2) \in \sigma}$;\textbf{BISIM3b-} for all ${s_1 \in \Ib_2}$, there is a ${s_2 \in \Ib_2}$ with ${(s_1,s_2) \in \sigma}$.
 
-\textbf{Greatest Bisimulation Relation (Equivalence)}
-${(s_1,s_2) \in \Bb_{0}\Leftrightarrow \Lb_1(s_1)=\Lb_2(s_2)}$
+%\textbf{Greatest Bisimulation Relation (Equivalence)}
+%${(s_1,s_2) \in \Bb_{0}\Leftrightarrow \Lb_1(s_1)=\Lb_2(s_2)}$
 
-${(s_1,s_2) \in \Bb_{i+1}\Leftrightarrow}$
-\begin{align*}
-  \begin{pmatrix}
-    (s_1,s_2) \in \Bb_{i} \wedge\\
-    \begin{bmatrix}
-    		\forall s'_1 \in \Sb_1.\exists s'_2 \in \Sb_2.\\
-   		(s_1,s'_1) \in \Rb_1 \rightarrow (s_2,s'_2) \in \Rb_2 \wedge (s'_1,s'_2) \in \Bb_{i}
-    \end{bmatrix}\\
-    \begin{bmatrix}
-    		\forall s'_2 \in \Sb_2.\exists s'_1 \in \Sb_1.\\
-   		(s_2,s'_2) \in \Rb_2 \rightarrow (s_1,s'_1) \in \Rb_1 \wedge (s'_1,s'_2) \in \Bb_{i}
-    \end{bmatrix}
-  \end{pmatrix}
-\end{align*}
-$\Bb_*$is the greatest simulation relation if ${\Ib_1 \subseteq \{s_1 \in \Sb_1 | \exists s_2 \in \Ib_2 . (s_1, s_2) \in \Bb_* \}}$ ${\Ib_2 \subseteq \{s_2 \in \Sb_2 | \exists s_1 \in \Ib_1 . (s_1, s_2) \in \Bb_* \}}$
+%${(s_1,s_2) \in \Bb_{i+1}\Leftrightarrow}$
+%\begin{align*}
+%  \begin{pmatrix}
+%    (s_1,s_2) \in \Bb_{i} \wedge\\
+%    \begin{bmatrix}
+%    		\forall s'_1 \in \Sb_1.\exists s'_2 \in \Sb_2.\\
+%   		(s_1,s'_1) \in \Rb_1 \rightarrow (s_2,s'_2) \in \Rb_2 \wedge (s'_1,s'_2) \in \Bb_{i}
+%    \end{bmatrix}\\
+%    \begin{bmatrix}
+%    		\forall s'_2 \in \Sb_2.\exists s'_1 \in \Sb_1.\\
+%   		(s_2,s'_2) \in \Rb_2 \rightarrow (s_1,s'_1) \in \Rb_1 \wedge (s'_1,s'_2) \in \Bb_{i}
+%    \end{bmatrix}
+%  \end{pmatrix}
+%\end{align*}
+%$\Bb_*$is the greatest simulation relation if ${\Ib_1 \subseteq \{s_1 \in \Sb_1 | \exists s_2 \in %\Ib_2 . (s_1, s_2) \in \Bb_* \}}$ ${\Ib_2 \subseteq \{s_2 \in \Sb_2 | \exists s_1 \in \Ib_1 . %(s_1, s_2) \in \Bb_* \}}$
 
-\textbf{Quotient}: given ${\Kb=(\Ib,\Sb,\Rb,\Lb)}$ and the equivalence relation $\sigma \subseteq \Sb \times \Sb$; Quotient structure $\Kb_{/\sigma}=(\widetilde{\Ib},\widetilde{\Sb},\widetilde{\Rb},\widetilde{\Lb})$:
-$\widetilde{\Ib}:=\{\{s' \in \Sb | (s,s') \in \sigma \} | s \in \Ib \}$
-$\widetilde{\Sb}:=\{\{s' \in \Sb | (s,s') \in \sigma \} | s \in \Sb \}$
-$(\widetilde{s}_1,\widetilde{s}_2) \in \Rb :\Leftrightarrow \exists s'_1 \in \widetilde{s}_1. \exists s'_2 \in \widetilde{s}_2.(s'_1,s'_2) \in \Rb$
-$\widetilde{\Lb}( \widetilde{s} ):= \Lb(s)$
+\textbf{Quotient}: Bisimulation with itself\\%given ${\Kb=(\Ib,\Sb,\Rb,\Lb)}$ and the equivalence relation $\sigma \subseteq \Sb \times \Sb$; Quotient structure $\Kb_{/\sigma}=(\widetilde{\Ib},\widetilde{\Sb},\widetilde{\Rb},\widetilde{\Lb})$:
+%$\widetilde{\Ib}:=\{\{s' \in \Sb | (s,s') \in \sigma \} | s \in \Ib \}$
+%$\widetilde{\Sb}:=\{\{s' \in \Sb | (s,s') \in \sigma \} | s \in \Sb \}$
+%$(\widetilde{s}_1,\widetilde{s}_2) \in \Rb :\Leftrightarrow \exists s'_1 \in \widetilde{s}_1. \exists s'_2 \in \widetilde{s}_2.(s'_1,s'_2) \in \Rb$
+%$\widetilde{\Lb}( \widetilde{s} ):= \Lb(s)$
 
 
-\includegraphics[width=0.7\columnwidth]{Quotient}
+%\includegraphics[width=0.7\columnwidth]{Quotient}
 
 
 \textbf{Symbolic Product Computation} - given ${\Kb_1=(\Vb_1,\varphi_{\Ib},\varphi_{\Rb})}$ and ${\Kb_2=(\Vb_2,\psi_{\Ib},\psi_{\Rb})}$, the product is: $\Kb_1 \times \Kb_2 = (\Vb_1 \cup \Vb_2, \varphi_{\Ib} \wedge \psi_{\Ib},\varphi_{\Rb} \wedge \psi_{\Rb} )$
@@ -399,10 +402,10 @@ for each node n in $\Kb$:
 %%%%%%%%%%%%%%%%%%%%%%%%
 %\vfill
 %\columnbreak
-\textbf{\textit{* Rabin-Scott Subset Construction}}
-\textbf{1.} Initial state is a set of states containing all the initial states.
-\textbf{2.} For all transitions of a set of states, compute the successors and create a set of states containing all the possible reachable states when performing that transition.
-\textbf{3.} Acceptance condition are set of states containing acceptance states.
+%\textbf{\textit{* Rabin-Scott Subset Construction}}
+%\textbf{1.} Initial state is a set of states containing all the initial states.
+%\textbf{2.} For all transitions of a set of states, compute the successors and create a set of states containing all the possible reachable states when performing that transition.
+%\textbf{3.} Acceptance condition are set of states containing acceptance states.
 %%%%%%%%%%%%%%%%%%%%%%%%
 
 \textbf{Local Model Checking}
@@ -424,7 +427,10 @@ If (s,$\mu x.\varphi$) repeats$\rightarrow$return 1&$apx_0(\mu x.\varphi):=0$\\ 
 If (s,$\nu x.\varphi$) repeats$\rightarrow$return 0& $apx_0(\nu x.\varphi):=1$\\ \hline
 \multicolumn{2}{|l|}{$apx_{n+1}(\mu x.\varphi):=[\varphi]_{x}^{apx{n}(\mu x.\varphi)}$}\\ \hline
 \multicolumn{2}{|l|}{$apx_{n+1}(\nu x.\varphi):=[\varphi]_{x}^{apx{n}(\nu x.\varphi)}$}\\ \hline
-\end{tabular}
+\end{tabular} \\
+
+\textbf{\#\#\#AUTOMATA}
+
 \textbf{Automata types:} G$\rightarrow$Safety; F$\rightarrow$Liveness; FG$\rightarrow$Persistence/Co-Buchi; GF$\rightarrow$Fairness/Buchi.
 
 \textbf{\underline{Automaton Determinization}}\\
@@ -446,17 +452,17 @@ Safra Algorithm.
 %\textbf{2.} For every possible transition of a set of states, compute the successors and create a set of states containing all the possible reachable states when performing that transition.
 %\textbf{3.} Acceptance condition are set of states containing acceptance states.
 
-\textbf{\textit{* Breakpoint Construction}}
-\textbf{1.} Each state is composed by two components
-\textbf{2.} Initial state first component is a set of all initial states, and second component is the empty set. Ex.: $(\Ib,\{\})$.
-\textbf{3.} a successor for a state (Q,Q\textsubscript{f}) is generated as follows:
-\begin{align*}
-\begin{cases}
-\text{If }Q_f = \{\} & (suc^{\Rb_{a}}_{\exists}(Q), (suc^{\Rb_{a}}_{\exists}(Q) \cap \Fb) \\
-\text{Otherwise} & (suc^{\Rb_{a}}_{\exists}(Q), (suc^{\Rb_{a}}_{\exists}(Q_f) \cap \Fb) \\
-\end{cases}
-\end{align*}
-\textbf{4.} Acceptance states are states where $Q_f \neq \{\}$.
+%\textbf{\textit{* Breakpoint Construction}}
+%\textbf{1.} Each state is composed by two components
+%\textbf{2.} Initial state first component is a set of all initial states, and second component is the empty set. Ex.: $(\Ib,\{\})$.
+%\textbf{3.} a successor for a state (Q,Q\textsubscript{f}) is generated as follows:
+%\begin{align*}
+%\begin{cases}
+%\text{If }Q_f = \{\} & (suc^{\Rb_{a}}_{\exists}(Q), (suc^{\Rb_{a}}_{\exists}(Q) \cap \Fb) \\
+%\text{Otherwise} & (suc^{\Rb_{a}}_{\exists}(Q), (suc^{\Rb_{a}}_{\exists}(Q_f) \cap \Fb) \\
+%\end{cases}
+%\end{align*}
+%\textbf{4.} Acceptance states are states where $Q_f \neq \{\}$.
 
 \textbf{Boolean Operations on $\omega$-Automata}
 \underline{Complement}
@@ -494,8 +500,8 @@ Q_1 \cup Q_2 \cup \{q\},\\
 $(1)\neg G \varphi = F \neg \varphi\qquad \qquad  (2)G \varphi \wedge G \psi = G[\varphi \wedge \psi]$\\
 $(3) G \varphi \vee G \psi = \Ab_{\exists}(\{p,q\},p \wedge q,\qquad\qquad$\\
 $\qquad\qquad\qquad\qquad[p' \leftrightarrow p \wedge \varphi] \wedge [q' \leftrightarrow q \wedge \psi],G[p \vee q])$\\
-\vfill
-\columnbreak
+%\vfill
+%\columnbreak
 \underline{Boolean Operations of F}
 $(1)\neg F \varphi = G \neg \varphi\qquad \qquad\quad\;(2)F \varphi \vee F \psi = F[\varphi \vee \psi]$\\
 $(3) F \varphi \wedge F \psi = \Ab_{\exists}(\{p,q\}, \neg p \wedge \neg q,\qquad\qquad$\\
@@ -537,19 +543,29 @@ $FG\varphi = \Ab_{\exists} \begin{pmatrix}
     GF[p \wedge \neg q]
 \end{pmatrix}$
 
-\textbf{\underline{Temporal Logics}}
+\textbf{\#\#\#TEMPORAL LOGICS} \\
+(S1)Pure LTL: AFGa \\
+(s2)LTL + CTL: AFa \\
+(S3)Pure CTL: AGEFa \\
+(S4)CTL*: AFGa $\vee$ AGEFa \\
+\textbf{\underline{Remarks}}
 \textit{Beware of Finite Paths}\\
 E and A quantify over infinite paths.\\
-A$\varphi$ holds on every state that has no infinite path;\\
-E$\varphi$ is false on every state that has no infinite path;\\
-A0 holds on states with only finite paths;\\
-E1 is false on state with only finite paths;\\
+A$\varphi$ \underline{holds} on every state that has \underline{no infinite path};\\
+E$\varphi$ is \underline{false} on every state that has \underline{no infinite path};\\
+A0 \underline{holds} on states with \underline{only finite paths};\\
+E1 is \underline{false} on state with \underline{only finite paths};\\
 $\square$0 holds on states with no successor states;\\
 $\diamondsuit$1 holds on states with successor states.\\
 $F\varphi = \varphi \vee X F\varphi\qquad\qquad\qquad G\varphi = \varphi \wedge XG \varphi$\\
 $[ \varphi \; U\; \psi ] = \psi \vee (\varphi\wedge X[ \varphi \; U\; \psi])$\\
 $[ \varphi \; B\; \psi ] = \neg \psi \wedge (\varphi \vee X[ \varphi \; B\; \psi])$\\
 $[ \varphi \; W\; \psi] = (\psi \wedge \varphi) \vee (\neg \psi \wedge X[\varphi \; W \; \psi])$
+
+\textbf{Weak Equivalences} \\
+$*[\varphi U \psi] := [\varphi \underline{U} \psi] \vee G\varphi \ \ \ \ *[\varphi B \psi] := [\varphi \underline{B} \psi] \vee G\neg\psi$ \\
+*same to past version$\ \ \ \ \ \ [\varphi W \psi] := \neg[(\neg\varphi) \underline{W} \psi]$ \\
+$\overleftarrow{X}\varphi := \neg\overleftarrow{\underline{X}}\neg\varphi\ (at\ t0:\ weak\ true.\ strong\ false) $ \\
 
 \textbf{Negation Normal Form}
 ${\neg( \varphi \wedge \psi ) = \neg \varphi \vee \neg \psi} \qquad\quad {\neg( \varphi \vee \psi ) = \neg \varphi \wedge \neg \psi }$ \\
@@ -604,21 +620,6 @@ $A[\varphi \; \underline{B} \; \psi] =  \neg E[(\neg \varphi \vee \psi) \; \unde
 $A[\varphi \; W\; \psi]=  \neg E[(\neg \psi) \; \underline{U}\; (\neg \varphi \wedge \psi)]$ \\
 $A[\varphi \; \underline{W} \; \psi] =  \neg E[(\neg \psi) \; \underline{U}\; (\neg \varphi \wedge \psi)] \wedge \neg EG\neg \psi $ \\
 $A[\varphi \; \underline{W} \; \psi] =  \neg E[(\neg \psi) \; U\; (\neg \varphi \wedge \psi)]$\\
-\textbf{CTL to $\mu -Calculus (\Phi _{inf} = \nu y.\diamondsuit y$)}
-$EX\varphi = \diamondsuit (\Phi_{inf} \wedge \varphi)$ \\
-$EG\varphi = \nu x.\varphi \wedge \diamondsuit x $ \\
-$EF\varphi = \mu x.\Phi_{inf} \wedge \varphi \vee \diamondsuit x  $ \\
-$E[ \varphi \underline{U} \psi] = \mu x.(\Phi_{inf} \wedge \psi) \vee \varphi \wedge \diamondsuit x $ \\
-$E[ \varphi U \psi] = \nu x.(\Phi_{inf} \wedge \psi) \vee \varphi \wedge \diamondsuit x $ \\
-$E[ \varphi \underline{B} \psi] = \mu x.\neg\psi \wedge (\Phi_{inf} \wedge \varphi \vee \diamondsuit x) $ \\
-$E[ \varphi B \psi] = \nu x.\neg\psi \wedge (\Phi_{inf} \wedge \varphi \vee \diamondsuit x) $ \\
-$AX\varphi = \square (\Phi_{inf} \rightarrow \varphi)$ \\
-$AG\varphi = \nu x.(\Phi_{inf} \rightarrow \varphi) \wedge \square x $ \\
-$AF\varphi = \mu x.\varphi \vee \square x  $ \\
-$A[ \varphi \underline{U} \psi] = \mu x. \psi \vee (\Phi_{inf} \rightarrow \varphi) \wedge \square x $ \\
-$A[ \varphi U \psi] = \nu x.\psi \vee (\Phi_{inf} \rightarrow \varphi) \wedge \square x $ \\
-$A[ \varphi \underline{B} \psi] = \mu x.(\Phi_{inf} \rightarrow \neg\psi) \wedge (\varphi \vee \square x) $ \\
-$A[ \varphi B \psi] = \nu x.(\Phi_{inf} \rightarrow \neg\psi) \wedge (\varphi \vee \square x)$\\
 
 \textbf{CTL* to CTL} - \underline{Existential Operators}\\
 $EX\varphi = EXE \varphi$\\
@@ -665,52 +666,26 @@ $\qquad\qquad\qquad\qquad\begin{bmatrix}
   		\psi_2 \wedge [\varphi_1 \; U \psi_1]\;\;\\
 	\end{pmatrix}
   \end{bmatrix}$
-\textbf{CTL* Modelchecking to LTL model checking}
-Let's $\varphi_i$ be a pure path formula (without path quantifiers), $\Psi$ be a propositional formula, abbreviate subformulas $E\varphi$ and $A\psi$ working bottom-up the syntax tree to obtain the following normal form:
-$\upphi = \text{let} \begin{bmatrix}
-x_1 = A\varphi_1\\
-\vdots \\
-x_n = A\varphi_n
-\end{bmatrix}
-\text{ in } \Psi \text{ end}$\\
-Use LTL model checking to compute $Q_i:=\llbracket A\varphi_i\rrbracket _{\Kb_{i-1}}$, where $\Kb_0 := \Kb$ and $\Kb_{i+1}$ is obtained from $\Kb_i$ by labelling the states $Q_i$ with $x_i$.
-Finally compute $\llbracket \Psi \rrbracket_{\Kb_n}$
 
-\textbf{LTL to $\omega$-automata}
-% Normal operator
-$\upphi \langle X \varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q\},1,q \leftrightarrow X \varphi, \upphi \langle q \rangle_x)$\\
-$\upphi \langle X \varphi\rangle_x \Leftrightarrow $ \\
-$\ \ \ \ \Ab_\exists (\{q_0,q_1\},1,(q_0 \leftrightarrow \varphi) \wedge (q_1 \leftrightarrow X q_0), \upphi \langle q_1 \rangle_x)$ \\
-$\upphi \langle G \varphi\rangle_x \Leftrightarrow $ \\
-$\ \ \ \ \Ab_\exists (\{q\},1,q \leftrightarrow \varphi \wedge X q,\upphi \langle q \rangle_x \wedge GF[\varphi \rightarrow q])$ \\
-$\upphi \langle F \varphi\rangle_x \Leftrightarrow$ \\
-$\ \ \ \ \Ab_\exists (\{q\},1,q \leftrightarrow \varphi \wedge X q, \upphi \langle q \rangle_x \wedge GF[q \rightarrow \varphi])$ \\
-$\upphi \langle [\varphi\; U \; \psi] \rangle_x \Leftrightarrow$ \\
-$\ \ \ \ \Ab_\exists (\{q\},1,q \leftrightarrow \psi \vee \varphi \wedge X q, \upphi \langle q \rangle_x \wedge GF[\varphi \rightarrow q])$ \\
-$\upphi \langle [\varphi\; \underline{U} \; \psi] \rangle_x \Leftrightarrow$ \\
-$\ \ \ \ \Ab_\exists (\{q\},1,q \leftrightarrow \psi \vee \varphi \wedge X q, \upphi \langle q \rangle_x \wedge GF[q \rightarrow \psi])$ \\
-$\upphi \langle [\varphi\; B \; \psi] \rangle_x \Leftrightarrow$ \\
-$\ \ \ \ \Ab_\exists (\{q\},1,q \leftrightarrow \neg\psi \wedge (\varphi \vee X q), \upphi \langle q \rangle_x \wedge GF[q \vee \psi])$ \\
-$\upphi \langle [\varphi\; \underline{B} \; \psi] \rangle_x \Leftrightarrow$ \\
-$\ \ \ \ \Ab_\exists (\{q\},1,q \leftrightarrow \neg\psi \wedge (\varphi \vee X q), \upphi \langle q \rangle_x \wedge GF[q \rightarrow \varphi])$ \\
-% Past operators
-$\upphi \langle \overleftarrow{X} \varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q\},q, Xq \leftrightarrow \varphi, \upphi \langle q \rangle_x)$\\
-$\upphi \langle \overleftarrow{X} \varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q\},\neg q, Xq \leftrightarrow \varphi, \upphi \langle q \rangle_x)$\\
-$\upphi \langle \overleftarrow{G}\varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q\},q, X q \leftrightarrow \varphi \wedge q,\upphi \langle \varphi \wedge q \rangle_x)$
-$\upphi \langle \overleftarrow{F}\varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q\},\neg q, X q \leftrightarrow \varphi \vee q,\upphi \langle \varphi \vee q \rangle_x)$
-$\upphi \langle [\varphi \; \overleftarrow{U} \; \psi] \rangle_x \Leftrightarrow$ \\
-$\ \ \ \ \Ab_\exists (\{q\},q, X q \leftrightarrow \psi \vee \varphi \wedge q, \upphi \langle \psi \vee \varphi \wedge q \rangle_x)$ \\
-$\upphi \langle [\varphi \; \overleftarrow{\underline{U}} \; \psi] \rangle_x \Leftrightarrow$ \\ $\ \ \ \ \Ab_\exists (\{q\},\neg q, X q \leftrightarrow \psi \vee \varphi \wedge q, \upphi \langle \psi \vee \varphi \wedge q \rangle_x)$ \\
-$\upphi \langle [\varphi\;\overleftarrow{B} \; \psi] \rangle_x \Leftrightarrow$ \\
-$\ \ \ \ \Ab_\exists (\{q\},q, X q \leftrightarrow \neg\psi \wedge (\varphi \vee q), \upphi \langle \neg \psi \wedge (\varphi \vee q) \rangle_x)$ \\
-$\upphi \langle [\varphi\;\underline{\overleftarrow{B}} \; \psi] \rangle_x \Leftrightarrow$ \\ $\ \ \ \ \Ab_\exists (\{q\},\neg q, X q \leftrightarrow \neg\psi \wedge (\varphi \vee q), \upphi \langle \neg \psi \wedge (\varphi \vee q) \rangle_x)$ \\
+\textbf{Equivalences and Tips} \\
+%$[\varphi \underline{U} \psi] \equiv \varphi\ don't\ matter\ when\ \psi\ hold $ \\
+$[\varphi \underline{B} \psi] \equiv \psi\ can't\ hold\ when\ \varphi\ hold $ \\
+%$[\varphi \underline{W} \psi] \equiv \neg\psi\ hold\ until\ \varphi\ \wedge\ \psi $ \\
+$[\varphi U \psi] \equiv [\varphi \underline{U} \psi] \vee G\varphi$ \\
+$[a \underline{U} Fb] \equiv Fb $ \\
+$F[a \underline{U} b] \equiv Fb \equiv [Fa \underline{U} Fb] $ \\
+$[\varphi B \psi] \equiv [\varphi \underline{B} \psi] \vee G\neg\psi$ \\
+$F[a \underline{B} b] \equiv F[a \wedge \neg b] $ \\
+$[\varphi W \psi] \equiv \neg[\neg\varphi \underline{W} \psi]$ \\
+$E(\varphi \wedge \psi) \equiv E\varphi \wedge E \psi (in\ general) $ \\
+$AEA \equiv A $ \\
+$GF(x \vee y) \equiv GFx \vee GFy $ \\
+$FF\varphi \equiv F\varphi$\\
+$GG\varphi \equiv G\varphi$\\
+$GF\varphi \equiv XGF\varphi\equiv FGF\varphi \equiv GGF\varphi\equiv GFGF\varphi \equiv FGGF\varphi$\\
+$FG\varphi\equiv XFG\varphi \equiv FFG\varphi \equiv GFG\varphi \equiv GFFG\varphi \equiv FGFG\varphi$ \\
 
-
-%\lipsum
-%\lipsum
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%% Other side of the previous sheet! %%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{\#\#\#MONADIC PREDICATE} \\
 
 \textbf{S1S} \\
 First order terms are defined as follows: \\
@@ -743,6 +718,30 @@ $-\varphi, \psi \in \zeta_{LO2} $ \\
 $-t \in V_{\sum} \ with \ typ_{\sum}(t) = \mathbb{N}$ \\
 $-p \in V_{\sum} \ with \ typ_{\sum}(p) = \mathbb{N} \rightarrow \mathbb{B}$ \\
 
+\textbf{LO2'}
+Consider the following set $\zeta_{LO2'}$ of formulas: \\
+$-Subset(p,q), Sing(p), and PSUC(p,q) belong to \zeta_{LO2'}$ \\
+$-\neg\varphi, \varphi \wedge \psi $ \\
+$-\exists p.\varphi$ \\
+where
+$-\varphi, \psi \in \zeta_{LO2'}$ \\
+$-p \in V_{\sum}\ with\ typ_{\sum}(p) = \mathbb{N} \rightarrow \mathbb{B}$ \\
+$\zeta_{LO2'}\ has no numeric variables$ \\
+numeric variable \textit{t} is replaced by a singleton set $p_{t}$ \\
+$\zeta_{LO2'}$ is as expressive as LO2 and S1S \\
+
+\textbf{\#\#\#TRANSLATIONS} \\
+
+\textbf{CTL* Modelchecking to LTL model checking}
+Let's $\varphi_i$ be a pure path formula (without path quantifiers), $\Psi$ be a propositional formula, abbreviate subformulas $E\varphi$ and $A\psi$ working bottom-up the syntax tree to obtain the following normal form:
+$\upphi = \text{let} \begin{bmatrix}
+x_1 = A\varphi_1\\
+\vdots \\
+x_n = A\varphi_n
+\end{bmatrix}
+\text{ in } \Psi \text{ end}$\\
+Use LTL model checking to compute $Q_i:=\llbracket A\varphi_i\rrbracket _{\Kb_{i-1}}$, where $\Kb_0 := \Kb$ and $\Kb_{i+1}$ is obtained from $\Kb_i$ by labelling the states $Q_i$ with $x_i$.
+Finally compute $\llbracket \Psi \rrbracket_{\Kb_n}$
 
 \textbf{function LO2\_S1S($\Phi$)} \\
 \ \ \textbf{case $\Phi$ of} \\
@@ -765,18 +764,6 @@ $\ \ \ \ \exists t.\varphi : \textbf{return}\ \exists t.S1S\_LO2(\varphi);$ \\
 $\ \ \ \ \exists p.\varphi : \textbf{return}\ \exists p.S1S\_LO2(\varphi); $ \\
 \ \ \textbf{end} \\
 \textbf{end} \\
-
-\textbf{LO2'}
-Consider the following set $\zeta_{LO2'}$ of formulas: \\
-$-Subset(p,q), Sing(p), and PSUC(p,q) belong to \zeta_{LO2'}$ \\
-$-\neg\varphi, \varphi \wedge \psi $ \\
-$-\exists p.\varphi$ \\
-where
-$-\varphi, \psi \in \zeta_{LO2'}$ \\
-$-p \in V_{\sum}\ with\ typ_{\sum}(p) = \mathbb{N} \rightarrow \mathbb{B}$ \\
-$\zeta_{LO2'}\ has no numeric variables$ \\
-numeric variable \textit{t} is replaced by a singleton set $p_{t}$ \\
-$\zeta_{LO2'}$ is as expressive as LO2 and S1S \\
 
 \textbf{function ElimFO($\Phi$)} (LO2 TO LO2')\\
 \ \ \textbf{case $\Phi$ of} \\
@@ -822,23 +809,60 @@ $\ \ \ \ \ \ \textbf{return}\ \forall t2.t0 \leq t2 \wedge t2 \leq3 t1 \rightarr
 \ \ \textbf{end} \\
 \textbf{end} \\
 
-\textbf{Temporal Logic Equivalences and Tips} \\
-$[\varphi \underline{U} \psi] \equiv \varphi\ don't\ matter\ when\ \psi\ hold $ \\
-$[\varphi \underline{B} \psi] \equiv \psi\ can't\ hold\ when\ \varphi\ hold $ \\
-$[\varphi \underline{W} \psi] \equiv \neg\psi\ hold\ until\ \varphi\ \wedge\ \psi $ \\
-$[\varphi U \psi] \equiv [\varphi \underline{U} \psi] \vee G\varphi$ \\
-$[a \underline{U} Fb] \equiv Fb $ \\
-$F[a \underline{U} b] \equiv Fb \equiv [Fa \underline{U} Fb] $ \\
-$[\varphi B \psi] \equiv [\varphi \underline{B} \psi] \vee G\neg\psi$ \\
-$F[a \underline{B} b] \equiv F[a \wedge \neg b] $ \\
-$[\varphi W \psi] \equiv \neg[\neg\varphi \underline{W} \psi]$ \\
-$E(\varphi \wedge \psi) \equiv E\varphi \wedge E \psi (in\ general) $ \\
-$AEA \equiv A $ \\
-$GF(x \vee y) \equiv GFx \vee GFy $ \\
-$FF\varphi \equiv F\varphi$\\
-$GG\varphi \equiv G\varphi$\\
-$GF\varphi \equiv XGF\varphi\equiv FGF\varphi \equiv GGF\varphi\equiv GFGF\varphi \equiv FGGF\varphi$\\
-$FG\varphi\equiv XFG\varphi \equiv FFG\varphi \equiv GFG\varphi \equiv GFFG\varphi \equiv FGFG\varphi$ \\
+\textbf{$\omega$-Automaton to LO2} \\
+$A_{\exists}({q1,...,qn}, \psi I, \psi R, \psi F) \textit{(input automaton)}$ \\
+$\exists q1..qn, \Theta LO2(0,\psi I) \wedge (\forall t.\Theta LO2(t,\psi R)) \wedge (\forall.t1\exists t2. t1 < t2 \wedge \Theta LO2(t2,\psi F))$ \\
+\textbf{Where $\Theta$LO2(t, $\Phi$) is:} \\
+-$\Theta LO2(t, p) := p(t)\ for\ variable\ p $ \\
+-$\Theta LO2(t, X\psi) := \Theta LO2(t+1, \psi)$ \\
+-$\Theta LO2(t, \neg\psi) := \neg\Theta LO2(t, \psi)$ \\
+-$\Theta LO2(t, \varphi\wedge\psi) := \Theta LO2(t, \varphi) \wedge \Theta LO2(t, \psi)$ \\
+-$\Theta LO2(t, \varphi\vee\psi) := \Theta LO2(t, \varphi) \vee \Theta LO2(t, \psi)$ \\
+
+\textbf{LTL to $\omega$-automata}
+% Normal operator
+$\upphi \langle X \varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q\},1,q \leftrightarrow X \varphi, \upphi \langle q \rangle_x)$\\
+$\upphi \langle X \varphi\rangle_x \Leftrightarrow $ \\
+$\ \ \ \ \Ab_\exists (\{q_0,q_1\},1,(q_0 \leftrightarrow \varphi) \wedge (q_1 \leftrightarrow X q_0), \upphi \langle q_1 \rangle_x)$ \\
+$\upphi \langle G \varphi\rangle_x \Leftrightarrow $ \\
+$\ \ \ \ \Ab_\exists (\{q\},1,q \leftrightarrow \varphi \wedge X q,\upphi \langle q \rangle_x \wedge GF[\varphi \rightarrow q])$ \\
+$\upphi \langle F \varphi\rangle_x \Leftrightarrow$ \\
+$\ \ \ \ \Ab_\exists (\{q\},1,q \leftrightarrow \varphi \wedge X q, \upphi \langle q \rangle_x \wedge GF[q \rightarrow \varphi])$ \\
+$\upphi \langle [\varphi\; U \; \psi] \rangle_x \Leftrightarrow$ \\
+$\ \ \ \ \Ab_\exists (\{q\},1,q \leftrightarrow \psi \vee \varphi \wedge X q, \upphi \langle q \rangle_x \wedge GF[\varphi \rightarrow q])$ \\
+$\upphi \langle [\varphi\; \underline{U} \; \psi] \rangle_x \Leftrightarrow$ \\
+$\ \ \ \ \Ab_\exists (\{q\},1,q \leftrightarrow \psi \vee \varphi \wedge X q, \upphi \langle q \rangle_x \wedge GF[q \rightarrow \psi])$ \\
+$\upphi \langle [\varphi\; B \; \psi] \rangle_x \Leftrightarrow$ \\
+$\ \ \ \ \Ab_\exists (\{q\},1,q \leftrightarrow \neg\psi \wedge (\varphi \vee X q), \upphi \langle q \rangle_x \wedge GF[q \vee \psi])$ \\
+$\upphi \langle [\varphi\; \underline{B} \; \psi] \rangle_x \Leftrightarrow$ \\
+$\ \ \ \ \Ab_\exists (\{q\},1,q \leftrightarrow \neg\psi \wedge (\varphi \vee X q), \upphi \langle q \rangle_x \wedge GF[q \rightarrow \varphi])$ \\
+% Past operators
+$\upphi \langle \overleftarrow{X} \varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q\},q, Xq \leftrightarrow \varphi, \upphi \langle q \rangle_x)$\\
+$\upphi \langle \overleftarrow{X} \varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q\},\neg q, Xq \leftrightarrow \varphi, \upphi \langle q \rangle_x)$\\
+$\upphi \langle \overleftarrow{G}\varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q\},q, X q \leftrightarrow \varphi \wedge q,\upphi \langle \varphi \wedge q \rangle_x)$
+$\upphi \langle \overleftarrow{F}\varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q\},\neg q, X q \leftrightarrow \varphi \vee q,\upphi \langle \varphi \vee q \rangle_x)$
+$\upphi \langle [\varphi \; \overleftarrow{U} \; \psi] \rangle_x \Leftrightarrow$ \\
+$\ \ \ \ \Ab_\exists (\{q\},q, X q \leftrightarrow \psi \vee \varphi \wedge q, \upphi \langle \psi \vee \varphi \wedge q \rangle_x)$ \\
+$\upphi \langle [\varphi \; \overleftarrow{\underline{U}} \; \psi] \rangle_x \Leftrightarrow$ \\ $\ \ \ \ \Ab_\exists (\{q\},\neg q, X q \leftrightarrow \psi \vee \varphi \wedge q, \upphi \langle \psi \vee \varphi \wedge q \rangle_x)$ \\
+$\upphi \langle [\varphi\;\overleftarrow{B} \; \psi] \rangle_x \Leftrightarrow$ \\
+$\ \ \ \ \Ab_\exists (\{q\},q, X q \leftrightarrow \neg\psi \wedge (\varphi \vee q), \upphi \langle \neg \psi \wedge (\varphi \vee q) \rangle_x)$ \\
+$\upphi \langle [\varphi\;\underline{\overleftarrow{B}} \; \psi] \rangle_x \Leftrightarrow$ \\ $\ \ \ \ \Ab_\exists (\{q\},\neg q, X q \leftrightarrow \neg\psi \wedge (\varphi \vee q), \upphi \langle \neg \psi \wedge (\varphi \vee q) \rangle_x)$ \\
+
+\textbf{CTL to $\mu -Calculus (\Phi _{inf} = \nu y.\diamondsuit y$)}
+$EX\varphi = \diamondsuit (\Phi_{inf} \wedge \varphi)$ \\
+$EG\varphi = \nu x.\varphi \wedge \diamondsuit x $ \\
+$EF\varphi = \mu x.\Phi_{inf} \wedge \varphi \vee \diamondsuit x  $ \\
+$E[ \varphi \underline{U} \psi] = \mu x.(\Phi_{inf} \wedge \psi) \vee \varphi \wedge \diamondsuit x $ \\
+$E[ \varphi U \psi] = \nu x.(\Phi_{inf} \wedge \psi) \vee \varphi \wedge \diamondsuit x $ \\
+$E[ \varphi \underline{B} \psi] = \mu x.\neg\psi \wedge (\Phi_{inf} \wedge \varphi \vee \diamondsuit x) $ \\
+$E[ \varphi B \psi] = \nu x.\neg\psi \wedge (\Phi_{inf} \wedge \varphi \vee \diamondsuit x) $ \\
+$AX\varphi = \square (\Phi_{inf} \rightarrow \varphi)$ \\
+$AG\varphi = \nu x.(\Phi_{inf} \rightarrow \varphi) \wedge \square x $ \\
+$AF\varphi = \mu x.\varphi \vee \square x  $ \\
+$A[ \varphi \underline{U} \psi] = \mu x. \psi \vee (\Phi_{inf} \rightarrow \varphi) \wedge \square x $ \\
+$A[ \varphi U \psi] = \nu x.\psi \vee (\Phi_{inf} \rightarrow \varphi) \wedge \square x $ \\
+$A[ \varphi \underline{B} \psi] = \mu x.(\Phi_{inf} \rightarrow \neg\psi) \wedge (\varphi \vee \square x) $ \\
+$A[ \varphi B \psi] = \nu x.(\Phi_{inf} \rightarrow \neg\psi) \wedge (\varphi \vee \square x)$\\
 
 \textbf{G and $\mu$-calculus (safety property)} \\
 -$[\nu x. \varphi \wedge \diamondsuit x]_{K} $ \\
@@ -857,20 +881,5 @@ $FG\varphi\equiv XFG\varphi \equiv FFG\varphi \equiv GFG\varphi \equiv GFFG\varp
 -Contains states s where an infinite path $\pi$ starts with $\forall t1.\exists t2. \pi^{(t1+t2)} \in [\varphi]_{K} ?????t1+t2 or t1+t0?????$ \\
 -$\varphi$ holds infinitely often on $\pi$ \\
 
-\textbf{$\omega$-Automaton to LO2} \\
-$A_{\exists}({q1,...,qn}, \psi I, \psi R, \psi F) \textit{(input automaton)}$ \\
-$\exists q1..qn, \Theta LO2(0,\psi I) \wedge (\forall t.\Theta LO2(t,\psi R)) \wedge (\forall.t1\exists t2. t1 < t2 \wedge \Theta LO2(t2,\psi F))$ \\
-\textbf{Where $\Theta$LO2(t, $\Phi$) is:} \\
--$\Theta LO2(t, p) := p(t)\ for\ variable\ p $ \\
--$\Theta LO2(t, X\psi) := \Theta LO2(t+1, \psi)$ \\
--$\Theta LO2(t, \neg\psi) := \neg\Theta LO2(t, \psi)$ \\
--$\Theta LO2(t, \varphi\wedge\psi) := \Theta LO2(t, \varphi) \wedge \Theta LO2(t, \psi)$ \\
--$\Theta LO2(t, \varphi\vee\psi) := \Theta LO2(t, \varphi) \vee \Theta LO2(t, \psi)$ \\
-
-\textbf{Temporal logic set examples} \\
--Pure LTL: AFGa \\
--Pure CTL: AGEFa \\
--LTL + CTL: AFa \\
--CTL*: AFGa $\vee$ AGEFa \\
 \end{multicols}
 \end{document}
