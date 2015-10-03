@@ -331,7 +331,7 @@ _____
 %\end{align*}
 %$\Bb_*$is the greatest simulation relation if ${\Ib_1 \subseteq \{s_1 \in \Sb_1 | \exists s_2 \in %\Ib_2 . (s_1, s_2) \in \Bb_* \}}$ ${\Ib_2 \subseteq \{s_2 \in \Sb_2 | \exists s_1 \in \Ib_1 . %(s_1, s_2) \in \Bb_* \}}$
 
-\textbf{Quotient}: Bisimulation with itself\\%given ${\Kb=(\Ib,\Sb,\Rb,\Lb)}$ and the equivalence relation $\sigma \subseteq \Sb \times \Sb$; Quotient structure $\Kb_{/\sigma}=(\widetilde{\Ib},\widetilde{\Sb},\widetilde{\Rb},\widetilde{\Lb})$:
+%\textbf{Quotient}: Bisimulation with itself\\%given ${\Kb=(\Ib,\Sb,\Rb,\Lb)}$ and the equivalence relation $\sigma \subseteq \Sb \times \Sb$; Quotient structure $\Kb_{/\sigma}=(\widetilde{\Ib},\widetilde{\Sb},\widetilde{\Rb},\widetilde{\Lb})$:
 %$\widetilde{\Ib}:=\{\{s' \in \Sb | (s,s') \in \sigma \} | s \in \Ib \}$
 %$\widetilde{\Sb}:=\{\{s' \in \Sb | (s,s') \in \sigma \} | s \in \Sb \}$
 %$(\widetilde{s}_1,\widetilde{s}_2) \in \Rb :\Leftrightarrow \exists s'_1 \in \widetilde{s}_1. \exists s'_2 \in \widetilde{s}_2.(s'_1,s'_2) \in \Rb$
@@ -341,7 +341,7 @@ _____
 %\includegraphics[width=0.7\columnwidth]{Quotient}
 
 
-\textbf{Symbolic Product Computation} - given ${\Kb_1=(\Vb_1,\varphi_{\Ib},\varphi_{\Rb})}$ and ${\Kb_2=(\Vb_2,\psi_{\Ib},\psi_{\Rb})}$, the product is: $\Kb_1 \times \Kb_2 = (\Vb_1 \cup \Vb_2, \varphi_{\Ib} \wedge \psi_{\Ib},\varphi_{\Rb} \wedge \psi_{\Rb} )$
+%\textbf{Symbolic Product Computation} - given ${\Kb_1=(\Vb_1,\varphi_{\Ib},\varphi_{\Rb})}$ and ${\Kb_2=(\Vb_2,\psi_{\Ib},\psi_{\Rb})}$, the product is: $\Kb_1 \times \Kb_2 = (\Vb_1 \cup \Vb_2, \varphi_{\Ib} \wedge \psi_{\Ib},\varphi_{\Rb} \wedge \psi_{\Rb} )$
 \textbf{Quantif.} ${\exists x.\varphi:=[\varphi]^{1}_{x} \vee [\varphi]^{0}_{x}}\; \clubsuit\; {\forall x.\varphi:=[\varphi]^{1}_{x} \wedge [\varphi]^{0}_{x}}$
 
 \textbf{Predecessor and Successor}
@@ -677,13 +677,14 @@ $F[a \underline{U} b] \equiv Fb \equiv [Fa \underline{U} Fb] $ \\
 $[\varphi B \psi] \equiv [\varphi \underline{B} \psi] \vee G\neg\psi$ \\
 $F[a \underline{B} b] \equiv F[a \wedge \neg b] $ \\
 $[\varphi W \psi] \equiv \neg[\neg\varphi \underline{W} \psi]$ \\
-$E(\varphi \wedge \psi) \equiv E\varphi \wedge E \psi (in\ general) $ \\
-$AEA \equiv A $ \\
-$GF(x \vee y) \equiv GFx \vee GFy $ \\
-$FF\varphi \equiv F\varphi$\\
-$GG\varphi \equiv G\varphi$\\
+$AEA \equiv A\ \ \ \ \ \ \ \ \ \ \ GFX \equiv GXF $ \\
+$FF\varphi \equiv F\varphi \ \ \ \ \ \ \ \ GG\varphi \equiv G\varphi$\\
 $GF\varphi \equiv XGF\varphi\equiv FGF\varphi \equiv GGF\varphi\equiv GFGF\varphi \equiv FGGF\varphi$\\
 $FG\varphi\equiv XFG\varphi \equiv FFG\varphi \equiv GFG\varphi \equiv GFFG\varphi \equiv FGFG\varphi$ \\
+$GF(x \vee y) \equiv GFx \vee GFy $ \\
+$E(\varphi \wedge \psi) \equiv E\varphi \wedge E \psi (in\ general) $ \\
+$E(\varphi \vee \psi) \equiv E\varphi \vee E\psi $ \\
+$AG(\varphi \wedge \psi) \equiv AG\varphi \wedge AG\psi $ \\
 
 \textbf{\#\#\#MONADIC PREDICATE} \\
 
@@ -785,13 +786,20 @@ $\ \ \ \ \exists p.\varphi : \textbf{return}\ \exists p.ElimFO(\varphi); $ \\
 $\ \ \ \ \neg \varphi : \textbf{return}\ \neg Tp2Od(\varphi); $ \\
 $\ \ \ \ \varphi \wedge \psi : \textbf{return}\ Tp2Od(\varphi) \wedge Tp2Od(\psi); $ \\
 $\ \ \ \ \varphi \vee \psi : \textbf{return}\ Tp2Od(\varphi) \vee Tp2Od(\psi); $ \\
-$\ \ \ \ X\varphi : \Psi := \exists t1.(t0 < t1)\wedge(\forall t2.t0 < t2 \rightarrow t1 \leq t2) \wedge Tp2Od(t1, \varphi);$ \\
-$\ \ \ \ [\varphi \underline{U} \psi] : \Psi := \exists t1.t0 \leq t1 \wedge Tp2Od(t1, \psi)\wedge interval((t0, 1, t1, 0), \varphi);$\\
-$\ \ \ \ [\varphi B \psi] : \Psi := \forall t1.t0 \leq t1 \wedge interval((t0, 1, t1, 0), \neg\varphi) \rightarrow Tp2Od(t1, \neg\psi);$\\
-$\ \ \ \ \overleftarrow{X}\varphi : \Psi := \forall t1.(t1 < t0)\wedge(\forall t2.t2 < t0 \rightarrow t2 \leq t1) \rightarrow Tp2Od(t1, \varphi);$ \\
-$\ \ \ \ \overleftarrow{\underline{X}}\varphi : \Psi := \exists t1.(t1 < t0)\wedge(\forall t2.t2 < t0 \rightarrow t2 \leq t1) \wedge Tp2Od(t1, \varphi);$ \\
-$\ \ \ \ [\varphi \overleftarrow{\underline{U}} \psi] : \Psi := \exists t1.t1 \leq t0 \wedge Tp2Od(t1, \psi)\wedge interval((t1, 0, t0, 1), \varphi);$\\
-$\ \ \ \ [\varphi \overleftarrow{B} \psi] : \Psi := \forall t1.t1 \leq t0 \wedge interval((t1, 0, t0, 1), \neg\varphi) \rightarrow Tp2Od(t1, \neg\psi);$\\
+$\ \ \ \ X\varphi : \Psi := \exists t1.(t0 < t1)\wedge$\\
+$\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \forall t2.t0 < t2 \rightarrow t1 \leq t2) \wedge Tp2Od(t1, \varphi);$ \\
+$\ \ \ \ [\varphi \underline{U} \psi] : \Psi := \exists t1.t0 \leq t1 \wedge Tp2Od(t1, \psi)\wedge$ \\
+$\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ interval((t0, 1, t1, 0), \varphi);$\\
+$\ \ \ \ [\varphi B \psi] : \Psi := \forall t1.t0 \leq t1 \wedge $ \\
+$\ \ \ \ \ \ \ \ \ \ interval((t0, 1, t1, 0), \neg\varphi) \rightarrow Tp2Od(t1, \neg\psi);$\\
+$\ \ \ \ \overleftarrow{X}\varphi : \Psi := \forall t1.(t1 < t0)\wedge$ \\
+$\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\forall t2.t2 < t0 \rightarrow t2 \leq t1) \rightarrow Tp2Od(t1, \varphi);$ \\
+$\ \ \ \ \overleftarrow{\underline{X}}\varphi : \Psi := \exists t1.(t1 < t0)\wedge$ \\
+$\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\forall t2.t2 < t0 \rightarrow t2 \leq t1) \wedge Tp2Od(t1, \varphi);$ \\
+$\ \ \ \ [\varphi \overleftarrow{\underline{U}} \psi] : \Psi := \exists t1.t1 \leq t0 \wedge Tp2Od(t1, \psi)\wedge$ \\
+$\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ interval((t1, 0, t0, 1), \varphi);$\\
+$\ \ \ \ [\varphi \overleftarrow{B} \psi] : \Psi := \forall t1.t1 \leq t0 \wedge$ \\
+$\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ interval((t1, 0, t0, 1), \neg\varphi) \rightarrow Tp2Od(t1, \neg\psi);$\\
 \ \ \textbf{end} \\
 \ \ \textbf{return}\ $\Psi$ \\
 \textbf{end} \\
