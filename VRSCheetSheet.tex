@@ -286,12 +286,12 @@ _____
 \savestack{\listingF}{\box0}
 \begin{tabular}{|l|l|}
 \hline
-%{\listingA} &
-{\listingB} &
-{\listingC} \\ \hline
-%{\listingD}\\ \hline
-%{\listingE} &
-%{\listingF} \\ \hline
+{\listingA} &
+{\listingB} \\ \hline
+{\listingC} &
+{\listingD}\\ \hline
+{\listingE} &
+{\listingF} \\ \hline
 \end{tabular}
 
 %\begin{window}[1, l, \includegraphics[width=0.3\columnwidth]{Simulation}, {}]
@@ -719,17 +719,17 @@ $-\varphi, \psi \in \zeta_{LO2} $ \\
 $-t \in V_{\sum} \ with \ typ_{\sum}(t) = \mathbb{N}$ \\
 $-p \in V_{\sum} \ with \ typ_{\sum}(p) = \mathbb{N} \rightarrow \mathbb{B}$ \\
 
-\textbf{LO2'}
-Consider the following set $\zeta_{LO2'}$ of formulas: \\
-$-Subset(p,q), Sing(p), and PSUC(p,q) belong to \zeta_{LO2'}$ \\
-$-\neg\varphi, \varphi \wedge \psi $ \\
-$-\exists p.\varphi$ \\
-where
-$-\varphi, \psi \in \zeta_{LO2'}$ \\
-$-p \in V_{\sum}\ with\ typ_{\sum}(p) = \mathbb{N} \rightarrow \mathbb{B}$ \\
-$\zeta_{LO2'}\ has no numeric variables$ \\
-numeric variable \textit{t} is replaced by a singleton set $p_{t}$ \\
-$\zeta_{LO2'}$ is as expressive as LO2 and S1S \\
+%\textbf{LO2'}
+%Consider the following set $\zeta_{LO2'}$ of formulas: \\
+%$-Subset(p,q), Sing(p), and PSUC(p,q) belong to \zeta_{LO2'}$ \\
+%$-\neg\varphi, \varphi \wedge \psi $ \\
+%$-\exists p.\varphi$ \\
+%where
+%$-\varphi, \psi \in \zeta_{LO2'}$ \\
+%$-p \in V_{\sum}\ with\ typ_{\sum}(p) = \mathbb{N} \rightarrow \mathbb{B}$ \\
+%$\zeta_{LO2'}\ has no numeric variables$ \\
+%numeric variable \textit{t} is replaced by a singleton set $p_{t}$ \\
+%$\zeta_{LO2'}$ is as expressive as LO2 and S1S \\
 
 \textbf{\#\#\#TRANSLATIONS} \\
 
@@ -766,19 +766,19 @@ $\ \ \ \ \exists p.\varphi : \textbf{return}\ \exists p.S1S\_LO2(\varphi); $ \\
 \ \ \textbf{end} \\
 \textbf{end} \\
 
-\textbf{function ElimFO($\Phi$)} (LO2 TO LO2')\\
-\ \ \textbf{case $\Phi$ of} \\
-$\ \ \ \ t1 = t2: \textbf{return}\ Subset(q_{t1}, q_{t2}) \wedge Subset(q_{t2}, q_{t1})$ \\
-$\ \ \ \ t1 < t2: \Psi :\equiv \forall q1. \forall q2.PSUC(q1, q2) \rightarrow [Subset(q1,p) \rightarrow Subset(q2,p)];$ \\
-$\ \ \ \ \ \ \ \ \textbf{return}\ \exists p.\Psi \wedge \neg Subset(qt1, p)\wedge Subset(qt2, p);$ \\
-$\ \ \ \ p^{(t)} : \textbf{return}\ Subset(qt, p)$ \\
-$\ \ \ \ \neg \varphi : \textbf{return}\ \neg ElimFO(\varphi); $ \\
-$\ \ \ \ \varphi \wedge \psi : \textbf{return}\ ElimFO(\varphi) \wedge ElimFO(\psi); $ \\
-$\ \ \ \ \varphi \vee \psi : \textbf{return}\ ElimFO(\varphi) \vee ElimFO(\psi); $ \\
-$\ \ \ \ \exists t.\varphi : \textbf{return}\ \exists qt.Sing(qt)\wedge ElimFO(\varphi);$ \\
-$\ \ \ \ \exists p.\varphi : \textbf{return}\ \exists p.ElimFO(\varphi); $ \\
-\ \ \textbf{end} \\
-\textbf{end} \\
+%\textbf{function ElimFO($\Phi$)} (LO2 TO LO2')\\
+%\ \ \textbf{case $\Phi$ of} \\
+%$\ \ \ \ t1 = t2: \textbf{return}\ Subset(q_{t1}, q_{t2}) \wedge Subset(q_{t2}, q_{t1})$ \\
+%$\ \ \ \ t1 < t2: \Psi :\equiv \forall q1. \forall q2.PSUC(q1, q2) \rightarrow [Subset(q1,p) \rightarrow Subset(q2,p)];$ \\
+%$\ \ \ \ \ \ \ \ \textbf{return}\ \exists p.\Psi \wedge \neg Subset(qt1, p)\wedge Subset(qt2, p);$ \\
+%$\ \ \ \ p^{(t)} : \textbf{return}\ Subset(qt, p)$ \\
+%$\ \ \ \ \neg \varphi : \textbf{return}\ \neg ElimFO(\varphi); $ \\
+%$\ \ \ \ \varphi \wedge \psi : \textbf{return}\ ElimFO(\varphi) \wedge ElimFO(\psi); $ \\
+%$\ \ \ \ \varphi \vee \psi : \textbf{return}\ ElimFO(\varphi) \vee ElimFO(\psi); $ \\
+%$\ \ \ \ \exists t.\varphi : \textbf{return}\ \exists qt.Sing(qt)\wedge ElimFO(\varphi);$ \\
+%$\ \ \ \ \exists p.\varphi : \textbf{return}\ \exists p.ElimFO(\varphi); $ \\
+%\ \ \textbf{end} \\
+%\textbf{end} \\
 
 \textbf{function} Tp2Od(t0, $\Phi$) \/\/\textit{temporal to LO1} \\
 \ \ \textbf{case $\Phi$ of} \\
