@@ -676,11 +676,29 @@ $FF\varphi \equiv F\varphi \ \ \ \ \ \ \ \ \ \bullet GG\varphi \equiv G\varphi$\
 $GF\varphi \equiv XGF\varphi\equiv FGF\varphi \equiv GGF\varphi\equiv GFGF\varphi \equiv FGGF\varphi$\\
 $FG\varphi\equiv XFG\varphi \equiv FFG\varphi \equiv GFG\varphi \equiv GFFG\varphi \equiv FGFG\varphi$ \\
 $GF(x \vee y) \equiv GFx \vee GFy $ \\
-$E(\varphi \wedge \psi) \equiv E\varphi \wedge E \psi (in\ general) $ \\
-$E(\varphi \vee \psi) \equiv E\varphi \vee E\psi $ \\
+$E(\varphi \wedge \psi) \equiv E\varphi \wedge E \psi (Careful!\ Only\ sometimes!) $ \\
+$E(\varphi \vee \psi) \equiv E\varphi \vee E\psi (Careful!\ Only\ sometimes!)$ \\
 $E[(a \underline{U} b) \wedge (c \underline{U} d)] \equiv $ \\
 $\ \ \ \ E[(a \wedge c) \underline{U} (b \wedge E(c \underline{U} d) \vee d \wedge E(a \underline{U} b))] $ \\
 $AG(\varphi \wedge \psi) \equiv AG\varphi \wedge AG\psi $ \\
+$A(G[a U b] \equiv G(a \vee b))$ \\
+$A(G[a B b] \equiv G(\neg b))$ \\
+$A(G[a W b] \equiv G(b \rightarrow a))$ \\
+$A(G[a \underline{U} b] \equiv G(a \vee b) \wedge GFb)$ \\
+$A(G[a \underline{B} b] \equiv G(\neg b) \wedge GFa)$ \\
+$\blacktriangleright $\textit{The following are initially but not generally valid} \\
+$A(G\overleftarrow{X}a \equiv Ga)\ \ \ \ \ \ \ \ \ \ \ \ \ \bullet A(G\overleftarrow{\underline{X}}a \equiv false)$ \\
+$A(G\overleftarrow{G}a \equiv Ga)\ \ \ \ \ \ \ \ \ \ \ \ \ \bullet A(G\overleftarrow{F}a \equiv a)$ \\
+$A(G[a \overleftarrow{U} b] \equiv G(a \vee b)\ \ \ \ \bullet A(G[a \overleftarrow{\underline{U}} b] \equiv b \wedge G(a \vee b) $ \\
+$A(G[a \overleftarrow{B} b] \equiv G(\neg b)\ \ \ \ \ \ \ \bullet A(G[a \overleftarrow{\underline{B}} b] \equiv a \wedge G(\neg b) $ \\
+$A(G[a \overleftarrow{W} b] \equiv G(b \rightarrow a)\ \ \bullet A(G[a \overleftarrow{\underline{W}} b] \equiv b \wedge G(b \rightarrow a) $ \\
+$A(F\overleftarrow{X}a \equiv true)\ \ \ \ \ \ \ \ \ \ \ \bullet A(F\overleftarrow{\underline{X}}a \equiv Fa)$ \\
+$A(F\overleftarrow{G}a \equiv a)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \bullet A(F\overleftarrow{F}a \equiv Fa)$ \\
+$A(F[a \overleftarrow{U} b] \equiv Fb \vee FPGa)\ \ \ \ \bullet A(F[a \overleftarrow{\underline{U}} b] \equiv Fb)$ \\
+$A(F[a \overleftarrow{B} b] \equiv F(a \wedge \neg b) \vee FPG(\neg a \wedge \neg b)$ \\
+$A(F[a \overleftarrow{\underline{B}} b] \equiv F(a \wedge \neg b)$ \\
+$A(F[a \overleftarrow{W} b] \equiv F(a \wedge b) \vee FPG\neg b)$ \\
+$A(F[a \overleftarrow{\underline{W}} b] \equiv F(a \wedge b)$ \\ 
 
 \textbf{Eliminate boolean op. after path quantify}\\
 $[\varphi_1\; \underline{U}\; \psi_1] \wedge [\varphi_2\; \underline{U}\; \psi_2] =$\\
@@ -710,21 +728,21 @@ $\qquad\qquad\qquad\qquad\begin{bmatrix}
 
 \textbf{\#\#\#MONADIC PREDICATE} \\
 
-\textbf{S1S} \\
-First order terms are defined as follows: \\
-$-0 \in Term _{\sum}^{S1S} $\\
-$-{\textit{t} \in V_{\sum} | typ_{\sum}(\textit{t}) = \mathbb{N}} \subseteq Term _{\sum}^{S1S} $ \\
-$-SUC(\tau) \in Term _{\sum}^{S1S} if \tau \in Term _{\sum}^{S1S}$ \\
-Formulas $\zeta_{S1S}$ are defined as: \\
-$-p^{(t)} \in L_{S1S}$ (predicate p at time t)\\
-$-\neg\varphi, \varphi \wedge \psi \in L_{S1S}$ \\
-$-\exists t. \varphi \in L_{S1S} $ \\
-$-\exists p. \varphi \in L_{S1S} $ \\
-where: \\
-$-\tau \in Term _{\sum}^{S1S} $ \\
-$-\varphi, \psi \in \zeta_{S1S} $ \\
-$-t \in V_{\sum} \ with \ typ_{\sum}(t) = \mathbb{N}$ \\
-$-p \in V_{\sum} \ with \ typ_{\sum}(p) = \mathbb{N} \rightarrow \mathbb{B}$ \\
+%\textbf{S1S} \\
+%First order terms are defined as follows: \\
+%$-0 \in Term _{\sum}^{S1S} $\\
+%$-{\textit{t} \in V_{\sum} | typ_{\sum}(\textit{t}) = \mathbb{N}} \subseteq Term _{\sum}^{S1S} $ \\
+%$-SUC(\tau) \in Term _{\sum}^{S1S} if \tau \in Term _{\sum}^{S1S}$ \\
+%Formulas $\zeta_{S1S}$ are defined as: \\
+%$-p^{(t)} \in L_{S1S}$ (predicate p at time t)\\
+%$-\neg\varphi, \varphi \wedge \psi \in L_{S1S}$ \\
+%$-\exists t. \varphi \in L_{S1S} $ \\
+%$-\exists p. \varphi \in L_{S1S} $ \\
+%where: \\
+%$-\tau \in Term _{\sum}^{S1S} $ \\
+%$-\varphi, \psi \in \zeta_{S1S} $ \\
+%$-t \in V_{\sum} \ with \ typ_{\sum}(t) = \mathbb{N}$ \\
+%$-p \in V_{\sum} \ with \ typ_{\sum}(p) = \mathbb{N} \rightarrow \mathbb{B}$ \\
 
 \textbf{LO2} \\
 first order terms are defined as: \\
@@ -741,17 +759,17 @@ $-\varphi, \psi \in \zeta_{LO2} $ \\
 $-t \in V_{\sum} \ with \ typ_{\sum}(t) = \mathbb{N}$ \\
 $-p \in V_{\sum} \ with \ typ_{\sum}(p) = \mathbb{N} \rightarrow \mathbb{B}$ \\
 
-\textbf{LO2'}
-Consider the following set $\zeta_{LO2'}$ of formulas: \\
-$-Subset(p,q), Sing(p), and PSUC(p,q) belong to \zeta_{LO2'}$ \\
-$-\neg\varphi, \varphi \wedge \psi $ \\
-$-\exists p.\varphi$ \\
-where
-$-\varphi, \psi \in \zeta_{LO2'}$ \\
-$-p \in V_{\sum}\ with\ typ_{\sum}(p) = \mathbb{N} \rightarrow \mathbb{B}$ \\
-$\zeta_{LO2'}\ has no numeric variables$ \\
-numeric variable \textit{t} is replaced by a singleton set $p_{t}$ \\
-$\zeta_{LO2'}$ is as expressive as LO2 and S1S \\
+%\textbf{LO2'}
+%Consider the following set $\zeta_{LO2'}$ of formulas: \\
+%$-Subset(p,q), Sing(p), and PSUC(p,q) belong to \zeta_{LO2'}$ \\
+%$-\neg\varphi, \varphi \wedge \psi $ \\
+%$-\exists p.\varphi$ \\
+%where
+%$-\varphi, \psi \in \zeta_{LO2'}$ \\
+%$-p \in V_{\sum}\ with\ typ_{\sum}(p) = \mathbb{N} \rightarrow \mathbb{B}$ \\
+%$\zeta_{LO2'}\ has no numeric variables$ \\
+%numeric variable \textit{t} is replaced by a singleton set $p_{t}$ \\
+%$\zeta_{LO2'}$ is as expressive as LO2 and S1S \\
 
 \textbf{\#\#\#TRANSLATIONS} \\
 
