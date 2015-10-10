@@ -684,7 +684,7 @@ $\ \ \ \ \Ab_\exists (\{q_0,q_1\},1,(q_0 \leftrightarrow \varphi) \wedge (q_1 \l
 $\upphi \langle G \varphi\rangle_x \Leftrightarrow $ \\
 $\ \ \ \ \Ab_\exists (\{q\},1,q \leftrightarrow \varphi \wedge X q,\upphi \langle q \rangle_x \wedge GF[\varphi \rightarrow q])$ \\
 $\upphi \langle F \varphi\rangle_x \Leftrightarrow$ \\
-$\ \ \ \ \Ab_\exists (\{q\},1,q \leftrightarrow \varphi \wedge X q, \upphi \langle q \rangle_x \wedge GF[q \rightarrow \varphi])$ \\
+$\ \ \ \ \Ab_\exists (\{q\},1,q \leftrightarrow \varphi \vee X q, \upphi \langle q \rangle_x \wedge GF[q \rightarrow \varphi])$ \\
 $\upphi \langle [\varphi\; U \; \psi] \rangle_x \Leftrightarrow$ \\
 $\ \ \ \ \Ab_\exists (\{q\},1,q \leftrightarrow \psi \vee \varphi \wedge X q, \upphi \langle q \rangle_x \wedge GF[\varphi \rightarrow q])$ \\
 $\upphi \langle [\varphi\; \underline{U} \; \psi] \rangle_x \Leftrightarrow$ \\
@@ -872,5 +872,44 @@ $\exists q1..qn, \Theta LO2(0,\psi I) \wedge (\forall t.\Theta LO2(t,\psi R)) \w
 -Pure CTL: AGEFa \\
 -LTL + CTL: AFa \\
 -CTL*: AFGa $\vee$ AGEFa \\
+
+\textbf{Extra Equations G}\\
+$ AG[\varphi \; U \; \psi] = AG(\varphi \vee \psi)$\\
+$ AG[\varphi \; B \; \psi] = AG(\neg \psi)$\\
+$ AG[\varphi \; W \; \psi] = AG(\psi \rightarrow \varphi)$\\
+$ AG[\varphi \; \underline{U} \; \psi]  =  A(G(\varphi \vee \psi)  \wedge G F \psi)$ \\
+$AG[\varphi \; \underline{B} \psi] = A (G(\neg \psi)   \wedge G F \varphi )$\\
+$AG[\varphi \; \underline{W} \psi] = A (G(\psi \rightarrow \varphi) \wedge G F \psi )$\\
+// note that the following are only initially, but not generally valid\\
+$AG \overleftarrow{X} \varphi = A G \varphi $\\
+$AG \underline{\overleftarrow{X}} \varphi = A \text{(false)}$\\
+$AG \overleftarrow{G} \varphi = A G \varphi $\\
+$AG \overleftarrow{F} \varphi = A \varphi $\\
+$AG[\varphi \; \overleftarrow{U}\; \psi] = A G(\varphi \vee \psi) $\\
+$AG[\varphi \; \overleftarrow{B}\; \psi] = A G(\neg \psi) $\\
+$AG[\varphi \; \overleftarrow{W}\; \psi] = A G(\psi \rightarrow \varphi)$\\
+$AG[\varphi \; \underline{\overleftarrow{U}}\;  \psi] = A (\psi \wedge G(\varphi \vee \psi))$\\
+$AG[\varphi \; \underline{\overleftarrow{B}}\;  \psi] = A (\varphi \wedge G(\neg \psi))$\\
+$AG[\varphi \; \underline{\overleftarrow{W}}\;  \psi] = A (\psi \wedge G(\psi \rightarrow \varphi))$\\
+\textbf{Extra Equations F}\\
+$ A F F \psi = A F \psi $\\
+$ A F[\varphi \; \underline{U}\; \psi]  = A F \psi $\\
+$ A F[\varphi \; \underline{B}\; \psi]  = A F(\varphi \wedge \neg \psi) $\\
+$ A F[\varphi \; \underline{W}\; \psi]  = A F(\varphi \wedge \psi)  $\\
+$ A F[\varphi \; U\; \psi] = A (F(\psi) \vee  F G \varphi) $\\
+$ A F[\varphi \; B\; \psi] = A (F(\varphi \wedge \neg \psi)  \vee  F G (\neg \varphi \wedge \neg \psi) ) $\\
+$ A F[\varphi \; W\; \psi] = A (F(\varphi \wedge \psi) \vee  F G \neg \psi )$\\
+// note that the following are only initially, but not generally valid\\
+$ A F \overleftarrow{X} \varphi = A \text{(true)} $\\
+$ A F \underline{\overleftarrow{X}} \varphi = A F \varphi $\\
+$ A F \overleftarrow{G} \varphi  = A \varphi $\\
+$ A F \overleftarrow{F} \varphi = AF \varphi $\\
+$ A F[\varphi \; \underline{\overleftarrow{U}}\; \psi] = AF \psi     $\\
+$ A F[\varphi \; \underline{\overleftarrow{B}}\; \psi] = AF(\varphi \wedge \neg \psi)  $\\
+$ A F[\varphi \; \underline{\overleftarrow{W}}\; \psi] = AF(\varphi \wedge \psi)    $\\
+$ A F[\varphi \; \overleftarrow{U}\; \psi] = A( F \psi \vee  F \overleftarrow{G} \varphi )$\\
+$ A F[\varphi \; \overleftarrow{B}\; \psi]  = A ( F(\varphi \wedge \neg \psi)  \vee  F \overleftarrow{G} (\neg \varphi \wedge \neg \psi) )$\\
+$ A F[\varphi \; \overleftarrow{W}\; \psi]  =  A(F(\varphi \wedge \psi) \vee  F \overleftarrow{G} \neg \psi )$\\
+
 \end{multicols}
 \end{document}
