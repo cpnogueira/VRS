@@ -114,9 +114,9 @@ OR & $\frac{\phi \vee \psi,\Gamma \vdash \Delta}{\phi,\Gamma \vdash \Delta \qqua
 \end{tabular}
 \textbf{Resolution Calculus} $\frac{\{\neg x \} \cup C_1 \qquad \{x \} \cup C_2 }{C_1 \cup C_2}$
 
-To prove unsatisfiability of given clauses in CNF: If we reach \{\}, the formula is unsatisfiable. 
+To prove \underline{unsatisfiability} of given clauses in CNF: If we reach \{\}, the formula is unsatisfiable. 
 E.g., $\{\{a\}, \{\neg a,b\}, \{\neg b\}\}$, we get: $\{a\} + \{ \neg a,b\} \rightarrow \{b\}; \{b\} + \{\neg b\}\rightarrow\{\} $ (unsatisfiable).
-To prove validity, prove UNSAT of negated formula.
+To prove \underline{validity}, prove \underline{UNSAT of negated} formula.
 
 \textbf{Davis Putnam Procedure} - proves SAT; To prove validity: prove unsatisfiability of negated formula. \\
 \textbf{(1)} Compute Linear Clause Form \underline{\textit{(Don't forget to create the last clause $\{x_n\}$)}} \\
@@ -124,7 +124,7 @@ To prove validity, prove UNSAT of negated formula.
 \textbf{(3)}For remaining variables: assume values and compute newly implied variables. \\
 \textbf{(4)}If contradiction reached: backtrack.
 
-\textbf{Linear Clause Forms (Computes CNF)} - Bottom up (inside out) in the syntax tree: convert “operators and variables” into new variable.
+\textbf{Linear Clause Forms (Computes CNF)} - Bottom up (\underline{inside out}) in the syntax tree: convert “operators and variables” into new variable.
 E.g., $\neg a \vee b$ becomes $x_1 \leftrightarrow \neg a; x_2 \leftrightarrow x_1 \vee b$. Use rules below to find CNF. \underline{Create last clause \{Xn\}} \\
 $x \leftrightarrow \neg y  \Leftrightarrow (\neg x \vee \neg y) \wedge (x \vee y)$ \\
 $x \leftrightarrow y_1 \wedge y_2 \Leftrightarrow$ \\
@@ -311,7 +311,7 @@ $(\partial\varphi / \partial x) := [\varphi]_x^0 \oplus [\varphi]_x^1$
 {\listingF} \\ \hline
 \end{tabular}
 
-\textbf{Local Model Checking}
+\textbf{Local Model Checking} (follow precedence!)
 \begin{tabular}{|l|l|l|l|}
 \hline
 \multicolumn{2}{|l|}{\small$\frac{s \vdash_{\Phi} \varphi \wedge \psi}{\{s \vdash_{\Phi} \varphi \} \quad \{s \vdash_{\Phi} \psi\}} \wedge$} & \multicolumn{2}{|l|}{\small$\frac{s \vdash_{\Phi} \varphi \vee \psi}{\{s \vdash_{\Phi} \varphi \} \quad \{s \vdash_{\Phi} \psi\}} \vee $}\\ \hline
@@ -570,8 +570,8 @@ $FG\varphi = \Ab_{\exists} \begin{pmatrix}
 \textbf{\underline{Remarks}}
 \textit{Beware of Finite Paths}\\
 E and A quantify over infinite paths.\\
-A$\varphi$ \underline{holds} on every state that has \underline{no infinite path};\\
-E$\varphi$ is \underline{false} on every state that has \underline{no infinite path};\\
+$\vartriangleright$ A$\varphi$ \underline{holds} on every state that has \underline{no infinite path};\\
+$\vartriangleright$ E$\varphi$ is \underline{false} on states that have \underline{no infinite path};\\
 A0 \underline{holds} on states with \underline{only finite paths};\\
 E1 is \underline{false} on state with \underline{only finite paths};\\
 $\square$0 holds on states with no successor states;\\
@@ -646,7 +646,8 @@ $A[\psi\; \underline{B} \; \varphi]=A[\psi\; \underline{B} \;(E(\varphi)]$\\
 
 \textbf{Weak Equivalences} \\
 $*[\varphi U \psi] := [\varphi \underline{U} \psi] \vee G\varphi \ \ \ \ *[\varphi B \psi] := [\varphi \underline{B} \psi] \vee G\neg\psi$ \\
-*same to past version$\ \ \ \ \ \ [\varphi W \psi] := \neg[(\neg\varphi) \underline{W} \psi]$ \\
+*same to past version \\
+$[\varphi W \psi] := \neg[(\neg\varphi) \underline{W} \psi]\ (if\ \psi\ never\ holds:\ true!)$ \\
 $\overleftarrow{X}\varphi := \neg\overleftarrow{\underline{X}}\neg\varphi\ (at\ t0:\ weak\ true.\ strong\ false) $ \\
 
 \textbf{Negation Normal Form}
@@ -667,12 +668,12 @@ $[\varphi \underline{B} \psi] \equiv \psi\ can't\ hold\ when\ \varphi\ hold $ \\
 $[\varphi \underline{W} \psi] \equiv \neg\psi\ hold\ until\ \varphi\ \wedge\ \psi $ \\
 $[\varphi U \psi] \equiv [\varphi \underline{U} \psi] \vee G\varphi$ \\
 $[a \underline{U} Fb] \equiv Fb $ \\
+$F\psi \equiv [1 \underline{U} \psi] $ \\
 $F[a \underline{U} b] \equiv Fb \equiv [Fa \underline{U} Fb] $ \\
 $[\varphi B \psi] \equiv [\varphi \underline{B} \psi] \vee G\neg\psi$ \\
 $F[a \underline{B} b] \equiv F[a \wedge \neg b] $ \\
 $[\varphi W \psi] \equiv \neg[\neg\varphi \underline{W} \psi]$ \\
-$AEA \equiv A\ \ \ \ \ \ \ \ \ \ \ \ \bullet GFX \equiv GXF $ \\
-$FF\varphi \equiv F\varphi \ \ \ \ \ \ \ \ \ \bullet GG\varphi \equiv G\varphi$\\
+$FF\varphi \equiv F\varphi\ \ \ \ \ \ \ \ \ \ \ \ \ \ \bullet GG\varphi \equiv G\varphi$\\
 $GF\varphi \equiv XGF\varphi\equiv FGF\varphi \equiv GGF\varphi\equiv GFGF\varphi \equiv FGGF\varphi$\\
 $FG\varphi\equiv XFG\varphi \equiv FFG\varphi \equiv GFG\varphi \equiv GFFG\varphi \equiv FGFG\varphi$ \\
 $GF(x \vee y) \equiv GFx \vee GFy $ \\
@@ -680,7 +681,8 @@ $E(\varphi \wedge \psi) \equiv E\varphi \wedge E \psi (Careful!\ Only\ sometimes
 $E(\varphi \vee \psi) \equiv E\varphi \vee E\psi (Careful!\ Only\ sometimes!)$ \\
 $E[(a \underline{U} b) \wedge (c \underline{U} d)] \equiv $ \\
 $\ \ \ \ E[(a \wedge c) \underline{U} (b \wedge E(c \underline{U} d) \vee d \wedge E(a \underline{U} b))] $ \\
-$AG(\varphi \wedge \psi) \equiv AG\varphi \wedge AG\psi $ \\
+$AEA \equiv A\ \ \ \ \ \ \ \ \bullet GFX \equiv GXF \ \ \ \ \bullet AGXF\equiv AXGF$ \\
+$AG(\varphi \wedge \psi) \equiv A(G\varphi \wedge G\psi) \equiv AG\varphi \wedge AG\psi $ \\
 $A(G[a U b] \equiv G(a \vee b))$ \\
 $A(G[a B b] \equiv G(\neg b))$ \\
 $A(G[a W b] \equiv G(b \rightarrow a))$ \\
@@ -694,8 +696,8 @@ $A(G[a \overleftarrow{B} b] \equiv G(\neg b)\ \ \ \ \ \ \ \bullet A(G[a \overlef
 $A(G[a \overleftarrow{W} b] \equiv G(b \rightarrow a)\ \ \bullet A(G[a \overleftarrow{\underline{W}} b] \equiv b \wedge G(b \rightarrow a) $ \\
 $A(F\overleftarrow{X}a \equiv true)\ \ \ \ \ \ \ \ \ \ \ \bullet A(F\overleftarrow{\underline{X}}a \equiv Fa)$ \\
 $A(F\overleftarrow{G}a \equiv a)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \bullet A(F\overleftarrow{F}a \equiv Fa)$ \\
-$A(F[a \overleftarrow{U} b] \equiv Fb \vee FPGa)\ \ \ \ \bullet A(F[a \overleftarrow{\underline{U}} b] \equiv Fb)$ \\
-$A(F[a \overleftarrow{B} b] \equiv F(a \wedge \neg b) \vee FPG(\neg a \wedge \neg b)$ \\
+$A(F[a \overleftarrow{U} b] \equiv Fb \vee F\overleftarrow{G}a)\ \ \ \ \bullet A(F[a \overleftarrow{\underline{U}} b] \equiv Fb)$ \\
+$A(F[a \overleftarrow{B} b] \equiv F(a \wedge \neg b) \vee F\overleftarrow{G}(\neg a \wedge \neg b)$ \\
 $A(F[a \overleftarrow{\underline{B}} b] \equiv F(a \wedge \neg b)$ \\
 $A(F[a \overleftarrow{W} b] \equiv F(a \wedge b) \vee FPG\neg b)$ \\
 $A(F[a \overleftarrow{\underline{W}} b] \equiv F(a \wedge b)$ \\ 
@@ -867,7 +869,7 @@ $\exists q1..qn, \Theta LO2(0,\psi I) \wedge (\forall t.\Theta LO2(t,\psi R)) \w
 -$\Theta LO2(t, \varphi\wedge\psi) := \Theta LO2(t, \varphi) \wedge \Theta LO2(t, \psi)$ \\
 -$\Theta LO2(t, \varphi\vee\psi) := \Theta LO2(t, \varphi) \vee \Theta LO2(t, \psi)$ \\
 
-\textbf{LTL to $\omega$-automata}
+\textbf{LTL to $\omega$-automata} (from inside out the tree)
 % Normal operator
 $\upphi \langle X \varphi\rangle_x \Leftrightarrow \Ab_\exists (\{q\},1,q \leftrightarrow X \varphi, \upphi \langle q \rangle_x)$\\
 $\upphi \langle X \varphi\rangle_x \Leftrightarrow $ \\
@@ -875,7 +877,7 @@ $\ \ \ \ \Ab_\exists (\{q_0,q_1\},1,(q_0 \leftrightarrow \varphi) \wedge (q_1 \l
 $\upphi \langle G \varphi\rangle_x \Leftrightarrow $ \\
 $\ \ \ \ \Ab_\exists (\{q\},1,q \leftrightarrow \varphi \wedge X q,\upphi \langle q \rangle_x \wedge GF[\varphi \rightarrow q])$ \\
 $\upphi \langle F \varphi\rangle_x \Leftrightarrow$ \\
-$\ \ \ \ \Ab_\exists (\{q\},1,q \leftrightarrow \varphi \wedge X q, \upphi \langle q \rangle_x \wedge GF[q \rightarrow \varphi])$ \\
+$\ \ \ \ \Ab_\exists (\{q\},1,q \leftrightarrow \varphi \vee X q, \upphi \langle q \rangle_x \wedge GF[q \rightarrow \varphi])$ \\
 $\upphi \langle [\varphi\; U \; \psi] \rangle_x \Leftrightarrow$ \\
 $\ \ \ \ \Ab_\exists (\{q\},1,q \leftrightarrow \psi \vee \varphi \wedge X q, \upphi \langle q \rangle_x \wedge GF[\varphi \rightarrow q])$ \\
 $\upphi \langle [\varphi\; \underline{U} \; \psi] \rangle_x \Leftrightarrow$ \\
