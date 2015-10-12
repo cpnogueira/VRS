@@ -390,6 +390,10 @@ $\diamondsuit := pre^{\Rb}_{\exists}(Q) := \exists x'_1,...,x'_n.\varphi_{\Rb} \
 $\overleftarrow{\diamondsuit} := suc^{\Rb}_{\exists}(Q) := [\exists x_1,...,x_n.\varphi_{\Rb} \wedge \varphi_{Q}]_{x'_1,...,x'_n}^{x_1,...,x_n}$
 $\square = pre^{\Rb}_{\forall}(Q) := \forall x'_1,...,x'_n.\varphi_{\Rb} \rightarrow [\varphi_{Q}]^{x'_1,...,x'_n}_{x_1,...,x_n}$
 $\overleftarrow{\square} := suc^{\Rb}_{\forall}(Q) := [\forall x_1,...,x_n.\varphi_{\Rb} \rightarrow \varphi_{Q}]_{x'_1,...,x'_n}^{x_1,...,x_n}$
+$\diamondsuit$\textit{(Points to some in the set? Yes, enter!)} \\
+$\overleftarrow{\diamondsuit}$\textit{(Is pointed by some in the set? Yes, enter!)} \\
+$\square$\textit{(Points to some outside the set? Yes, \underline{don't} enter!)} \\
+$\overleftarrow{\square}$\textit{(Pointed by some out the set? Yes, \underline{don't} enter!)} \\
 \begin{tabular}{l l}
 \raisebox{-0.2\height+\baselineskip}{\includegraphics[width=0.33\columnwidth]{universalPre}}
 &
@@ -431,11 +435,11 @@ for each node n in $\Kb$:
 }
 \savestack{\listingH}{\box0}
 
-\begin{tabular}{|l|l|}
-\hline
-{\listingG} &
-{\listingH} \\ \hline
-\end{tabular}
+%\begin{tabular}{|l|l|}
+%\hline
+%{\listingG} &
+%{\listingH} \\ \hline
+%\end{tabular}
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 %%% If we find something small, we can add it here in this space
@@ -667,13 +671,12 @@ $[\varphi \underline{U} \psi] \equiv \varphi\ don't\ matter\ when\ \psi\ hold $ 
 $[\varphi \underline{B} \psi] \equiv \psi\ can't\ hold\ when\ \varphi\ hold $ \\
 $[\varphi \underline{W} \psi] \equiv \neg\psi\ hold\ until\ \varphi\ \wedge\ \psi $ \\
 $[\varphi U \psi] \equiv [\varphi \underline{U} \psi] \vee G\varphi$ \\
-$[a \underline{U} Fb] \equiv Fb $ \\
-$F\psi \equiv [1 \underline{U} \psi] $ \\
+$[a \underline{U} Fb] \equiv Fb\ \ \ \ \ \ \ \ \ \ \ \ \ \ \bullet F\psi \equiv [1 \underline{U} \psi] $ \\
 $F[a \underline{U} b] \equiv Fb \equiv [Fa \underline{U} Fb] $ \\
 $[\varphi B \psi] \equiv [\varphi \underline{B} \psi] \vee G\neg\psi$ \\
 $F[a \underline{B} b] \equiv F[a \wedge \neg b] $ \\
 $[\varphi W \psi] \equiv \neg[\neg\varphi \underline{W} \psi]$ \\
-$FF\varphi \equiv F\varphi\ \ \ \ \ \ \ \ \ \ \ \ \ \ \bullet GG\varphi \equiv G\varphi$\\
+$FF\varphi \equiv F\varphi\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \bullet GG\varphi \equiv G\varphi$\\
 $GF\varphi \equiv XGF\varphi\equiv FGF\varphi \equiv GGF\varphi\equiv GFGF\varphi \equiv FGGF\varphi$\\
 $FG\varphi\equiv XFG\varphi \equiv FFG\varphi \equiv GFG\varphi \equiv GFFG\varphi \equiv FGFG\varphi$ \\
 $GF(x \vee y) \equiv GFx \vee GFy $ \\
@@ -682,25 +685,54 @@ $E(\varphi \vee \psi) \equiv E\varphi \vee E\psi (Careful!\ Only\ sometimes!)$ \
 $E[(a \underline{U} b) \wedge (c \underline{U} d)] \equiv $ \\
 $\ \ \ \ E[(a \wedge c) \underline{U} (b \wedge E(c \underline{U} d) \vee d \wedge E(a \underline{U} b))] $ \\
 $AEA \equiv A\ \ \ \ \ \ \ \ \bullet GFX \equiv GXF \ \ \ \ \bullet AGXF\equiv AXGF$ \\
+%$A(G[a U b] \equiv G(a \vee b))$ \\
+%$A(G[a B b] \equiv G(\neg b))$ \\
+%$A(G[a W b] \equiv G(b \rightarrow a))$ \\
+%$A(G[a \underline{U} b] \equiv G(a \vee b) \wedge GFb)$ \\
+%$A(G[a \underline{B} b] \equiv G(\neg b) \wedge GFa)$ \\
+%$\blacktriangleright $\textit{The following are initially but not generally valid} \\
+%$A(G\overleftarrow{X}a \equiv Ga)\ \ \ \ \ \ \ \ \ \ \ \ \ \bullet %A(G\overleftarrow{\underline{X}}a \equiv false)$ \\
+%$A(G\overleftarrow{G}a \equiv Ga)\ \ \ \ \ \ \ \ \ \ \ \ \ \bullet A(G\overleftarrow{F}a \equiv a)$ \\
+%$A(G[a \overleftarrow{U} b] \equiv G(a \vee b)\ \ \ \ \bullet A(G[a \overleftarrow{\underline{U}} b] \equiv b \wedge G(a \vee b) $ \\
+%$A(G[a \overleftarrow{B} b] \equiv G(\neg b)\ \ \ \ \ \ \ \bullet A(G[a \overleftarrow{\underline{B}} b] \equiv a \wedge G(\neg b) $ \\
+%$A(G[a \overleftarrow{W} b] \equiv G(b \rightarrow a)\ \ \bullet A(G[a \overleftarrow{\underline{W}} b] \equiv b \wedge G(b \rightarrow a) $ \\
+%$A(F\overleftarrow{X}a \equiv true)\ \ \ \ \ \ \ \ \ \ \ \bullet A(F\overleftarrow{\underline{X}}a \equiv Fa)$ \\
+%$A(F\overleftarrow{G}a \equiv a)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \bullet A(F\overleftarrow{F}a \equiv Fa)$ \\
+%$A(F[a \overleftarrow{U} b] \equiv Fb \vee F\overleftarrow{G}a)\ \ \ \ \bullet A(F[a \overleftarrow{\underline{U}} b] \equiv Fb)$ \\
+%$A(F[a \overleftarrow{B} b] \equiv F(a \wedge \neg b) \vee F\overleftarrow{G}(\neg a \wedge \neg b)$ \\
+%$A(F[a \overleftarrow{\underline{B}} b] \equiv F(a \wedge \neg b)$ \\
+%$A(F[a \overleftarrow{W} b] \equiv F(a \wedge b) \vee FPG\neg b)$ \\
+%$A(F[a \overleftarrow{\underline{W}} b] \equiv F(a \wedge b)$ \\ 
+\textbf{Extra Equations G}\\
 $AG(\varphi \wedge \psi) \equiv A(G\varphi \wedge G\psi) \equiv AG\varphi \wedge AG\psi $ \\
-$A(G[a U b] \equiv G(a \vee b))$ \\
-$A(G[a B b] \equiv G(\neg b))$ \\
-$A(G[a W b] \equiv G(b \rightarrow a))$ \\
-$A(G[a \underline{U} b] \equiv G(a \vee b) \wedge GFb)$ \\
-$A(G[a \underline{B} b] \equiv G(\neg b) \wedge GFa)$ \\
-$\blacktriangleright $\textit{The following are initially but not generally valid} \\
-$A(G\overleftarrow{X}a \equiv Ga)\ \ \ \ \ \ \ \ \ \ \ \ \ \bullet A(G\overleftarrow{\underline{X}}a \equiv false)$ \\
-$A(G\overleftarrow{G}a \equiv Ga)\ \ \ \ \ \ \ \ \ \ \ \ \ \bullet A(G\overleftarrow{F}a \equiv a)$ \\
-$A(G[a \overleftarrow{U} b] \equiv G(a \vee b)\ \ \ \ \bullet A(G[a \overleftarrow{\underline{U}} b] \equiv b \wedge G(a \vee b) $ \\
-$A(G[a \overleftarrow{B} b] \equiv G(\neg b)\ \ \ \ \ \ \ \bullet A(G[a \overleftarrow{\underline{B}} b] \equiv a \wedge G(\neg b) $ \\
-$A(G[a \overleftarrow{W} b] \equiv G(b \rightarrow a)\ \ \bullet A(G[a \overleftarrow{\underline{W}} b] \equiv b \wedge G(b \rightarrow a) $ \\
-$A(F\overleftarrow{X}a \equiv true)\ \ \ \ \ \ \ \ \ \ \ \bullet A(F\overleftarrow{\underline{X}}a \equiv Fa)$ \\
-$A(F\overleftarrow{G}a \equiv a)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \bullet A(F\overleftarrow{F}a \equiv Fa)$ \\
-$A(F[a \overleftarrow{U} b] \equiv Fb \vee F\overleftarrow{G}a)\ \ \ \ \bullet A(F[a \overleftarrow{\underline{U}} b] \equiv Fb)$ \\
-$A(F[a \overleftarrow{B} b] \equiv F(a \wedge \neg b) \vee F\overleftarrow{G}(\neg a \wedge \neg b)$ \\
-$A(F[a \overleftarrow{\underline{B}} b] \equiv F(a \wedge \neg b)$ \\
-$A(F[a \overleftarrow{W} b] \equiv F(a \wedge b) \vee FPG\neg b)$ \\
-$A(F[a \overleftarrow{\underline{W}} b] \equiv F(a \wedge b)$ \\ 
+$ AG[\varphi \; U \; \psi] = AG(\varphi \vee \psi)\ \ \ \ \bullet AG[\varphi \; B \; \psi] = AG(\neg \psi)$\\
+$ AG[\varphi \; W \; \psi] = AG(\psi \rightarrow \varphi)$\\
+$ AG[\varphi \; \underline{U} \; \psi]  =  A(G(\varphi \vee \psi)  \wedge G F \psi)$ \\
+$AG[\varphi \; \underline{B} \psi] = A (G(\neg \psi)   \wedge G F \varphi )$\\
+$AG[\varphi \; \underline{W} \psi] = A (G(\psi \rightarrow \varphi) \wedge G F \psi )$\\
+// note that the following are only initially, but not generally valid\\
+$AG \overleftarrow{X} \varphi = A G \varphi\ \ \ \ \ \ \ \ \bullet AG \underline{\overleftarrow{X}} \varphi = A \text{(false)}$\\
+$AG \overleftarrow{G} \varphi = A G \varphi\ \ \ \ \ \ \ \ \bullet AG \overleftarrow{F} \varphi = A \varphi $\\
+$AG[\varphi \; \overleftarrow{U}\; \psi] = A G(\varphi \vee \psi) $\\
+$AG[\varphi \; \underline{\overleftarrow{U}}\;  \psi] = A (\psi \wedge G(\varphi \vee \psi))$\\
+$AG[\varphi \; \overleftarrow{B}\; \psi] = A G(\neg \psi) $\\
+$AG[\varphi \; \underline{\overleftarrow{B}}\;  \psi] = A (\varphi \wedge G(\neg \psi))$\\
+$AG[\varphi \; \overleftarrow{W}\; \psi] = A G(\psi \rightarrow \varphi)$\\
+$AG[\varphi \; \underline{\overleftarrow{W}}\;  \psi] = A (\psi \wedge G(\psi \rightarrow \varphi))$\\
+\textbf{Extra Equations F}\\
+$ A F F \psi = A F \psi\ \ \ \ \ \ \ \ \ \ \bullet A F[\varphi \; \underline{U}\; \psi]  = A F \psi $\\
+$ A F[\varphi \; U\; \psi] = A (F(\psi) \vee  F G \varphi) $\\
+$ A F[\varphi \; \underline{B}\; \psi]  = A F(\varphi \wedge \neg \psi) $\\
+$ A F[\varphi \; B\; \psi] = A (F(\varphi \wedge \neg \psi)  \vee  F G (\neg \varphi \wedge \neg \psi) ) $\\
+$ A F[\varphi \; \underline{W}\; \psi]  = A F(\varphi \wedge \psi)  $\\
+$ A F[\varphi \; W\; \psi] = A (F(\varphi \wedge \psi) \vee  F G \neg \psi )$\\
+// note that the following are only initially, but not generally valid\\
+$ A F \overleftarrow{X} \varphi = A \text{(true)}\ \ \ \ \bullet A F \underline{\overleftarrow{X}} \varphi = A F \varphi $\\
+$ A F \overleftarrow{G} \varphi  = A \varphi\ \ \ \ \ \ \ \ \ \ \bullet A F \overleftarrow{F} \varphi = AF \varphi $\\
+$ A F[\varphi \; \underline{\overleftarrow{U}}\; \psi] = AF \psi\ \ \bullet A F[\varphi \; \overleftarrow{U}\; \psi] = A( F \psi \vee  F \overleftarrow{G} \varphi )$\\
+$ A F[\varphi \; \underline{\overleftarrow{B}}\; \psi] = AF(\varphi \wedge \neg \psi)\ \ \bullet A F[\varphi \; \underline{\overleftarrow{W}}\; \psi] = AF(\varphi \wedge \psi)    $\\
+$ A F[\varphi \; \overleftarrow{B}\; \psi]  = A ( F(\varphi \wedge \neg \psi)  \vee  F \overleftarrow{G} (\neg \varphi \wedge \neg \psi) )$\\
+$ A F[\varphi \; \overleftarrow{W}\; \psi]  =  A(F(\varphi \wedge \psi) \vee  F \overleftarrow{G} \neg \psi )$\\
 
 \textbf{Eliminate boolean op. after path quantify}\\
 $[\varphi_1\; \underline{U}\; \psi_1] \wedge [\varphi_2\; \underline{U}\; \psi_2] =$\\
@@ -729,6 +761,9 @@ $\qquad\qquad\qquad\qquad\begin{bmatrix}
   \end{bmatrix}$
 
 \textbf{\#\#\#MONADIC PREDICATE} \\
+\textbf{S1S}: define 0 and its successors \\
+\textbf{LO2}: $\mathbb{N}$ and comparison (i.e., <, >...) \\
+Also have predicates, $\vee$, $\wedge$ and $\neg$. \\
 
 %\textbf{S1S} \\
 %First order terms are defined as follows: \\
@@ -746,20 +781,20 @@ $\qquad\qquad\qquad\qquad\begin{bmatrix}
 %$-t \in V_{\sum} \ with \ typ_{\sum}(t) = \mathbb{N}$ \\
 %$-p \in V_{\sum} \ with \ typ_{\sum}(p) = \mathbb{N} \rightarrow \mathbb{B}$ \\
 
-\textbf{LO2} \\
-first order terms are defined as: \\
-$-{\textit{t} \in V_{\sum} | typ_{\sum}(\textit{t}) = \mathbb{N}} \subseteq Term _{\sum}^{LO2} $ \\
-formulas LO2 are defined as: \\
-$-t1 < t2 \in L_{LO2} $ \\
-$-p^{(t)} \in L_{LO2}$ \\
-$-\neg\varphi, \varphi \wedge \psi \in L_{LO2}$ \\
-$-\exists t. \varphi \in L_{LO2} $ \\
-$-\exists p. \varphi \in L_{LO2} $ \\
-where: \\
-$-t, t_{1}, t_{2}\tau \in V_{\sum} \ with \ typ_{\sum}(_{t}) = typ_{\sum}(_{t1}) = typ_{\sum}(t_{t2}) = \mathbb{N} $ \\
-$-\varphi, \psi \in \zeta_{LO2} $ \\
-$-t \in V_{\sum} \ with \ typ_{\sum}(t) = \mathbb{N}$ \\
-$-p \in V_{\sum} \ with \ typ_{\sum}(p) = \mathbb{N} \rightarrow \mathbb{B}$ \\
+%\textbf{LO2} \\
+%first order terms are defined as: \\
+%$-{\textit{t} \in V_{\sum} | typ_{\sum}(\textit{t}) = \mathbb{N}} \subseteq Term _{\sum}^{LO2} $ \\
+%formulas LO2 are defined as: \\
+%$-t1 < t2 \in L_{LO2} $ \\
+%$-p^{(t)} \in L_{LO2}$ \\
+%$-\neg\varphi, \varphi \wedge \psi \in L_{LO2}$ \\
+%$-\exists t. \varphi \in L_{LO2} $ \\
+%$-\exists p. \varphi \in L_{LO2} $ \\
+%where: \\
+%$-t, t_{1}, t_{2}\tau \in V_{\sum} \ with \ typ_{\sum}(_{t}) = typ_{\sum}(_{t1}) = typ_{\sum}(t_{t2}) = \mathbb{N} $ \\
+%$-\varphi, \psi \in \zeta_{LO2} $ \\
+%$-t \in V_{\sum} \ with \ typ_{\sum}(t) = \mathbb{N}$ \\
+%$-p \in V_{\sum} \ with \ typ_{\sum}(p) = \mathbb{N} \rightarrow \mathbb{B}$ \\
 
 %\textbf{LO2'}
 %Consider the following set $\zeta_{LO2'}$ of formulas: \\
