@@ -677,7 +677,8 @@ Use LTL model checking to compute $Q_i:=\llbracket A\varphi_i\rrbracket _{\Kb_{i
 Finally compute $\llbracket \Psi \rrbracket_{\Kb_n}$\\
 \textbf{LTL Model Checking}
 Given LTL formula $\Phi \equiv A \varphi$, translate $\neg \varphi$ to an $\omega\text{-automaton } \Afra_{\neg \varphi} = \Ab_{\exists}(Q,\varphi_{\Ib},\varphi_{\Rb},\varphi_{\Fb})$. Thus: \\
-$\Kb \vDash A \varphi \Leftrightarrow \Kb \vDash \neg E \neg \varphi \Leftrightarrow \Kb \vDash \Afra_{\neg \varphi} \Leftrightarrow \Kb \times \Kb_{\Afra} \vDash \neg E \varphi_{\Fb}$
+$\Kb \vDash A \varphi \Leftrightarrow \Kb \vDash \neg E \neg \varphi \Leftrightarrow \Kb \vDash \Afra_{\neg \varphi} \Leftrightarrow \Kb \times \Kb_{\Afra} \vDash \neg E \varphi_{\Fb}$\\
+Reduction to $\omega$-automaton emptiness.
 
 \textbf{LTL to $\omega$-automata}
 % Normal operator
