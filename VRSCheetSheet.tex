@@ -843,6 +843,17 @@ $FF\varphi \equiv F\varphi$\\
 $GG\varphi \equiv G\varphi$\\
 $GF\varphi \equiv XGF\varphi\equiv FGF\varphi \equiv GGF\varphi\equiv GFGF\varphi \equiv FGGF\varphi$\\
 $FG\varphi\equiv XFG\varphi \equiv FFG\varphi \equiv GFG\varphi \equiv GFFG\varphi \equiv FGFG\varphi$ \\
+$\Rightarrow$ Rules from F apply to E and rules from G to A.\\
+LTL formulas that can't be translated for CTL\\
+*  E[([a1 SU b1] | [a2 SU b2]) SU c]\\
+*  E[(a | [b SU c]) SU d]\\
+*  E[[[a SU b] SU c] SU d]\\
+*  E[[a SU [b SU c]] SU d]\\
+*  EG[([a1 SU b1] | [a2 SU b2]) SU c]\\
+*  EG(a | X a)\\
+*  EG(a | [b SU c])\\
+*  EG[[a SU b] SU c]\\
+*  EG[a SU [b SU c]]\\
 
 \textbf{G and $\mu$-calculus (safety property)} \\
 -$[\nu x. \varphi \wedge \diamondsuit x]_{K} $ \\
